@@ -1,0 +1,3994 @@
+{
+  "formatVersion": "1.0",
+  "universe": {
+    "id": "clickhouse-universe-small",
+    "name": "Demo ClickHouse Universe",
+    "description": "Deterministic static ClickHouse lineage graph",
+    "generatedAt": "2026-07-26T00:00:00Z",
+    "layoutSeed": 42042
+  },
+  "schemas": [
+    {
+      "id": "schema.s00",
+      "name": "domain_00",
+      "displayName": "Raw Intake",
+      "owner": "Core Data",
+      "tags": [
+        "gold"
+      ]
+    },
+    {
+      "id": "schema.s01",
+      "name": "domain_01",
+      "displayName": "Analytics",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "silver"
+      ]
+    },
+    {
+      "id": "schema.s02",
+      "name": "domain_02",
+      "displayName": "Finance",
+      "owner": "Finance Platform",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "schema.s03",
+      "name": "domain_03",
+      "displayName": "Operations",
+      "owner": "Growth",
+      "tags": [
+        "realtime"
+      ]
+    },
+    {
+      "id": "schema.s04",
+      "name": "domain_04",
+      "displayName": "Growth",
+      "owner": "Operations",
+      "tags": [
+        "pii"
+      ]
+    },
+    {
+      "id": "schema.s05",
+      "name": "domain_05",
+      "displayName": "Serving",
+      "owner": "Core Data",
+      "tags": [
+        "events"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "node.s00.object_0000",
+      "schemaId": "schema.s00",
+      "name": "object_0000",
+      "qualifiedName": "domain_00.object_0000",
+      "kind": "special_table",
+      "description": "Deterministic special table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "gold",
+        "silver"
+      ],
+      "metrics": {
+        "freshnessMinutes": 0
+      },
+      "table": {
+        "engine": "TinyLog",
+        "engineFamily": "Log",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 796394501599,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": true
+        },
+        "rows": 24659823521
+      }
+    },
+    {
+      "id": "node.s01.object_0001",
+      "schemaId": "schema.s01",
+      "name": "object_0001",
+      "qualifiedName": "domain_01.object_0001",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "silver",
+        "pii"
+      ],
+      "metrics": {
+        "freshnessMinutes": 1
+      },
+      "table": {
+        "engine": "TinyLog",
+        "engineFamily": "Log",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 57934890246,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 297416329
+      }
+    },
+    {
+      "id": "node.s02.object_0002",
+      "schemaId": "schema.s02",
+      "name": "object_0002",
+      "qualifiedName": "domain_02.object_0002",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "hourly",
+        "ops"
+      ],
+      "metrics": {
+        "freshnessMinutes": 2
+      },
+      "table": {
+        "engine": "S3",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 1672321,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 39229
+      }
+    },
+    {
+      "id": "node.s03.object_0003",
+      "schemaId": "schema.s03",
+      "name": "object_0003",
+      "qualifiedName": "domain_03.object_0003",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "realtime",
+        "hourly"
+      ],
+      "metrics": {
+        "freshnessMinutes": 3
+      },
+      "table": {
+        "engine": "Kafka",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 197931947797842,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 2064929694574
+      }
+    },
+    {
+      "id": "node.s04.object_0004",
+      "schemaId": "schema.s04",
+      "name": "object_0004",
+      "qualifiedName": "domain_04.object_0004",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "pii",
+        "events"
+      ],
+      "metrics": {
+        "freshnessMinutes": 4
+      },
+      "table": {
+        "engine": "Memory",
+        "engineFamily": "Memory",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 399218786443672,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 3772839066985
+      }
+    },
+    {
+      "id": "node.s05.object_0005",
+      "schemaId": "schema.s05",
+      "name": "object_0005",
+      "qualifiedName": "domain_05.object_0005",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "events",
+        "gold"
+      ],
+      "metrics": {
+        "freshnessMinutes": 5
+      },
+      "table": {
+        "engine": "Kafka",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 2467228,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 101285
+      }
+    },
+    {
+      "id": "node.s00.object_0006",
+      "schemaId": "schema.s00",
+      "name": "object_0006",
+      "qualifiedName": "domain_00.object_0006",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "finance",
+        "realtime"
+      ],
+      "metrics": {
+        "freshnessMinutes": 6
+      },
+      "table": {
+        "engine": "S3",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 417098299,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 19430537
+      }
+    },
+    {
+      "id": "node.s01.object_0007",
+      "schemaId": "schema.s01",
+      "name": "object_0007",
+      "qualifiedName": "domain_01.object_0007",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "ops",
+        "finance"
+      ],
+      "metrics": {
+        "freshnessMinutes": 7
+      },
+      "table": {
+        "engine": "Kafka",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 8909654,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": true
+        },
+        "rows": 47993
+      }
+    },
+    {
+      "id": "node.s02.object_0008",
+      "schemaId": "schema.s02",
+      "name": "object_0008",
+      "qualifiedName": "domain_02.object_0008",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "gold",
+        "silver"
+      ],
+      "metrics": {
+        "freshnessMinutes": 8
+      },
+      "table": {
+        "engine": "ReplicatedMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 51462970,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 313226
+      }
+    },
+    {
+      "id": "node.s03.object_0009",
+      "schemaId": "schema.s03",
+      "name": "object_0009",
+      "qualifiedName": "domain_03.object_0009",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "silver",
+        "pii"
+      ],
+      "metrics": {
+        "freshnessMinutes": 9
+      },
+      "table": {
+        "engine": "S3",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 58617425431276,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 751307025529
+      }
+    },
+    {
+      "id": "node.s04.object_0010",
+      "schemaId": "schema.s04",
+      "name": "object_0010",
+      "qualifiedName": "domain_04.object_0010",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "hourly",
+        "ops"
+      ],
+      "metrics": {
+        "freshnessMinutes": 10
+      },
+      "table": {
+        "engine": "ReplicatedMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 1451430,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 9585
+      }
+    },
+    {
+      "id": "node.s05.object_0011",
+      "schemaId": "schema.s05",
+      "name": "object_0011",
+      "qualifiedName": "domain_05.object_0011",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "realtime",
+        "hourly"
+      ],
+      "metrics": {
+        "freshnessMinutes": 11
+      },
+      "table": {
+        "engine": "ReplicatedMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 3532887761,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 39924867
+      }
+    },
+    {
+      "id": "node.s00.object_0012",
+      "schemaId": "schema.s00",
+      "name": "object_0012",
+      "qualifiedName": "domain_00.object_0012",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "pii",
+        "events"
+      ],
+      "metrics": {
+        "freshnessMinutes": 12
+      },
+      "table": {
+        "engine": "Kafka",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 217473256,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 1147861
+      }
+    },
+    {
+      "id": "node.s01.object_0013",
+      "schemaId": "schema.s01",
+      "name": "object_0013",
+      "qualifiedName": "domain_01.object_0013",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "events",
+        "gold"
+      ],
+      "metrics": {
+        "freshnessMinutes": 13
+      },
+      "table": {
+        "engine": "Kafka",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 1042368,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 8643
+      }
+    },
+    {
+      "id": "node.s02.object_0014",
+      "schemaId": "schema.s02",
+      "name": "object_0014",
+      "qualifiedName": "domain_02.object_0014",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "finance",
+        "realtime"
+      ],
+      "metrics": {
+        "freshnessMinutes": 14
+      },
+      "table": {
+        "engine": "ReplacingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 3700077451831,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": true
+        },
+        "rows": 56445253472
+      }
+    },
+    {
+      "id": "node.s03.object_0015",
+      "schemaId": "schema.s03",
+      "name": "object_0015",
+      "qualifiedName": "domain_03.object_0015",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "ops",
+        "finance"
+      ],
+      "metrics": {
+        "freshnessMinutes": 15
+      },
+      "table": {
+        "engine": "ReplicatedMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 50419258,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 302991
+      }
+    },
+    {
+      "id": "node.s04.object_0016",
+      "schemaId": "schema.s04",
+      "name": "object_0016",
+      "qualifiedName": "domain_04.object_0016",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "gold",
+        "silver"
+      ],
+      "metrics": {
+        "freshnessMinutes": 16
+      },
+      "table": {
+        "engine": "SummingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 2976803,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 35508
+      }
+    },
+    {
+      "id": "node.s05.object_0017",
+      "schemaId": "schema.s05",
+      "name": "object_0017",
+      "qualifiedName": "domain_05.object_0017",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "silver",
+        "pii"
+      ],
+      "metrics": {
+        "freshnessMinutes": 17
+      },
+      "table": {
+        "engine": "ReplicatedMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 10536143926,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 136145884
+      }
+    },
+    {
+      "id": "node.s00.object_0018",
+      "schemaId": "schema.s00",
+      "name": "object_0018",
+      "qualifiedName": "domain_00.object_0018",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "hourly",
+        "ops"
+      ],
+      "metrics": {
+        "freshnessMinutes": 18
+      },
+      "table": {
+        "engine": "S3",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 165886158079461,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 2091462362134
+      }
+    },
+    {
+      "id": "node.s01.object_0019",
+      "schemaId": "schema.s01",
+      "name": "object_0019",
+      "qualifiedName": "domain_01.object_0019",
+      "kind": "view",
+      "description": "Deterministic view for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "realtime",
+        "hourly"
+      ],
+      "metrics": {
+        "freshnessMinutes": 19
+      },
+      "view": {
+        "viewType": "normal"
+      }
+    },
+    {
+      "id": "node.s02.object_0020",
+      "schemaId": "schema.s02",
+      "name": "object_0020",
+      "qualifiedName": "domain_02.object_0020",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "pii",
+        "events"
+      ],
+      "metrics": {
+        "freshnessMinutes": 20
+      },
+      "table": {
+        "engine": "Memory",
+        "engineFamily": "Memory",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 325024512,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 3336139
+      }
+    },
+    {
+      "id": "node.s03.object_0021",
+      "schemaId": "schema.s03",
+      "name": "object_0021",
+      "qualifiedName": "domain_03.object_0021",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "events",
+        "gold"
+      ],
+      "metrics": {
+        "freshnessMinutes": 21
+      },
+      "table": {
+        "engine": "Kafka",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 27719223358,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": true
+        },
+        "rows": 227682660
+      }
+    },
+    {
+      "id": "node.s04.object_0022",
+      "schemaId": "schema.s04",
+      "name": "object_0022",
+      "qualifiedName": "domain_04.object_0022",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "finance",
+        "realtime"
+      ],
+      "metrics": {
+        "freshnessMinutes": 22
+      },
+      "table": {
+        "engine": "S3",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 141237632,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 864697
+      }
+    },
+    {
+      "id": "node.s05.object_0023",
+      "schemaId": "schema.s05",
+      "name": "object_0023",
+      "qualifiedName": "domain_05.object_0023",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "ops",
+        "finance"
+      ],
+      "metrics": {
+        "freshnessMinutes": 23
+      },
+      "table": {
+        "engine": "ReplacingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 6056697,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 99714
+      }
+    },
+    {
+      "id": "node.s00.object_0024",
+      "schemaId": "schema.s00",
+      "name": "object_0024",
+      "qualifiedName": "domain_00.object_0024",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "gold",
+        "silver"
+      ],
+      "metrics": {
+        "freshnessMinutes": 24
+      },
+      "table": {
+        "engine": "SummingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 326364999,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 2726233
+      }
+    },
+    {
+      "id": "node.s01.object_0025",
+      "schemaId": "schema.s01",
+      "name": "object_0025",
+      "qualifiedName": "domain_01.object_0025",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "silver",
+        "pii"
+      ],
+      "metrics": {
+        "freshnessMinutes": 25
+      },
+      "table": {
+        "engine": "ReplacingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 3817053,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 65602
+      }
+    },
+    {
+      "id": "node.s02.object_0026",
+      "schemaId": "schema.s02",
+      "name": "object_0026",
+      "qualifiedName": "domain_02.object_0026",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "hourly",
+        "ops"
+      ],
+      "metrics": {
+        "freshnessMinutes": 26
+      },
+      "table": {
+        "engine": "S3",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 2613090183,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 41985596
+      }
+    },
+    {
+      "id": "node.s03.object_0027",
+      "schemaId": "schema.s03",
+      "name": "object_0027",
+      "qualifiedName": "domain_03.object_0027",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "realtime",
+        "hourly"
+      ],
+      "metrics": {
+        "freshnessMinutes": 27
+      },
+      "table": {
+        "engine": "Kafka",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 1438482387,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 11953742
+      }
+    },
+    {
+      "id": "node.s04.object_0028",
+      "schemaId": "schema.s04",
+      "name": "object_0028",
+      "qualifiedName": "domain_04.object_0028",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "pii",
+        "events"
+      ],
+      "metrics": {
+        "freshnessMinutes": 28
+      },
+      "table": {
+        "engine": "Kafka",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 71685495710,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": true
+        },
+        "rows": 559628487
+      }
+    },
+    {
+      "id": "node.s05.object_0029",
+      "schemaId": "schema.s05",
+      "name": "object_0029",
+      "qualifiedName": "domain_05.object_0029",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "events",
+        "gold"
+      ],
+      "metrics": {
+        "freshnessMinutes": 29
+      },
+      "table": {
+        "engine": "SummingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 907364259643267,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 6441699143274
+      }
+    },
+    {
+      "id": "node.s00.object_0030",
+      "schemaId": "schema.s00",
+      "name": "object_0030",
+      "qualifiedName": "domain_00.object_0030",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "finance",
+        "realtime"
+      ],
+      "metrics": {
+        "freshnessMinutes": 30
+      },
+      "table": {
+        "engine": "Memory",
+        "engineFamily": "Memory",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 22558384,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 225391
+      }
+    },
+    {
+      "id": "node.s01.object_0031",
+      "schemaId": "schema.s01",
+      "name": "object_0031",
+      "qualifiedName": "domain_01.object_0031",
+      "kind": "materialized_view",
+      "description": "Deterministic materialized view for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "ops",
+        "finance"
+      ],
+      "metrics": {
+        "freshnessMinutes": 31
+      },
+      "table": {
+        "engine": "ReplicatedMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 437644956858020,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 13400387538934
+      },
+      "materializedView": {
+        "mode": "incremental",
+        "targetNodeId": "node.s01.object_0037"
+      }
+    },
+    {
+      "id": "node.s02.object_0032",
+      "schemaId": "schema.s02",
+      "name": "object_0032",
+      "qualifiedName": "domain_02.object_0032",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "gold",
+        "silver"
+      ],
+      "metrics": {
+        "freshnessMinutes": 32
+      },
+      "table": {
+        "engine": "SummingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 35664416,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 1005707
+      }
+    },
+    {
+      "id": "node.s03.object_0033",
+      "schemaId": "schema.s03",
+      "name": "object_0033",
+      "qualifiedName": "domain_03.object_0033",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "silver",
+        "pii"
+      ],
+      "metrics": {
+        "freshnessMinutes": 33
+      },
+      "table": {
+        "engine": "MergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 13480969,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 102927
+      }
+    },
+    {
+      "id": "node.s04.object_0034",
+      "schemaId": "schema.s04",
+      "name": "object_0034",
+      "qualifiedName": "domain_04.object_0034",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "hourly",
+        "ops"
+      ],
+      "metrics": {
+        "freshnessMinutes": 34
+      },
+      "table": {
+        "engine": "ReplacingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 263456343771,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 2350614855
+      }
+    },
+    {
+      "id": "node.s05.object_0035",
+      "schemaId": "schema.s05",
+      "name": "object_0035",
+      "qualifiedName": "domain_05.object_0035",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "realtime",
+        "hourly"
+      ],
+      "metrics": {
+        "freshnessMinutes": 35
+      },
+      "table": {
+        "engine": "Memory",
+        "engineFamily": "Memory",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 197800872736,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": true
+        },
+        "rows": 1351712873
+      }
+    },
+    {
+      "id": "node.s00.object_0036",
+      "schemaId": "schema.s00",
+      "name": "object_0036",
+      "qualifiedName": "domain_00.object_0036",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "pii",
+        "events"
+      ],
+      "metrics": {
+        "freshnessMinutes": 36
+      },
+      "table": {
+        "engine": "MergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 3793450335421,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 103810063255
+      }
+    },
+    {
+      "id": "node.s01.object_0037",
+      "schemaId": "schema.s01",
+      "name": "object_0037",
+      "qualifiedName": "domain_01.object_0037",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "events",
+        "gold"
+      ],
+      "metrics": {
+        "freshnessMinutes": 37
+      },
+      "table": {
+        "engine": "ReplacingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 93396081,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 499848
+      }
+    },
+    {
+      "id": "node.s02.object_0038",
+      "schemaId": "schema.s02",
+      "name": "object_0038",
+      "qualifiedName": "domain_02.object_0038",
+      "kind": "view",
+      "description": "Deterministic view for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "finance",
+        "realtime"
+      ],
+      "metrics": {
+        "freshnessMinutes": 38
+      },
+      "view": {
+        "viewType": "normal"
+      }
+    },
+    {
+      "id": "node.s03.object_0039",
+      "schemaId": "schema.s03",
+      "name": "object_0039",
+      "qualifiedName": "domain_03.object_0039",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "ops",
+        "finance"
+      ],
+      "metrics": {
+        "freshnessMinutes": 39
+      },
+      "table": {
+        "engine": "Kafka",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 9762004,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 131974
+      }
+    },
+    {
+      "id": "node.s04.object_0040",
+      "schemaId": "schema.s04",
+      "name": "object_0040",
+      "qualifiedName": "domain_04.object_0040",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "gold",
+        "silver"
+      ],
+      "metrics": {
+        "freshnessMinutes": 40
+      },
+      "table": {
+        "engine": "Kafka",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 143049945650678,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 1172250526451
+      }
+    },
+    {
+      "id": "node.s05.object_0041",
+      "schemaId": "schema.s05",
+      "name": "object_0041",
+      "qualifiedName": "domain_05.object_0041",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "silver",
+        "pii"
+      ],
+      "metrics": {
+        "freshnessMinutes": 41
+      },
+      "table": {
+        "engine": "ReplicatedMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 668459719203,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 5506190050
+      }
+    },
+    {
+      "id": "node.s00.object_0042",
+      "schemaId": "schema.s00",
+      "name": "object_0042",
+      "qualifiedName": "domain_00.object_0042",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "hourly",
+        "ops"
+      ],
+      "metrics": {
+        "freshnessMinutes": 42
+      },
+      "table": {
+        "engine": "Kafka",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 238123573,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": true
+        },
+        "rows": 1298956
+      }
+    },
+    {
+      "id": "node.s01.object_0043",
+      "schemaId": "schema.s01",
+      "name": "object_0043",
+      "qualifiedName": "domain_01.object_0043",
+      "kind": "distributed_table",
+      "description": "Deterministic distributed table for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "realtime",
+        "hourly"
+      ],
+      "metrics": {
+        "freshnessMinutes": 43
+      },
+      "table": {
+        "engine": "Distributed",
+        "engineFamily": "Distributed",
+        "hasOwnData": false,
+        "size": {
+          "kind": "unknown",
+          "scope": "unknown",
+          "isApproximate": false
+        }
+      },
+      "distributedTable": {
+        "clusterName": "demo_cluster",
+        "remoteSchema": "domain_01",
+        "remoteTable": "object_0049"
+      }
+    },
+    {
+      "id": "node.s02.object_0044",
+      "schemaId": "schema.s02",
+      "name": "object_0044",
+      "qualifiedName": "domain_02.object_0044",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "pii",
+        "events"
+      ],
+      "metrics": {
+        "freshnessMinutes": 44
+      },
+      "table": {
+        "engine": "TinyLog",
+        "engineFamily": "Log",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 19889547,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 295468
+      }
+    },
+    {
+      "id": "node.s03.object_0045",
+      "schemaId": "schema.s03",
+      "name": "object_0045",
+      "qualifiedName": "domain_03.object_0045",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "events",
+        "gold"
+      ],
+      "metrics": {
+        "freshnessMinutes": 45
+      },
+      "table": {
+        "engine": "Memory",
+        "engineFamily": "Memory",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 25675283,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 162827
+      }
+    },
+    {
+      "id": "node.s04.object_0046",
+      "schemaId": "schema.s04",
+      "name": "object_0046",
+      "qualifiedName": "domain_04.object_0046",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "finance",
+        "realtime"
+      ],
+      "metrics": {
+        "freshnessMinutes": 46
+      },
+      "table": {
+        "engine": "ReplicatedMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 413630241960282,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 2930196130326
+      }
+    },
+    {
+      "id": "node.s05.object_0047",
+      "schemaId": "schema.s05",
+      "name": "object_0047",
+      "qualifiedName": "domain_05.object_0047",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "ops",
+        "finance"
+      ],
+      "metrics": {
+        "freshnessMinutes": 47
+      },
+      "table": {
+        "engine": "S3",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 851545991246,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 7051282235
+      }
+    },
+    {
+      "id": "node.s00.object_0048",
+      "schemaId": "schema.s00",
+      "name": "object_0048",
+      "qualifiedName": "domain_00.object_0048",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "gold",
+        "silver"
+      ],
+      "metrics": {
+        "freshnessMinutes": 48
+      },
+      "table": {
+        "engine": "Memory",
+        "engineFamily": "Memory",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 39285690,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 266298
+      }
+    },
+    {
+      "id": "node.s01.object_0049",
+      "schemaId": "schema.s01",
+      "name": "object_0049",
+      "qualifiedName": "domain_01.object_0049",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "silver",
+        "pii"
+      ],
+      "metrics": {
+        "freshnessMinutes": 49
+      },
+      "table": {
+        "engine": "SummingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 622485246368342,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": true
+        },
+        "rows": 4316198369732
+      }
+    },
+    {
+      "id": "node.s02.object_0050",
+      "schemaId": "schema.s02",
+      "name": "object_0050",
+      "qualifiedName": "domain_02.object_0050",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "hourly",
+        "ops"
+      ],
+      "metrics": {
+        "freshnessMinutes": 50
+      },
+      "table": {
+        "engine": "SummingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 2673885166837,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 29432915538
+      }
+    },
+    {
+      "id": "node.s03.object_0051",
+      "schemaId": "schema.s03",
+      "name": "object_0051",
+      "qualifiedName": "domain_03.object_0051",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "realtime",
+        "hourly"
+      ],
+      "metrics": {
+        "freshnessMinutes": 51
+      },
+      "table": {
+        "engine": "Memory",
+        "engineFamily": "Memory",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 192265466483331,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 2087024783908
+      }
+    },
+    {
+      "id": "node.s04.object_0052",
+      "schemaId": "schema.s04",
+      "name": "object_0052",
+      "qualifiedName": "domain_04.object_0052",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "pii",
+        "events"
+      ],
+      "metrics": {
+        "freshnessMinutes": 52
+      },
+      "table": {
+        "engine": "Memory",
+        "engineFamily": "Memory",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 11553477831,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 533332799
+      }
+    },
+    {
+      "id": "node.s05.object_0053",
+      "schemaId": "schema.s05",
+      "name": "object_0053",
+      "qualifiedName": "domain_05.object_0053",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "events",
+        "gold"
+      ],
+      "metrics": {
+        "freshnessMinutes": 53
+      },
+      "table": {
+        "engine": "ReplacingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 2407708335681,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 113642707484
+      }
+    },
+    {
+      "id": "node.s00.object_0054",
+      "schemaId": "schema.s00",
+      "name": "object_0054",
+      "qualifiedName": "domain_00.object_0054",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "finance",
+        "realtime"
+      ],
+      "metrics": {
+        "freshnessMinutes": 54
+      },
+      "table": {
+        "engine": "ReplicatedMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 4482391972,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 50399848
+      }
+    },
+    {
+      "id": "node.s01.object_0055",
+      "schemaId": "schema.s01",
+      "name": "object_0055",
+      "qualifiedName": "domain_01.object_0055",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "ops",
+        "finance"
+      ],
+      "metrics": {
+        "freshnessMinutes": 55
+      },
+      "table": {
+        "engine": "ReplacingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 78774607940,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 424685473
+      }
+    },
+    {
+      "id": "node.s02.object_0056",
+      "schemaId": "schema.s02",
+      "name": "object_0056",
+      "qualifiedName": "domain_02.object_0056",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "gold",
+        "silver"
+      ],
+      "metrics": {
+        "freshnessMinutes": 56
+      },
+      "table": {
+        "engine": "SummingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 1066804983018,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": true
+        },
+        "rows": 23046518946
+      }
+    },
+    {
+      "id": "node.s03.object_0057",
+      "schemaId": "schema.s03",
+      "name": "object_0057",
+      "qualifiedName": "domain_03.object_0057",
+      "kind": "view",
+      "description": "Deterministic view for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "silver",
+        "pii"
+      ],
+      "metrics": {
+        "freshnessMinutes": 57
+      },
+      "view": {
+        "viewType": "normal"
+      }
+    },
+    {
+      "id": "node.s04.object_0058",
+      "schemaId": "schema.s04",
+      "name": "object_0058",
+      "qualifiedName": "domain_04.object_0058",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "hourly",
+        "ops"
+      ],
+      "metrics": {
+        "freshnessMinutes": 58
+      },
+      "table": {
+        "engine": "MergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 2605641768,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 14821323
+      }
+    },
+    {
+      "id": "node.s05.object_0059",
+      "schemaId": "schema.s05",
+      "name": "object_0059",
+      "qualifiedName": "domain_05.object_0059",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "realtime",
+        "hourly"
+      ],
+      "metrics": {
+        "freshnessMinutes": 59
+      },
+      "table": {
+        "engine": "Kafka",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 35246874242,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 223242928
+      }
+    },
+    {
+      "id": "node.s00.object_0060",
+      "schemaId": "schema.s00",
+      "name": "object_0060",
+      "qualifiedName": "domain_00.object_0060",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "pii",
+        "events"
+      ],
+      "metrics": {
+        "freshnessMinutes": 60
+      },
+      "table": {
+        "engine": "Memory",
+        "engineFamily": "Memory",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 13650247,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 103718
+      }
+    },
+    {
+      "id": "node.s01.object_0061",
+      "schemaId": "schema.s01",
+      "name": "object_0061",
+      "qualifiedName": "domain_01.object_0061",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "events",
+        "gold"
+      ],
+      "metrics": {
+        "freshnessMinutes": 61
+      },
+      "table": {
+        "engine": "Kafka",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 27113870,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 248120
+      }
+    },
+    {
+      "id": "node.s02.object_0062",
+      "schemaId": "schema.s02",
+      "name": "object_0062",
+      "qualifiedName": "domain_02.object_0062",
+      "kind": "materialized_view",
+      "description": "Deterministic materialized view for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "finance",
+        "realtime"
+      ],
+      "metrics": {
+        "freshnessMinutes": 62
+      },
+      "table": {
+        "engine": "S3",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 12251527948,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 406542668
+      },
+      "materializedView": {
+        "mode": "refreshable",
+        "targetNodeId": "node.s02.object_0068"
+      }
+    },
+    {
+      "id": "node.s03.object_0063",
+      "schemaId": "schema.s03",
+      "name": "object_0063",
+      "qualifiedName": "domain_03.object_0063",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "ops",
+        "finance"
+      ],
+      "metrics": {
+        "freshnessMinutes": 63
+      },
+      "table": {
+        "engine": "S3",
+        "engineFamily": "Integration",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 1280470510,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": true
+        },
+        "rows": 6947486
+      }
+    },
+    {
+      "id": "node.s04.object_0064",
+      "schemaId": "schema.s04",
+      "name": "object_0064",
+      "qualifiedName": "domain_04.object_0064",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "gold",
+        "silver"
+      ],
+      "metrics": {
+        "freshnessMinutes": 64
+      },
+      "table": {
+        "engine": "ReplacingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 1098179,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 6778
+      }
+    },
+    {
+      "id": "node.s05.object_0065",
+      "schemaId": "schema.s05",
+      "name": "object_0065",
+      "qualifiedName": "domain_05.object_0065",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "silver",
+        "pii"
+      ],
+      "metrics": {
+        "freshnessMinutes": 65
+      },
+      "table": {
+        "engine": "SummingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 1831380386,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 15867937
+      }
+    },
+    {
+      "id": "node.s00.object_0066",
+      "schemaId": "schema.s00",
+      "name": "object_0066",
+      "qualifiedName": "domain_00.object_0066",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "hourly",
+        "ops"
+      ],
+      "metrics": {
+        "freshnessMinutes": 66
+      },
+      "table": {
+        "engine": "TinyLog",
+        "engineFamily": "Log",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 1938756877,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 11649457
+      }
+    },
+    {
+      "id": "node.s01.object_0067",
+      "schemaId": "schema.s01",
+      "name": "object_0067",
+      "qualifiedName": "domain_01.object_0067",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Finance Platform",
+      "tags": [
+        "realtime",
+        "hourly"
+      ],
+      "metrics": {
+        "freshnessMinutes": 67
+      },
+      "table": {
+        "engine": "ReplacingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 30389341,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 172914
+      }
+    },
+    {
+      "id": "node.s02.object_0068",
+      "schemaId": "schema.s02",
+      "name": "object_0068",
+      "qualifiedName": "domain_02.object_0068",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Growth",
+      "tags": [
+        "pii",
+        "events"
+      ],
+      "metrics": {
+        "freshnessMinutes": 68
+      },
+      "table": {
+        "engine": "ReplacingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 9415239399,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 60767467
+      }
+    },
+    {
+      "id": "node.s03.object_0069",
+      "schemaId": "schema.s03",
+      "name": "object_0069",
+      "qualifiedName": "domain_03.object_0069",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Operations",
+      "tags": [
+        "events",
+        "gold"
+      ],
+      "metrics": {
+        "freshnessMinutes": 69
+      },
+      "table": {
+        "engine": "TinyLog",
+        "engineFamily": "Log",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 1392560068973,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 15025006199
+      }
+    },
+    {
+      "id": "node.s04.object_0070",
+      "schemaId": "schema.s04",
+      "name": "object_0070",
+      "qualifiedName": "domain_04.object_0070",
+      "kind": "table",
+      "description": "Deterministic table for lineage exploration",
+      "owner": "Core Data",
+      "tags": [
+        "finance",
+        "realtime"
+      ],
+      "metrics": {
+        "freshnessMinutes": 70
+      },
+      "table": {
+        "engine": "ReplacingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 166459471284,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": true
+        },
+        "rows": 7380295767
+      }
+    },
+    {
+      "id": "node.s05.object_0071",
+      "schemaId": "schema.s05",
+      "name": "object_0071",
+      "qualifiedName": "domain_05.object_0071",
+      "kind": "external_table",
+      "description": "Deterministic external table for lineage exploration",
+      "owner": "Analytics Engineering",
+      "tags": [
+        "ops",
+        "finance"
+      ],
+      "metrics": {
+        "freshnessMinutes": 71
+      },
+      "table": {
+        "engine": "SummingMergeTree",
+        "engineFamily": "MergeTree",
+        "hasOwnData": true,
+        "size": {
+          "bytes": 2347483066054,
+          "kind": "compressed",
+          "scope": "unique",
+          "isApproximate": false
+        },
+        "rows": 112476117371
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge.00000",
+      "sourceNodeId": "node.s00.object_0000",
+      "targetNodeId": "node.s01.object_0001",
+      "type": "etl_transfer",
+      "label": "known-path-0",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00001",
+      "sourceNodeId": "node.s01.object_0001",
+      "targetNodeId": "node.s02.object_0002",
+      "type": "etl_transfer",
+      "label": "known-path-0",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00002",
+      "sourceNodeId": "node.s02.object_0002",
+      "targetNodeId": "node.s03.object_0003",
+      "type": "etl_transfer",
+      "label": "known-path-0",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00003",
+      "sourceNodeId": "node.s03.object_0003",
+      "targetNodeId": "node.s04.object_0004",
+      "type": "etl_transfer",
+      "label": "known-path-0",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00004",
+      "sourceNodeId": "node.s04.object_0004",
+      "targetNodeId": "node.s05.object_0005",
+      "type": "etl_transfer",
+      "label": "known-path-0",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00005",
+      "sourceNodeId": "node.s00.object_0006",
+      "targetNodeId": "node.s01.object_0007",
+      "type": "etl_transfer",
+      "label": "known-path-1",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00006",
+      "sourceNodeId": "node.s01.object_0007",
+      "targetNodeId": "node.s02.object_0008",
+      "type": "etl_transfer",
+      "label": "known-path-1",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00007",
+      "sourceNodeId": "node.s02.object_0008",
+      "targetNodeId": "node.s03.object_0009",
+      "type": "etl_transfer",
+      "label": "known-path-1",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00008",
+      "sourceNodeId": "node.s03.object_0009",
+      "targetNodeId": "node.s04.object_0010",
+      "type": "etl_transfer",
+      "label": "known-path-1",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00009",
+      "sourceNodeId": "node.s04.object_0010",
+      "targetNodeId": "node.s05.object_0011",
+      "type": "etl_transfer",
+      "label": "known-path-1",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00010",
+      "sourceNodeId": "node.s00.object_0012",
+      "targetNodeId": "node.s01.object_0013",
+      "type": "etl_transfer",
+      "label": "known-path-2",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00011",
+      "sourceNodeId": "node.s01.object_0013",
+      "targetNodeId": "node.s02.object_0014",
+      "type": "etl_transfer",
+      "label": "known-path-2",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00012",
+      "sourceNodeId": "node.s02.object_0014",
+      "targetNodeId": "node.s03.object_0015",
+      "type": "etl_transfer",
+      "label": "known-path-2",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00013",
+      "sourceNodeId": "node.s03.object_0015",
+      "targetNodeId": "node.s04.object_0016",
+      "type": "etl_transfer",
+      "label": "known-path-2",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00014",
+      "sourceNodeId": "node.s04.object_0016",
+      "targetNodeId": "node.s05.object_0017",
+      "type": "etl_transfer",
+      "label": "known-path-2",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00015",
+      "sourceNodeId": "node.s05.object_0065",
+      "targetNodeId": "node.s01.object_0037",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00016",
+      "sourceNodeId": "node.s04.object_0064",
+      "targetNodeId": "node.s04.object_0046",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00017",
+      "sourceNodeId": "node.s01.object_0031",
+      "targetNodeId": "node.s04.object_0034",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00018",
+      "sourceNodeId": "node.s05.object_0029",
+      "targetNodeId": "node.s04.object_0034",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00019",
+      "sourceNodeId": "node.s05.object_0059",
+      "targetNodeId": "node.s02.object_0056",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00020",
+      "sourceNodeId": "node.s01.object_0055",
+      "targetNodeId": "node.s04.object_0022",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00021",
+      "sourceNodeId": "node.s03.object_0057",
+      "targetNodeId": "node.s02.object_0020",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00022",
+      "sourceNodeId": "node.s02.object_0056",
+      "targetNodeId": "node.s05.object_0023",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00023",
+      "sourceNodeId": "node.s01.object_0031",
+      "targetNodeId": "node.s02.object_0044",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00024",
+      "sourceNodeId": "node.s00.object_0018",
+      "targetNodeId": "node.s03.object_0021",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00025",
+      "sourceNodeId": "node.s02.object_0026",
+      "targetNodeId": "node.s01.object_0049",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00026",
+      "sourceNodeId": "node.s05.object_0035",
+      "targetNodeId": "node.s00.object_0024",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00027",
+      "sourceNodeId": "node.s03.object_0027",
+      "targetNodeId": "node.s03.object_0021",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00028",
+      "sourceNodeId": "node.s00.object_0024",
+      "targetNodeId": "node.s05.object_0059",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00029",
+      "sourceNodeId": "node.s00.object_0018",
+      "targetNodeId": "node.s05.object_0053",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00030",
+      "sourceNodeId": "node.s02.object_0062",
+      "targetNodeId": "node.s01.object_0067",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00031",
+      "sourceNodeId": "node.s00.object_0054",
+      "targetNodeId": "node.s03.object_0039",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00032",
+      "sourceNodeId": "node.s02.object_0020",
+      "targetNodeId": "node.s04.object_0058",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00033",
+      "sourceNodeId": "node.s03.object_0045",
+      "targetNodeId": "node.s02.object_0044",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00034",
+      "sourceNodeId": "node.s04.object_0034",
+      "targetNodeId": "node.s02.object_0032",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00035",
+      "sourceNodeId": "node.s04.object_0028",
+      "targetNodeId": "node.s05.object_0053",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00036",
+      "sourceNodeId": "node.s03.object_0063",
+      "targetNodeId": "node.s05.object_0029",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00037",
+      "sourceNodeId": "node.s02.object_0044",
+      "targetNodeId": "node.s04.object_0022",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00038",
+      "sourceNodeId": "node.s01.object_0031",
+      "targetNodeId": "node.s05.object_0041",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00039",
+      "sourceNodeId": "node.s00.object_0024",
+      "targetNodeId": "node.s00.object_0066",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00040",
+      "sourceNodeId": "node.s01.object_0049",
+      "targetNodeId": "node.s00.object_0066",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00041",
+      "sourceNodeId": "node.s04.object_0034",
+      "targetNodeId": "node.s03.object_0051",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00042",
+      "sourceNodeId": "node.s00.object_0060",
+      "targetNodeId": "node.s03.object_0057",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00043",
+      "sourceNodeId": "node.s02.object_0026",
+      "targetNodeId": "node.s04.object_0064",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00044",
+      "sourceNodeId": "node.s03.object_0021",
+      "targetNodeId": "node.s05.object_0035",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00045",
+      "sourceNodeId": "node.s04.object_0034",
+      "targetNodeId": "node.s00.object_0030",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00046",
+      "sourceNodeId": "node.s00.object_0054",
+      "targetNodeId": "node.s02.object_0044",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00047",
+      "sourceNodeId": "node.s01.object_0067",
+      "targetNodeId": "node.s02.object_0050",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00048",
+      "sourceNodeId": "node.s05.object_0065",
+      "targetNodeId": "node.s01.object_0043",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00049",
+      "sourceNodeId": "node.s04.object_0052",
+      "targetNodeId": "node.s02.object_0062",
+      "type": "materialized_view_input",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00050",
+      "sourceNodeId": "node.s01.object_0055",
+      "targetNodeId": "node.s05.object_0065",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00051",
+      "sourceNodeId": "node.s00.object_0054",
+      "targetNodeId": "node.s02.object_0032",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00052",
+      "sourceNodeId": "node.s03.object_0051",
+      "targetNodeId": "node.s00.object_0042",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00053",
+      "sourceNodeId": "node.s01.object_0043",
+      "targetNodeId": "node.s05.object_0023",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00054",
+      "sourceNodeId": "node.s00.object_0024",
+      "targetNodeId": "node.s01.object_0043",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00055",
+      "sourceNodeId": "node.s04.object_0052",
+      "targetNodeId": "node.s01.object_0067",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00056",
+      "sourceNodeId": "node.s01.object_0061",
+      "targetNodeId": "node.s02.object_0068",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00057",
+      "sourceNodeId": "node.s00.object_0042",
+      "targetNodeId": "node.s05.object_0053",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00058",
+      "sourceNodeId": "node.s03.object_0045",
+      "targetNodeId": "node.s03.object_0033",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00059",
+      "sourceNodeId": "node.s03.object_0027",
+      "targetNodeId": "node.s02.object_0068",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00060",
+      "sourceNodeId": "node.s02.object_0038",
+      "targetNodeId": "node.s05.object_0059",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00061",
+      "sourceNodeId": "node.s00.object_0066",
+      "targetNodeId": "node.s01.object_0025",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00062",
+      "sourceNodeId": "node.s05.object_0065",
+      "targetNodeId": "node.s01.object_0031",
+      "type": "materialized_view_input",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00063",
+      "sourceNodeId": "node.s03.object_0051",
+      "targetNodeId": "node.s00.object_0018",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00064",
+      "sourceNodeId": "node.s05.object_0059",
+      "targetNodeId": "node.s01.object_0067",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00065",
+      "sourceNodeId": "node.s00.object_0036",
+      "targetNodeId": "node.s04.object_0064",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00066",
+      "sourceNodeId": "node.s03.object_0045",
+      "targetNodeId": "node.s01.object_0049",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00067",
+      "sourceNodeId": "node.s02.object_0026",
+      "targetNodeId": "node.s04.object_0028",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00068",
+      "sourceNodeId": "node.s00.object_0066",
+      "targetNodeId": "node.s01.object_0055",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00069",
+      "sourceNodeId": "node.s01.object_0049",
+      "targetNodeId": "node.s00.object_0060",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00070",
+      "sourceNodeId": "node.s03.object_0027",
+      "targetNodeId": "node.s00.object_0042",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00071",
+      "sourceNodeId": "node.s00.object_0042",
+      "targetNodeId": "node.s01.object_0037",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00072",
+      "sourceNodeId": "node.s02.object_0038",
+      "targetNodeId": "node.s01.object_0025",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00073",
+      "sourceNodeId": "node.s03.object_0051",
+      "targetNodeId": "node.s05.object_0059",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00074",
+      "sourceNodeId": "node.s03.object_0057",
+      "targetNodeId": "node.s01.object_0067",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00075",
+      "sourceNodeId": "node.s00.object_0060",
+      "targetNodeId": "node.s00.object_0036",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00076",
+      "sourceNodeId": "node.s04.object_0052",
+      "targetNodeId": "node.s04.object_0028",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00077",
+      "sourceNodeId": "node.s03.object_0063",
+      "targetNodeId": "node.s04.object_0040",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00078",
+      "sourceNodeId": "node.s04.object_0052",
+      "targetNodeId": "node.s03.object_0051",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00079",
+      "sourceNodeId": "node.s04.object_0040",
+      "targetNodeId": "node.s03.object_0051",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00080",
+      "sourceNodeId": "node.s01.object_0037",
+      "targetNodeId": "node.s01.object_0031",
+      "type": "materialized_view_input",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00081",
+      "sourceNodeId": "node.s02.object_0020",
+      "targetNodeId": "node.s05.object_0053",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00082",
+      "sourceNodeId": "node.s00.object_0060",
+      "targetNodeId": "node.s02.object_0044",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00083",
+      "sourceNodeId": "node.s04.object_0028",
+      "targetNodeId": "node.s04.object_0034",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00084",
+      "sourceNodeId": "node.s01.object_0037",
+      "targetNodeId": "node.s02.object_0038",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00085",
+      "sourceNodeId": "node.s02.object_0056",
+      "targetNodeId": "node.s03.object_0057",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00086",
+      "sourceNodeId": "node.s00.object_0024",
+      "targetNodeId": "node.s02.object_0038",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00087",
+      "sourceNodeId": "node.s04.object_0034",
+      "targetNodeId": "node.s00.object_0042",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00088",
+      "sourceNodeId": "node.s00.object_0060",
+      "targetNodeId": "node.s05.object_0029",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00089",
+      "sourceNodeId": "node.s05.object_0053",
+      "targetNodeId": "node.s00.object_0018",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00090",
+      "sourceNodeId": "node.s02.object_0062",
+      "targetNodeId": "node.s05.object_0047",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00091",
+      "sourceNodeId": "node.s01.object_0025",
+      "targetNodeId": "node.s02.object_0020",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00092",
+      "sourceNodeId": "node.s03.object_0021",
+      "targetNodeId": "node.s03.object_0033",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00093",
+      "sourceNodeId": "node.s00.object_0060",
+      "targetNodeId": "node.s05.object_0053",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00094",
+      "sourceNodeId": "node.s01.object_0067",
+      "targetNodeId": "node.s00.object_0042",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00095",
+      "sourceNodeId": "node.s04.object_0058",
+      "targetNodeId": "node.s00.object_0066",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00096",
+      "sourceNodeId": "node.s03.object_0057",
+      "targetNodeId": "node.s05.object_0023",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00097",
+      "sourceNodeId": "node.s04.object_0046",
+      "targetNodeId": "node.s01.object_0043",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00098",
+      "sourceNodeId": "node.s00.object_0054",
+      "targetNodeId": "node.s04.object_0058",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00099",
+      "sourceNodeId": "node.s03.object_0057",
+      "targetNodeId": "node.s02.object_0032",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00100",
+      "sourceNodeId": "node.s01.object_0061",
+      "targetNodeId": "node.s00.object_0036",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00101",
+      "sourceNodeId": "node.s01.object_0043",
+      "targetNodeId": "node.s00.object_0042",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00102",
+      "sourceNodeId": "node.s02.object_0050",
+      "targetNodeId": "node.s05.object_0047",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00103",
+      "sourceNodeId": "node.s04.object_0052",
+      "targetNodeId": "node.s03.object_0027",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00104",
+      "sourceNodeId": "node.s05.object_0029",
+      "targetNodeId": "node.s04.object_0052",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00105",
+      "sourceNodeId": "node.s01.object_0037",
+      "targetNodeId": "node.s00.object_0054",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00106",
+      "sourceNodeId": "node.s04.object_0022",
+      "targetNodeId": "node.s02.object_0050",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00107",
+      "sourceNodeId": "node.s05.object_0059",
+      "targetNodeId": "node.s00.object_0060",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00108",
+      "sourceNodeId": "node.s02.object_0062",
+      "targetNodeId": "node.s00.object_0054",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00109",
+      "sourceNodeId": "node.s00.object_0030",
+      "targetNodeId": "node.s01.object_0019",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00110",
+      "sourceNodeId": "node.s02.object_0050",
+      "targetNodeId": "node.s03.object_0063",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00111",
+      "sourceNodeId": "node.s05.object_0053",
+      "targetNodeId": "node.s05.object_0047",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00112",
+      "sourceNodeId": "node.s00.object_0048",
+      "targetNodeId": "node.s00.object_0036",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00113",
+      "sourceNodeId": "node.s04.object_0058",
+      "targetNodeId": "node.s04.object_0034",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00114",
+      "sourceNodeId": "node.s02.object_0020",
+      "targetNodeId": "node.s00.object_0042",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00115",
+      "sourceNodeId": "node.s00.object_0030",
+      "targetNodeId": "node.s02.object_0038",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00116",
+      "sourceNodeId": "node.s00.object_0018",
+      "targetNodeId": "node.s03.object_0039",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00117",
+      "sourceNodeId": "node.s01.object_0031",
+      "targetNodeId": "node.s01.object_0049",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00118",
+      "sourceNodeId": "node.s04.object_0034",
+      "targetNodeId": "node.s04.object_0046",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00119",
+      "sourceNodeId": "node.s01.object_0061",
+      "targetNodeId": "node.s05.object_0041",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00120",
+      "sourceNodeId": "node.s03.object_0063",
+      "targetNodeId": "node.s01.object_0067",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00121",
+      "sourceNodeId": "node.s01.object_0061",
+      "targetNodeId": "node.s00.object_0054",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00122",
+      "sourceNodeId": "node.s00.object_0048",
+      "targetNodeId": "node.s02.object_0032",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00123",
+      "sourceNodeId": "node.s04.object_0040",
+      "targetNodeId": "node.s04.object_0046",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00124",
+      "sourceNodeId": "node.s01.object_0037",
+      "targetNodeId": "node.s00.object_0030",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00125",
+      "sourceNodeId": "node.s02.object_0068",
+      "targetNodeId": "node.s02.object_0062",
+      "type": "materialized_view_input",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00126",
+      "sourceNodeId": "node.s00.object_0054",
+      "targetNodeId": "node.s01.object_0061",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00127",
+      "sourceNodeId": "node.s05.object_0041",
+      "targetNodeId": "node.s00.object_0036",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00128",
+      "sourceNodeId": "node.s04.object_0052",
+      "targetNodeId": "node.s05.object_0023",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00129",
+      "sourceNodeId": "node.s00.object_0030",
+      "targetNodeId": "node.s05.object_0035",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00130",
+      "sourceNodeId": "node.s02.object_0068",
+      "targetNodeId": "node.s04.object_0034",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00131",
+      "sourceNodeId": "node.s01.object_0049",
+      "targetNodeId": "node.s04.object_0058",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00132",
+      "sourceNodeId": "node.s04.object_0028",
+      "targetNodeId": "node.s04.object_0046",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00133",
+      "sourceNodeId": "node.s05.object_0047",
+      "targetNodeId": "node.s03.object_0033",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00134",
+      "sourceNodeId": "node.s01.object_0055",
+      "targetNodeId": "node.s00.object_0030",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00135",
+      "sourceNodeId": "node.s01.object_0037",
+      "targetNodeId": "node.s04.object_0040",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00136",
+      "sourceNodeId": "node.s04.object_0028",
+      "targetNodeId": "node.s01.object_0037",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00137",
+      "sourceNodeId": "node.s02.object_0056",
+      "targetNodeId": "node.s01.object_0037",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00138",
+      "sourceNodeId": "node.s02.object_0050",
+      "targetNodeId": "node.s01.object_0019",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00139",
+      "sourceNodeId": "node.s02.object_0056",
+      "targetNodeId": "node.s04.object_0028",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00140",
+      "sourceNodeId": "node.s01.object_0067",
+      "targetNodeId": "node.s01.object_0043",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00141",
+      "sourceNodeId": "node.s00.object_0048",
+      "targetNodeId": "node.s02.object_0062",
+      "type": "materialized_view_input",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00142",
+      "sourceNodeId": "node.s03.object_0051",
+      "targetNodeId": "node.s04.object_0040",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00143",
+      "sourceNodeId": "node.s03.object_0045",
+      "targetNodeId": "node.s03.object_0027",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00144",
+      "sourceNodeId": "node.s01.object_0043",
+      "targetNodeId": "node.s00.object_0024",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00145",
+      "sourceNodeId": "node.s02.object_0026",
+      "targetNodeId": "node.s05.object_0059",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00146",
+      "sourceNodeId": "node.s01.object_0037",
+      "targetNodeId": "node.s02.object_0020",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00147",
+      "sourceNodeId": "node.s01.object_0067",
+      "targetNodeId": "node.s01.object_0031",
+      "type": "materialized_view_input",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00148",
+      "sourceNodeId": "node.s05.object_0047",
+      "targetNodeId": "node.s05.object_0041",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00149",
+      "sourceNodeId": "node.s02.object_0044",
+      "targetNodeId": "node.s04.object_0064",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00150",
+      "sourceNodeId": "node.s00.object_0036",
+      "targetNodeId": "node.s02.object_0044",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00151",
+      "sourceNodeId": "node.s02.object_0056",
+      "targetNodeId": "node.s01.object_0037",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00152",
+      "sourceNodeId": "node.s01.object_0049",
+      "targetNodeId": "node.s03.object_0033",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00153",
+      "sourceNodeId": "node.s04.object_0046",
+      "targetNodeId": "node.s02.object_0056",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00154",
+      "sourceNodeId": "node.s00.object_0054",
+      "targetNodeId": "node.s05.object_0059",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00155",
+      "sourceNodeId": "node.s04.object_0058",
+      "targetNodeId": "node.s03.object_0057",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00156",
+      "sourceNodeId": "node.s05.object_0023",
+      "targetNodeId": "node.s03.object_0039",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00157",
+      "sourceNodeId": "node.s00.object_0042",
+      "targetNodeId": "node.s05.object_0041",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00158",
+      "sourceNodeId": "node.s01.object_0031",
+      "targetNodeId": "node.s02.object_0026",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00159",
+      "sourceNodeId": "node.s02.object_0050",
+      "targetNodeId": "node.s02.object_0062",
+      "type": "materialized_view_input",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00160",
+      "sourceNodeId": "node.s05.object_0053",
+      "targetNodeId": "node.s04.object_0040",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00161",
+      "sourceNodeId": "node.s00.object_0054",
+      "targetNodeId": "node.s03.object_0063",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00162",
+      "sourceNodeId": "node.s04.object_0052",
+      "targetNodeId": "node.s04.object_0064",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00163",
+      "sourceNodeId": "node.s03.object_0045",
+      "targetNodeId": "node.s03.object_0021",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00164",
+      "sourceNodeId": "node.s05.object_0035",
+      "targetNodeId": "node.s02.object_0068",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00165",
+      "sourceNodeId": "node.s00.object_0054",
+      "targetNodeId": "node.s00.object_0066",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00166",
+      "sourceNodeId": "node.s05.object_0029",
+      "targetNodeId": "node.s00.object_0024",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00167",
+      "sourceNodeId": "node.s03.object_0045",
+      "targetNodeId": "node.s01.object_0037",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00168",
+      "sourceNodeId": "node.s05.object_0029",
+      "targetNodeId": "node.s00.object_0060",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00169",
+      "sourceNodeId": "node.s00.object_0030",
+      "targetNodeId": "node.s03.object_0051",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00170",
+      "sourceNodeId": "node.s04.object_0064",
+      "targetNodeId": "node.s02.object_0068",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00171",
+      "sourceNodeId": "node.s03.object_0033",
+      "targetNodeId": "node.s01.object_0049",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00172",
+      "sourceNodeId": "node.s01.object_0037",
+      "targetNodeId": "node.s02.object_0056",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00173",
+      "sourceNodeId": "node.s02.object_0050",
+      "targetNodeId": "node.s00.object_0066",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00174",
+      "sourceNodeId": "node.s04.object_0022",
+      "targetNodeId": "node.s00.object_0060",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00175",
+      "sourceNodeId": "node.s00.object_0060",
+      "targetNodeId": "node.s04.object_0022",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00176",
+      "sourceNodeId": "node.s05.object_0059",
+      "targetNodeId": "node.s03.object_0027",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00177",
+      "sourceNodeId": "node.s01.object_0055",
+      "targetNodeId": "node.s01.object_0037",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00178",
+      "sourceNodeId": "node.s02.object_0062",
+      "targetNodeId": "node.s01.object_0037",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00179",
+      "sourceNodeId": "node.s05.object_0023",
+      "targetNodeId": "node.s00.object_0036",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00180",
+      "sourceNodeId": "node.s02.object_0020",
+      "targetNodeId": "node.s04.object_0046",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00181",
+      "sourceNodeId": "node.s00.object_0066",
+      "targetNodeId": "node.s04.object_0034",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00182",
+      "sourceNodeId": "node.s05.object_0035",
+      "targetNodeId": "node.s03.object_0033",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00183",
+      "sourceNodeId": "node.s00.object_0030",
+      "targetNodeId": "node.s01.object_0061",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00184",
+      "sourceNodeId": "node.s00.object_0066",
+      "targetNodeId": "node.s00.object_0048",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00185",
+      "sourceNodeId": "node.s01.object_0031",
+      "targetNodeId": "node.s00.object_0024",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00186",
+      "sourceNodeId": "node.s05.object_0053",
+      "targetNodeId": "node.s00.object_0048",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00187",
+      "sourceNodeId": "node.s01.object_0031",
+      "targetNodeId": "node.s00.object_0024",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00188",
+      "sourceNodeId": "node.s00.object_0054",
+      "targetNodeId": "node.s03.object_0063",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00189",
+      "sourceNodeId": "node.s05.object_0053",
+      "targetNodeId": "node.s04.object_0046",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00190",
+      "sourceNodeId": "node.s00.object_0018",
+      "targetNodeId": "node.s03.object_0045",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00191",
+      "sourceNodeId": "node.s05.object_0023",
+      "targetNodeId": "node.s02.object_0056",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00192",
+      "sourceNodeId": "node.s00.object_0054",
+      "targetNodeId": "node.s04.object_0064",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00193",
+      "sourceNodeId": "node.s05.object_0047",
+      "targetNodeId": "node.s03.object_0057",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00194",
+      "sourceNodeId": "node.s01.object_0025",
+      "targetNodeId": "node.s01.object_0037",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00195",
+      "sourceNodeId": "node.s05.object_0047",
+      "targetNodeId": "node.s00.object_0024",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00196",
+      "sourceNodeId": "node.s04.object_0058",
+      "targetNodeId": "node.s00.object_0054",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00197",
+      "sourceNodeId": "node.s05.object_0047",
+      "targetNodeId": "node.s02.object_0068",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00198",
+      "sourceNodeId": "node.s02.object_0020",
+      "targetNodeId": "node.s00.object_0048",
+      "type": "unknown",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00199",
+      "sourceNodeId": "node.s05.object_0053",
+      "targetNodeId": "node.s02.object_0056",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00200",
+      "sourceNodeId": "node.s02.object_0032",
+      "targetNodeId": "node.s00.object_0042",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00201",
+      "sourceNodeId": "node.s02.object_0032",
+      "targetNodeId": "node.s04.object_0058",
+      "type": "etl_transfer",
+      "tags": [
+        "hourly"
+      ]
+    },
+    {
+      "id": "edge.00202",
+      "sourceNodeId": "node.s00.object_0060",
+      "targetNodeId": "node.s02.object_0026",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00203",
+      "sourceNodeId": "node.s03.object_0051",
+      "targetNodeId": "node.s05.object_0029",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00204",
+      "sourceNodeId": "node.s01.object_0019",
+      "targetNodeId": "node.s03.object_0051",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00205",
+      "sourceNodeId": "node.s01.object_0019",
+      "targetNodeId": "node.s00.object_0036",
+      "type": "distributed_reference",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00206",
+      "sourceNodeId": "node.s04.object_0052",
+      "targetNodeId": "node.s04.object_0028",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00207",
+      "sourceNodeId": "node.s00.object_0030",
+      "targetNodeId": "node.s01.object_0031",
+      "type": "materialized_view_input",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00208",
+      "sourceNodeId": "node.s01.object_0055",
+      "targetNodeId": "node.s05.object_0065",
+      "type": "manual_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00209",
+      "sourceNodeId": "node.s00.object_0042",
+      "targetNodeId": "node.s03.object_0063",
+      "type": "view_dependency",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00210",
+      "sourceNodeId": "node.s01.object_0031",
+      "targetNodeId": "node.s01.object_0037",
+      "type": "materialized_view_target",
+      "tags": [
+        "lineage"
+      ]
+    },
+    {
+      "id": "edge.00211",
+      "sourceNodeId": "node.s02.object_0062",
+      "targetNodeId": "node.s02.object_0068",
+      "type": "materialized_view_target",
+      "tags": [
+        "lineage"
+      ]
+    }
+  ],
+  "layout": null
+}
