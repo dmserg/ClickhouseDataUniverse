@@ -37,6 +37,10 @@ pnpm generate:mock
 
 The breadcrumbs always provide a route back to Galaxy or Universe. Both overlay panels are collapsible.
 
+## License
+
+ClickHouse Universe is available under the [MIT License](./LICENSE).
+
 ## Main workflow
 
 1. Search for an object or enter a galaxy.
