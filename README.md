@@ -1,6 +1,6 @@
-# ClickHouse Universe
+# ClickHouse Data Universe
 
-ClickHouse Universe is a local, browser-first 3D explorer for a static ClickHouse lineage graph. Schemas become galaxies, data-owning tables become scaled stars, views become planets, materialized views become transformation stations, and distributed tables become portals.
+ClickHouse Data Universe is a local, browser-first 3D explorer for a static ClickHouse lineage graph. Schemas become galaxies, data-owning tables become scaled stars, views become planets, materialized views become transformation stations, and distributed tables become portals.
 
 The prototype is deliberately client-only. It does not connect to ClickHouse, execute SQL, run a backend, use Docker, require cloud services, authenticate users, or update metadata live.
 
