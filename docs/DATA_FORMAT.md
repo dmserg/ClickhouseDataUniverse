@@ -4,8 +4,6 @@
 
 Use a versioned JSON document as the canonical input format.
 
-Mermaid may be added later as a convenience importer, but it must not be the internal or canonical model. Mermaid does not naturally express size semantics, engine metadata, ownership, lineage types, cluster scope, and layout hints.
-
 ## Top-level structure
 
 ```json

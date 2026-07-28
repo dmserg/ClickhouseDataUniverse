@@ -21,8 +21,179 @@ const engines = [
   ["Kafka", "Integration"],
   ["S3", "Integration"]
 ];
-const owners = ["Core Data", "Analytics Engineering", "Finance Platform", "Growth", "Operations"];
-const tags = ["gold", "silver", "hourly", "realtime", "pii", "events", "finance", "ops"];
+const galaxyNames = [
+  "tatooine",
+  "naboo",
+  "coruscant",
+  "alderaan",
+  "hoth",
+  "endor",
+  "dagobah",
+  "mustafar",
+  "kashyyyk",
+  "kamino",
+  "geonosis",
+  "bespin",
+  "jakku",
+  "scarif",
+  "jedha",
+  "lothal",
+  "mandalore",
+  "dathomir",
+  "exegol",
+  "crait",
+  "corellia",
+  "kessel",
+  "mon_cala",
+  "ryloth",
+  "felucia",
+  "utapau",
+  "mygeeto",
+  "christophsis",
+  "malachor",
+  "yavin_4",
+  "ajan_kloss",
+  "ilum",
+  "niamos",
+  "ferrix",
+  "narkina_5",
+  "nevarro",
+  "sorgan",
+  "trask",
+  "teth",
+  "onderon",
+  "rishi",
+  "saleucami",
+  "polis_massa",
+  "hosnian_prime",
+  "takodana",
+  "d_qar",
+  "ahch_to",
+  "savareen",
+  "vandor",
+  "moraband"
+];
+const entityNames = [
+  "luke_skywalker",
+  "leia_organa",
+  "han_solo",
+  "chewbacca",
+  "obi_wan_kenobi",
+  "anakin_skywalker",
+  "ahsoka_tano",
+  "padme_amidala",
+  "yoda",
+  "mace_windu",
+  "qui_gon_jinn",
+  "rey_skywalker",
+  "finn",
+  "poe_dameron",
+  "lando_calrissian",
+  "cassian_andor",
+  "jyn_erso",
+  "din_djarin",
+  "grogu",
+  "bo_katan",
+  "hera_syndulla",
+  "ezra_bridger",
+  "sabine_wren",
+  "kanan_jarrus",
+  "captain_rex",
+  "commander_cody",
+  "boba_fett",
+  "jango_fett",
+  "darth_vader",
+  "darth_maul",
+  "emperor_palpatine",
+  "count_dooku",
+  "general_grievous",
+  "kylo_ren",
+  "grand_moff_tarkin",
+  "grand_admiral_thrawn",
+  "asajj_ventress",
+  "moff_gideon",
+  "r2_d2",
+  "c_3po",
+  "bb_8",
+  "k_2so",
+  "chopper",
+  "ig_11",
+  "millennium_falcon",
+  "razor_crest",
+  "ghost",
+  "x_wing",
+  "tie_fighter",
+  "star_destroyer",
+  "death_star",
+  "home_one",
+  "slave_one",
+  "tantive_iv",
+  "executor",
+  "fondor_haulcraft",
+  "jedi_temple",
+  "mos_eisley",
+  "cloud_city",
+  "echo_base",
+  "massassi_temple",
+  "theed_palace",
+  "imperial_palace",
+  "clone_facility",
+  "niima_outpost",
+  "black_spire",
+  "a_new_hope",
+  "the_empire_strikes_back",
+  "return_of_the_jedi",
+  "the_phantom_menace",
+  "attack_of_the_clones",
+  "revenge_of_the_sith",
+  "the_force_awakens",
+  "the_last_jedi",
+  "the_rise_of_skywalker",
+  "rogue_one",
+  "solo",
+  "the_clone_wars",
+  "rebels",
+  "the_mandalorian",
+  "andor",
+  "the_bad_batch",
+  "tales_of_the_jedi",
+  "jedi_order",
+  "galactic_senate",
+  "rebel_alliance",
+  "galactic_empire",
+  "first_order",
+  "resistance",
+  "trade_federation",
+  "separatist_alliance",
+  "night_sisters",
+  "mandalorian_clans",
+  "inquisitorius",
+  "kyber_crystal",
+  "holocron",
+  "lightsaber",
+  "dark_saber",
+  "beskar"
+];
+const dataSubjects = [
+  "missions",
+  "telemetry",
+  "encounters",
+  "hyperspace_routes",
+  "archive",
+  "events",
+  "intelligence",
+  "supply_manifest",
+  "holonet_feed",
+  "battle_records"
+];
+const owners = [
+  "Jedi Archives",
+  "Rebel Intelligence",
+  "Imperial Logistics",
+  "Senate Analytics",
+  "Droid Operations"
+];
+const tags = ["rebel", "imperial", "jedi", "sith", "outer-rim", "clone-wars", "force", "hyperspace"];
 const edgeTypes = [
   "etl_transfer",
   "view_dependency",
@@ -33,17 +204,28 @@ const edgeTypes = [
 
 function createDataset({ seed, schemaCount, nodeCount, edgeCount, pathCount, name }) {
   const random = randomSource(seed);
+  const titleCase = (value) =>
+    value
+      .split("_")
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(" ");
+  const nodeNameAt = (index) => {
+    const entity = entityNames[index % entityNames.length];
+    const subject = dataSubjects[Math.floor(index / entityNames.length) % dataSubjects.length];
+    const era = Math.floor(index / (entityNames.length * dataSubjects.length));
+    return `${entity}_${subject}${era > 0 ? `_era_${era + 1}` : ""}`;
+  };
   const schemas = Array.from({ length: schemaCount }, (_, index) => ({
-    id: `schema.s${String(index).padStart(2, "0")}`,
-    name: `domain_${String(index).padStart(2, "0")}`,
-    displayName: ["Raw Intake", "Analytics", "Finance", "Operations", "Growth", "Serving"][index] ?? `Domain ${index}`,
+    id: `schema.${galaxyNames[index]}`,
+    name: galaxyNames[index],
+    displayName: titleCase(galaxyNames[index]),
     owner: owners[index % owners.length],
     tags: [tags[index % tags.length]]
   }));
   const nodes = Array.from({ length: nodeCount }, (_, index) => {
     const schemaIndex = index % schemaCount;
     const schema = schemas[schemaIndex];
-    const suffix = String(index).padStart(4, "0");
+    const nodeName = nodeNameAt(index);
     let kind = "table";
     if (index % 19 === 0) kind = "view";
     if (index % 31 === 0) kind = "materialized_view";
@@ -56,12 +238,12 @@ function createDataset({ seed, schemaCount, nodeCount, edgeCount, pathCount, nam
         ? undefined
         : Math.floor(Math.pow(10, 6 + Math.pow(random(), 1.8) * 9));
     const node = {
-      id: `node.s${String(schemaIndex).padStart(2, "0")}.object_${suffix}`,
+      id: `node.${schema.name}.${nodeName}`,
       schemaId: schema.id,
-      name: `object_${suffix}`,
-      qualifiedName: `${schema.name}.object_${suffix}`,
+      name: nodeName,
+      qualifiedName: `${schema.name}.${nodeName}`,
       kind,
-      description: `Deterministic ${kind.replaceAll("_", " ")} for lineage exploration`,
+      description: `${titleCase(nodeName)} ${kind.replaceAll("_", " ")} in the ${schema.displayName} galaxy`,
       owner: owners[index % owners.length],
       tags: [tags[index % tags.length], tags[(index * 3 + 1) % tags.length]],
       metrics: { freshnessMinutes: index % 240 }
@@ -81,9 +263,9 @@ function createDataset({ seed, schemaCount, nodeCount, edgeCount, pathCount, nam
     if (kind === "materialized_view") node.materializedView = { mode: index % 2 ? "incremental" : "refreshable" };
     if (kind === "distributed_table") {
       node.distributedTable = {
-        clusterName: "demo_cluster",
+        clusterName: "galactic_holonet",
         remoteSchema: schema.name,
-        remoteTable: `object_${String((index + schemaCount) % nodeCount).padStart(4, "0")}`
+        remoteTable: nodeNameAt((index + schemaCount) % nodeCount)
       };
     }
     return node;
@@ -116,7 +298,7 @@ function createDataset({ seed, schemaCount, nodeCount, edgeCount, pathCount, nam
     for (let step = 0; step < pathLength; step += 1) {
       const nodeIndex = start + step;
       ids.push(nodes[nodeIndex].id);
-      if (step > 0) addEdge(nodeIndex - 1, nodeIndex, "etl_transfer", `known-path-${pathIndex}`);
+      if (step > 0) addEdge(nodeIndex - 1, nodeIndex, "etl_transfer", `hyperspace-route-${pathIndex + 1}`);
     }
     knownPaths.push(ids);
   }
@@ -154,8 +336,8 @@ function createDataset({ seed, schemaCount, nodeCount, edgeCount, pathCount, nam
       formatVersion: "1.0",
       universe: {
         id: `clickhouse-universe-${name}`,
-        name: `${name === "small" ? "Demo" : "Benchmark"} ClickHouse Universe`,
-        description: "Deterministic static ClickHouse lineage graph",
+        name: `${name === "small" ? "Skywalker Saga" : "Galactic Archives"} ClickHouse Universe`,
+        description: "Deterministic Star Wars-inspired ClickHouse lineage graph",
         generatedAt: "2026-07-26T00:00:00Z",
         layoutSeed: seed
       },

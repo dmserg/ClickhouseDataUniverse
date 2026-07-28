@@ -2,79 +2,79 @@
   "formatVersion": "1.0",
   "universe": {
     "id": "clickhouse-universe-small",
-    "name": "Demo ClickHouse Universe",
-    "description": "Deterministic static ClickHouse lineage graph",
+    "name": "Skywalker Saga ClickHouse Universe",
+    "description": "Deterministic Star Wars-inspired ClickHouse lineage graph",
     "generatedAt": "2026-07-26T00:00:00Z",
     "layoutSeed": 42042
   },
   "schemas": [
     {
-      "id": "schema.s00",
-      "name": "domain_00",
-      "displayName": "Raw Intake",
-      "owner": "Core Data",
+      "id": "schema.tatooine",
+      "name": "tatooine",
+      "displayName": "Tatooine",
+      "owner": "Jedi Archives",
       "tags": [
-        "gold"
+        "rebel"
       ]
     },
     {
-      "id": "schema.s01",
-      "name": "domain_01",
-      "displayName": "Analytics",
-      "owner": "Analytics Engineering",
+      "id": "schema.naboo",
+      "name": "naboo",
+      "displayName": "Naboo",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "silver"
+        "imperial"
       ]
     },
     {
-      "id": "schema.s02",
-      "name": "domain_02",
-      "displayName": "Finance",
-      "owner": "Finance Platform",
+      "id": "schema.coruscant",
+      "name": "coruscant",
+      "displayName": "Coruscant",
+      "owner": "Imperial Logistics",
       "tags": [
-        "hourly"
+        "jedi"
       ]
     },
     {
-      "id": "schema.s03",
-      "name": "domain_03",
-      "displayName": "Operations",
-      "owner": "Growth",
+      "id": "schema.alderaan",
+      "name": "alderaan",
+      "displayName": "Alderaan",
+      "owner": "Senate Analytics",
       "tags": [
-        "realtime"
+        "sith"
       ]
     },
     {
-      "id": "schema.s04",
-      "name": "domain_04",
-      "displayName": "Growth",
-      "owner": "Operations",
+      "id": "schema.hoth",
+      "name": "hoth",
+      "displayName": "Hoth",
+      "owner": "Droid Operations",
       "tags": [
-        "pii"
+        "outer-rim"
       ]
     },
     {
-      "id": "schema.s05",
-      "name": "domain_05",
-      "displayName": "Serving",
-      "owner": "Core Data",
+      "id": "schema.endor",
+      "name": "endor",
+      "displayName": "Endor",
+      "owner": "Jedi Archives",
       "tags": [
-        "events"
+        "clone-wars"
       ]
     }
   ],
   "nodes": [
     {
-      "id": "node.s00.object_0000",
-      "schemaId": "schema.s00",
-      "name": "object_0000",
-      "qualifiedName": "domain_00.object_0000",
+      "id": "node.tatooine.luke_skywalker_missions",
+      "schemaId": "schema.tatooine",
+      "name": "luke_skywalker_missions",
+      "qualifiedName": "tatooine.luke_skywalker_missions",
       "kind": "special_table",
-      "description": "Deterministic special table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Luke Skywalker Missions special table in the Tatooine galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "gold",
-        "silver"
+        "rebel",
+        "imperial"
       ],
       "metrics": {
         "freshnessMinutes": 0
@@ -93,16 +93,16 @@
       }
     },
     {
-      "id": "node.s01.object_0001",
-      "schemaId": "schema.s01",
-      "name": "object_0001",
-      "qualifiedName": "domain_01.object_0001",
+      "id": "node.naboo.leia_organa_missions",
+      "schemaId": "schema.naboo",
+      "name": "leia_organa_missions",
+      "qualifiedName": "naboo.leia_organa_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "Leia Organa Missions table in the Naboo galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "silver",
-        "pii"
+        "imperial",
+        "outer-rim"
       ],
       "metrics": {
         "freshnessMinutes": 1
@@ -121,16 +121,16 @@
       }
     },
     {
-      "id": "node.s02.object_0002",
-      "schemaId": "schema.s02",
-      "name": "object_0002",
-      "qualifiedName": "domain_02.object_0002",
+      "id": "node.coruscant.han_solo_missions",
+      "schemaId": "schema.coruscant",
+      "name": "han_solo_missions",
+      "qualifiedName": "coruscant.han_solo_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "Han Solo Missions table in the Coruscant galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "hourly",
-        "ops"
+        "jedi",
+        "hyperspace"
       ],
       "metrics": {
         "freshnessMinutes": 2
@@ -149,16 +149,16 @@
       }
     },
     {
-      "id": "node.s03.object_0003",
-      "schemaId": "schema.s03",
-      "name": "object_0003",
-      "qualifiedName": "domain_03.object_0003",
+      "id": "node.alderaan.chewbacca_missions",
+      "schemaId": "schema.alderaan",
+      "name": "chewbacca_missions",
+      "qualifiedName": "alderaan.chewbacca_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Growth",
+      "description": "Chewbacca Missions table in the Alderaan galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "realtime",
-        "hourly"
+        "sith",
+        "jedi"
       ],
       "metrics": {
         "freshnessMinutes": 3
@@ -177,16 +177,16 @@
       }
     },
     {
-      "id": "node.s04.object_0004",
-      "schemaId": "schema.s04",
-      "name": "object_0004",
-      "qualifiedName": "domain_04.object_0004",
+      "id": "node.hoth.obi_wan_kenobi_missions",
+      "schemaId": "schema.hoth",
+      "name": "obi_wan_kenobi_missions",
+      "qualifiedName": "hoth.obi_wan_kenobi_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Operations",
+      "description": "Obi Wan Kenobi Missions table in the Hoth galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "pii",
-        "events"
+        "outer-rim",
+        "clone-wars"
       ],
       "metrics": {
         "freshnessMinutes": 4
@@ -205,16 +205,16 @@
       }
     },
     {
-      "id": "node.s05.object_0005",
-      "schemaId": "schema.s05",
-      "name": "object_0005",
-      "qualifiedName": "domain_05.object_0005",
+      "id": "node.endor.anakin_skywalker_missions",
+      "schemaId": "schema.endor",
+      "name": "anakin_skywalker_missions",
+      "qualifiedName": "endor.anakin_skywalker_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Anakin Skywalker Missions table in the Endor galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "events",
-        "gold"
+        "clone-wars",
+        "rebel"
       ],
       "metrics": {
         "freshnessMinutes": 5
@@ -233,16 +233,16 @@
       }
     },
     {
-      "id": "node.s00.object_0006",
-      "schemaId": "schema.s00",
-      "name": "object_0006",
-      "qualifiedName": "domain_00.object_0006",
+      "id": "node.tatooine.ahsoka_tano_missions",
+      "schemaId": "schema.tatooine",
+      "name": "ahsoka_tano_missions",
+      "qualifiedName": "tatooine.ahsoka_tano_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "Ahsoka Tano Missions table in the Tatooine galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "finance",
-        "realtime"
+        "force",
+        "sith"
       ],
       "metrics": {
         "freshnessMinutes": 6
@@ -261,16 +261,16 @@
       }
     },
     {
-      "id": "node.s01.object_0007",
-      "schemaId": "schema.s01",
-      "name": "object_0007",
-      "qualifiedName": "domain_01.object_0007",
+      "id": "node.naboo.padme_amidala_missions",
+      "schemaId": "schema.naboo",
+      "name": "padme_amidala_missions",
+      "qualifiedName": "naboo.padme_amidala_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "Padme Amidala Missions table in the Naboo galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "ops",
-        "finance"
+        "hyperspace",
+        "force"
       ],
       "metrics": {
         "freshnessMinutes": 7
@@ -289,16 +289,16 @@
       }
     },
     {
-      "id": "node.s02.object_0008",
-      "schemaId": "schema.s02",
-      "name": "object_0008",
-      "qualifiedName": "domain_02.object_0008",
+      "id": "node.coruscant.yoda_missions",
+      "schemaId": "schema.coruscant",
+      "name": "yoda_missions",
+      "qualifiedName": "coruscant.yoda_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Growth",
+      "description": "Yoda Missions table in the Coruscant galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "gold",
-        "silver"
+        "rebel",
+        "imperial"
       ],
       "metrics": {
         "freshnessMinutes": 8
@@ -317,16 +317,16 @@
       }
     },
     {
-      "id": "node.s03.object_0009",
-      "schemaId": "schema.s03",
-      "name": "object_0009",
-      "qualifiedName": "domain_03.object_0009",
+      "id": "node.alderaan.mace_windu_missions",
+      "schemaId": "schema.alderaan",
+      "name": "mace_windu_missions",
+      "qualifiedName": "alderaan.mace_windu_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Operations",
+      "description": "Mace Windu Missions table in the Alderaan galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "silver",
-        "pii"
+        "imperial",
+        "outer-rim"
       ],
       "metrics": {
         "freshnessMinutes": 9
@@ -345,16 +345,16 @@
       }
     },
     {
-      "id": "node.s04.object_0010",
-      "schemaId": "schema.s04",
-      "name": "object_0010",
-      "qualifiedName": "domain_04.object_0010",
+      "id": "node.hoth.qui_gon_jinn_missions",
+      "schemaId": "schema.hoth",
+      "name": "qui_gon_jinn_missions",
+      "qualifiedName": "hoth.qui_gon_jinn_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Qui Gon Jinn Missions table in the Hoth galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "hourly",
-        "ops"
+        "jedi",
+        "hyperspace"
       ],
       "metrics": {
         "freshnessMinutes": 10
@@ -373,16 +373,16 @@
       }
     },
     {
-      "id": "node.s05.object_0011",
-      "schemaId": "schema.s05",
-      "name": "object_0011",
-      "qualifiedName": "domain_05.object_0011",
+      "id": "node.endor.rey_skywalker_missions",
+      "schemaId": "schema.endor",
+      "name": "rey_skywalker_missions",
+      "qualifiedName": "endor.rey_skywalker_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "Rey Skywalker Missions table in the Endor galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "realtime",
-        "hourly"
+        "sith",
+        "jedi"
       ],
       "metrics": {
         "freshnessMinutes": 11
@@ -401,16 +401,16 @@
       }
     },
     {
-      "id": "node.s00.object_0012",
-      "schemaId": "schema.s00",
-      "name": "object_0012",
-      "qualifiedName": "domain_00.object_0012",
+      "id": "node.tatooine.finn_missions",
+      "schemaId": "schema.tatooine",
+      "name": "finn_missions",
+      "qualifiedName": "tatooine.finn_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "Finn Missions table in the Tatooine galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "pii",
-        "events"
+        "outer-rim",
+        "clone-wars"
       ],
       "metrics": {
         "freshnessMinutes": 12
@@ -429,16 +429,16 @@
       }
     },
     {
-      "id": "node.s01.object_0013",
-      "schemaId": "schema.s01",
-      "name": "object_0013",
-      "qualifiedName": "domain_01.object_0013",
+      "id": "node.naboo.poe_dameron_missions",
+      "schemaId": "schema.naboo",
+      "name": "poe_dameron_missions",
+      "qualifiedName": "naboo.poe_dameron_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Growth",
+      "description": "Poe Dameron Missions table in the Naboo galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "events",
-        "gold"
+        "clone-wars",
+        "rebel"
       ],
       "metrics": {
         "freshnessMinutes": 13
@@ -457,16 +457,16 @@
       }
     },
     {
-      "id": "node.s02.object_0014",
-      "schemaId": "schema.s02",
-      "name": "object_0014",
-      "qualifiedName": "domain_02.object_0014",
+      "id": "node.coruscant.lando_calrissian_missions",
+      "schemaId": "schema.coruscant",
+      "name": "lando_calrissian_missions",
+      "qualifiedName": "coruscant.lando_calrissian_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Operations",
+      "description": "Lando Calrissian Missions table in the Coruscant galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "finance",
-        "realtime"
+        "force",
+        "sith"
       ],
       "metrics": {
         "freshnessMinutes": 14
@@ -485,16 +485,16 @@
       }
     },
     {
-      "id": "node.s03.object_0015",
-      "schemaId": "schema.s03",
-      "name": "object_0015",
-      "qualifiedName": "domain_03.object_0015",
+      "id": "node.alderaan.cassian_andor_missions",
+      "schemaId": "schema.alderaan",
+      "name": "cassian_andor_missions",
+      "qualifiedName": "alderaan.cassian_andor_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Cassian Andor Missions table in the Alderaan galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "ops",
-        "finance"
+        "hyperspace",
+        "force"
       ],
       "metrics": {
         "freshnessMinutes": 15
@@ -513,16 +513,16 @@
       }
     },
     {
-      "id": "node.s04.object_0016",
-      "schemaId": "schema.s04",
-      "name": "object_0016",
-      "qualifiedName": "domain_04.object_0016",
+      "id": "node.hoth.jyn_erso_missions",
+      "schemaId": "schema.hoth",
+      "name": "jyn_erso_missions",
+      "qualifiedName": "hoth.jyn_erso_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "Jyn Erso Missions table in the Hoth galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "gold",
-        "silver"
+        "rebel",
+        "imperial"
       ],
       "metrics": {
         "freshnessMinutes": 16
@@ -541,16 +541,16 @@
       }
     },
     {
-      "id": "node.s05.object_0017",
-      "schemaId": "schema.s05",
-      "name": "object_0017",
-      "qualifiedName": "domain_05.object_0017",
+      "id": "node.endor.din_djarin_missions",
+      "schemaId": "schema.endor",
+      "name": "din_djarin_missions",
+      "qualifiedName": "endor.din_djarin_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "Din Djarin Missions table in the Endor galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "silver",
-        "pii"
+        "imperial",
+        "outer-rim"
       ],
       "metrics": {
         "freshnessMinutes": 17
@@ -569,16 +569,16 @@
       }
     },
     {
-      "id": "node.s00.object_0018",
-      "schemaId": "schema.s00",
-      "name": "object_0018",
-      "qualifiedName": "domain_00.object_0018",
+      "id": "node.tatooine.grogu_missions",
+      "schemaId": "schema.tatooine",
+      "name": "grogu_missions",
+      "qualifiedName": "tatooine.grogu_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Growth",
+      "description": "Grogu Missions table in the Tatooine galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "hourly",
-        "ops"
+        "jedi",
+        "hyperspace"
       ],
       "metrics": {
         "freshnessMinutes": 18
@@ -597,16 +597,16 @@
       }
     },
     {
-      "id": "node.s01.object_0019",
-      "schemaId": "schema.s01",
-      "name": "object_0019",
-      "qualifiedName": "domain_01.object_0019",
+      "id": "node.naboo.bo_katan_missions",
+      "schemaId": "schema.naboo",
+      "name": "bo_katan_missions",
+      "qualifiedName": "naboo.bo_katan_missions",
       "kind": "view",
-      "description": "Deterministic view for lineage exploration",
-      "owner": "Operations",
+      "description": "Bo Katan Missions view in the Naboo galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "realtime",
-        "hourly"
+        "sith",
+        "jedi"
       ],
       "metrics": {
         "freshnessMinutes": 19
@@ -616,16 +616,16 @@
       }
     },
     {
-      "id": "node.s02.object_0020",
-      "schemaId": "schema.s02",
-      "name": "object_0020",
-      "qualifiedName": "domain_02.object_0020",
+      "id": "node.coruscant.hera_syndulla_missions",
+      "schemaId": "schema.coruscant",
+      "name": "hera_syndulla_missions",
+      "qualifiedName": "coruscant.hera_syndulla_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Hera Syndulla Missions table in the Coruscant galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "pii",
-        "events"
+        "outer-rim",
+        "clone-wars"
       ],
       "metrics": {
         "freshnessMinutes": 20
@@ -644,16 +644,16 @@
       }
     },
     {
-      "id": "node.s03.object_0021",
-      "schemaId": "schema.s03",
-      "name": "object_0021",
-      "qualifiedName": "domain_03.object_0021",
+      "id": "node.alderaan.ezra_bridger_missions",
+      "schemaId": "schema.alderaan",
+      "name": "ezra_bridger_missions",
+      "qualifiedName": "alderaan.ezra_bridger_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "Ezra Bridger Missions table in the Alderaan galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "events",
-        "gold"
+        "clone-wars",
+        "rebel"
       ],
       "metrics": {
         "freshnessMinutes": 21
@@ -672,16 +672,16 @@
       }
     },
     {
-      "id": "node.s04.object_0022",
-      "schemaId": "schema.s04",
-      "name": "object_0022",
-      "qualifiedName": "domain_04.object_0022",
+      "id": "node.hoth.sabine_wren_missions",
+      "schemaId": "schema.hoth",
+      "name": "sabine_wren_missions",
+      "qualifiedName": "hoth.sabine_wren_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "Sabine Wren Missions table in the Hoth galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "finance",
-        "realtime"
+        "force",
+        "sith"
       ],
       "metrics": {
         "freshnessMinutes": 22
@@ -700,16 +700,16 @@
       }
     },
     {
-      "id": "node.s05.object_0023",
-      "schemaId": "schema.s05",
-      "name": "object_0023",
-      "qualifiedName": "domain_05.object_0023",
+      "id": "node.endor.kanan_jarrus_missions",
+      "schemaId": "schema.endor",
+      "name": "kanan_jarrus_missions",
+      "qualifiedName": "endor.kanan_jarrus_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Growth",
+      "description": "Kanan Jarrus Missions table in the Endor galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "ops",
-        "finance"
+        "hyperspace",
+        "force"
       ],
       "metrics": {
         "freshnessMinutes": 23
@@ -728,16 +728,16 @@
       }
     },
     {
-      "id": "node.s00.object_0024",
-      "schemaId": "schema.s00",
-      "name": "object_0024",
-      "qualifiedName": "domain_00.object_0024",
+      "id": "node.tatooine.captain_rex_missions",
+      "schemaId": "schema.tatooine",
+      "name": "captain_rex_missions",
+      "qualifiedName": "tatooine.captain_rex_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Operations",
+      "description": "Captain Rex Missions table in the Tatooine galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "gold",
-        "silver"
+        "rebel",
+        "imperial"
       ],
       "metrics": {
         "freshnessMinutes": 24
@@ -756,16 +756,16 @@
       }
     },
     {
-      "id": "node.s01.object_0025",
-      "schemaId": "schema.s01",
-      "name": "object_0025",
-      "qualifiedName": "domain_01.object_0025",
+      "id": "node.naboo.commander_cody_missions",
+      "schemaId": "schema.naboo",
+      "name": "commander_cody_missions",
+      "qualifiedName": "naboo.commander_cody_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Commander Cody Missions table in the Naboo galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "silver",
-        "pii"
+        "imperial",
+        "outer-rim"
       ],
       "metrics": {
         "freshnessMinutes": 25
@@ -784,16 +784,16 @@
       }
     },
     {
-      "id": "node.s02.object_0026",
-      "schemaId": "schema.s02",
-      "name": "object_0026",
-      "qualifiedName": "domain_02.object_0026",
+      "id": "node.coruscant.boba_fett_missions",
+      "schemaId": "schema.coruscant",
+      "name": "boba_fett_missions",
+      "qualifiedName": "coruscant.boba_fett_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "Boba Fett Missions table in the Coruscant galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "hourly",
-        "ops"
+        "jedi",
+        "hyperspace"
       ],
       "metrics": {
         "freshnessMinutes": 26
@@ -812,16 +812,16 @@
       }
     },
     {
-      "id": "node.s03.object_0027",
-      "schemaId": "schema.s03",
-      "name": "object_0027",
-      "qualifiedName": "domain_03.object_0027",
+      "id": "node.alderaan.jango_fett_missions",
+      "schemaId": "schema.alderaan",
+      "name": "jango_fett_missions",
+      "qualifiedName": "alderaan.jango_fett_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "Jango Fett Missions table in the Alderaan galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "realtime",
-        "hourly"
+        "sith",
+        "jedi"
       ],
       "metrics": {
         "freshnessMinutes": 27
@@ -840,16 +840,16 @@
       }
     },
     {
-      "id": "node.s04.object_0028",
-      "schemaId": "schema.s04",
-      "name": "object_0028",
-      "qualifiedName": "domain_04.object_0028",
+      "id": "node.hoth.darth_vader_missions",
+      "schemaId": "schema.hoth",
+      "name": "darth_vader_missions",
+      "qualifiedName": "hoth.darth_vader_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Growth",
+      "description": "Darth Vader Missions table in the Hoth galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "pii",
-        "events"
+        "outer-rim",
+        "clone-wars"
       ],
       "metrics": {
         "freshnessMinutes": 28
@@ -868,16 +868,16 @@
       }
     },
     {
-      "id": "node.s05.object_0029",
-      "schemaId": "schema.s05",
-      "name": "object_0029",
-      "qualifiedName": "domain_05.object_0029",
+      "id": "node.endor.darth_maul_missions",
+      "schemaId": "schema.endor",
+      "name": "darth_maul_missions",
+      "qualifiedName": "endor.darth_maul_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Operations",
+      "description": "Darth Maul Missions table in the Endor galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "events",
-        "gold"
+        "clone-wars",
+        "rebel"
       ],
       "metrics": {
         "freshnessMinutes": 29
@@ -896,16 +896,16 @@
       }
     },
     {
-      "id": "node.s00.object_0030",
-      "schemaId": "schema.s00",
-      "name": "object_0030",
-      "qualifiedName": "domain_00.object_0030",
+      "id": "node.tatooine.emperor_palpatine_missions",
+      "schemaId": "schema.tatooine",
+      "name": "emperor_palpatine_missions",
+      "qualifiedName": "tatooine.emperor_palpatine_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Emperor Palpatine Missions table in the Tatooine galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "finance",
-        "realtime"
+        "force",
+        "sith"
       ],
       "metrics": {
         "freshnessMinutes": 30
@@ -924,16 +924,16 @@
       }
     },
     {
-      "id": "node.s01.object_0031",
-      "schemaId": "schema.s01",
-      "name": "object_0031",
-      "qualifiedName": "domain_01.object_0031",
+      "id": "node.naboo.count_dooku_missions",
+      "schemaId": "schema.naboo",
+      "name": "count_dooku_missions",
+      "qualifiedName": "naboo.count_dooku_missions",
       "kind": "materialized_view",
-      "description": "Deterministic materialized view for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "Count Dooku Missions materialized view in the Naboo galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "ops",
-        "finance"
+        "hyperspace",
+        "force"
       ],
       "metrics": {
         "freshnessMinutes": 31
@@ -952,20 +952,20 @@
       },
       "materializedView": {
         "mode": "incremental",
-        "targetNodeId": "node.s01.object_0037"
+        "targetNodeId": "node.naboo.moff_gideon_missions"
       }
     },
     {
-      "id": "node.s02.object_0032",
-      "schemaId": "schema.s02",
-      "name": "object_0032",
-      "qualifiedName": "domain_02.object_0032",
+      "id": "node.coruscant.general_grievous_missions",
+      "schemaId": "schema.coruscant",
+      "name": "general_grievous_missions",
+      "qualifiedName": "coruscant.general_grievous_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "General Grievous Missions table in the Coruscant galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "gold",
-        "silver"
+        "rebel",
+        "imperial"
       ],
       "metrics": {
         "freshnessMinutes": 32
@@ -984,16 +984,16 @@
       }
     },
     {
-      "id": "node.s03.object_0033",
-      "schemaId": "schema.s03",
-      "name": "object_0033",
-      "qualifiedName": "domain_03.object_0033",
+      "id": "node.alderaan.kylo_ren_missions",
+      "schemaId": "schema.alderaan",
+      "name": "kylo_ren_missions",
+      "qualifiedName": "alderaan.kylo_ren_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Growth",
+      "description": "Kylo Ren Missions table in the Alderaan galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "silver",
-        "pii"
+        "imperial",
+        "outer-rim"
       ],
       "metrics": {
         "freshnessMinutes": 33
@@ -1012,16 +1012,16 @@
       }
     },
     {
-      "id": "node.s04.object_0034",
-      "schemaId": "schema.s04",
-      "name": "object_0034",
-      "qualifiedName": "domain_04.object_0034",
+      "id": "node.hoth.grand_moff_tarkin_missions",
+      "schemaId": "schema.hoth",
+      "name": "grand_moff_tarkin_missions",
+      "qualifiedName": "hoth.grand_moff_tarkin_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Operations",
+      "description": "Grand Moff Tarkin Missions table in the Hoth galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "hourly",
-        "ops"
+        "jedi",
+        "hyperspace"
       ],
       "metrics": {
         "freshnessMinutes": 34
@@ -1040,16 +1040,16 @@
       }
     },
     {
-      "id": "node.s05.object_0035",
-      "schemaId": "schema.s05",
-      "name": "object_0035",
-      "qualifiedName": "domain_05.object_0035",
+      "id": "node.endor.grand_admiral_thrawn_missions",
+      "schemaId": "schema.endor",
+      "name": "grand_admiral_thrawn_missions",
+      "qualifiedName": "endor.grand_admiral_thrawn_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Grand Admiral Thrawn Missions table in the Endor galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "realtime",
-        "hourly"
+        "sith",
+        "jedi"
       ],
       "metrics": {
         "freshnessMinutes": 35
@@ -1068,16 +1068,16 @@
       }
     },
     {
-      "id": "node.s00.object_0036",
-      "schemaId": "schema.s00",
-      "name": "object_0036",
-      "qualifiedName": "domain_00.object_0036",
+      "id": "node.tatooine.asajj_ventress_missions",
+      "schemaId": "schema.tatooine",
+      "name": "asajj_ventress_missions",
+      "qualifiedName": "tatooine.asajj_ventress_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "Asajj Ventress Missions table in the Tatooine galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "pii",
-        "events"
+        "outer-rim",
+        "clone-wars"
       ],
       "metrics": {
         "freshnessMinutes": 36
@@ -1096,16 +1096,16 @@
       }
     },
     {
-      "id": "node.s01.object_0037",
-      "schemaId": "schema.s01",
-      "name": "object_0037",
-      "qualifiedName": "domain_01.object_0037",
+      "id": "node.naboo.moff_gideon_missions",
+      "schemaId": "schema.naboo",
+      "name": "moff_gideon_missions",
+      "qualifiedName": "naboo.moff_gideon_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "Moff Gideon Missions table in the Naboo galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "events",
-        "gold"
+        "clone-wars",
+        "rebel"
       ],
       "metrics": {
         "freshnessMinutes": 37
@@ -1124,16 +1124,16 @@
       }
     },
     {
-      "id": "node.s02.object_0038",
-      "schemaId": "schema.s02",
-      "name": "object_0038",
-      "qualifiedName": "domain_02.object_0038",
+      "id": "node.coruscant.r2_d2_missions",
+      "schemaId": "schema.coruscant",
+      "name": "r2_d2_missions",
+      "qualifiedName": "coruscant.r2_d2_missions",
       "kind": "view",
-      "description": "Deterministic view for lineage exploration",
-      "owner": "Growth",
+      "description": "R2 D2 Missions view in the Coruscant galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "finance",
-        "realtime"
+        "force",
+        "sith"
       ],
       "metrics": {
         "freshnessMinutes": 38
@@ -1143,16 +1143,16 @@
       }
     },
     {
-      "id": "node.s03.object_0039",
-      "schemaId": "schema.s03",
-      "name": "object_0039",
-      "qualifiedName": "domain_03.object_0039",
+      "id": "node.alderaan.c_3po_missions",
+      "schemaId": "schema.alderaan",
+      "name": "c_3po_missions",
+      "qualifiedName": "alderaan.c_3po_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Operations",
+      "description": "C 3po Missions table in the Alderaan galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "ops",
-        "finance"
+        "hyperspace",
+        "force"
       ],
       "metrics": {
         "freshnessMinutes": 39
@@ -1171,16 +1171,16 @@
       }
     },
     {
-      "id": "node.s04.object_0040",
-      "schemaId": "schema.s04",
-      "name": "object_0040",
-      "qualifiedName": "domain_04.object_0040",
+      "id": "node.hoth.bb_8_missions",
+      "schemaId": "schema.hoth",
+      "name": "bb_8_missions",
+      "qualifiedName": "hoth.bb_8_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Bb 8 Missions table in the Hoth galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "gold",
-        "silver"
+        "rebel",
+        "imperial"
       ],
       "metrics": {
         "freshnessMinutes": 40
@@ -1199,16 +1199,16 @@
       }
     },
     {
-      "id": "node.s05.object_0041",
-      "schemaId": "schema.s05",
-      "name": "object_0041",
-      "qualifiedName": "domain_05.object_0041",
+      "id": "node.endor.k_2so_missions",
+      "schemaId": "schema.endor",
+      "name": "k_2so_missions",
+      "qualifiedName": "endor.k_2so_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "K 2so Missions table in the Endor galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "silver",
-        "pii"
+        "imperial",
+        "outer-rim"
       ],
       "metrics": {
         "freshnessMinutes": 41
@@ -1227,16 +1227,16 @@
       }
     },
     {
-      "id": "node.s00.object_0042",
-      "schemaId": "schema.s00",
-      "name": "object_0042",
-      "qualifiedName": "domain_00.object_0042",
+      "id": "node.tatooine.chopper_missions",
+      "schemaId": "schema.tatooine",
+      "name": "chopper_missions",
+      "qualifiedName": "tatooine.chopper_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "Chopper Missions table in the Tatooine galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "hourly",
-        "ops"
+        "jedi",
+        "hyperspace"
       ],
       "metrics": {
         "freshnessMinutes": 42
@@ -1255,16 +1255,16 @@
       }
     },
     {
-      "id": "node.s01.object_0043",
-      "schemaId": "schema.s01",
-      "name": "object_0043",
-      "qualifiedName": "domain_01.object_0043",
+      "id": "node.naboo.ig_11_missions",
+      "schemaId": "schema.naboo",
+      "name": "ig_11_missions",
+      "qualifiedName": "naboo.ig_11_missions",
       "kind": "distributed_table",
-      "description": "Deterministic distributed table for lineage exploration",
-      "owner": "Growth",
+      "description": "Ig 11 Missions distributed table in the Naboo galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "realtime",
-        "hourly"
+        "sith",
+        "jedi"
       ],
       "metrics": {
         "freshnessMinutes": 43
@@ -1280,22 +1280,22 @@
         }
       },
       "distributedTable": {
-        "clusterName": "demo_cluster",
-        "remoteSchema": "domain_01",
-        "remoteTable": "object_0049"
+        "clusterName": "galactic_holonet",
+        "remoteSchema": "naboo",
+        "remoteTable": "star_destroyer_missions"
       }
     },
     {
-      "id": "node.s02.object_0044",
-      "schemaId": "schema.s02",
-      "name": "object_0044",
-      "qualifiedName": "domain_02.object_0044",
+      "id": "node.coruscant.millennium_falcon_missions",
+      "schemaId": "schema.coruscant",
+      "name": "millennium_falcon_missions",
+      "qualifiedName": "coruscant.millennium_falcon_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Operations",
+      "description": "Millennium Falcon Missions table in the Coruscant galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "pii",
-        "events"
+        "outer-rim",
+        "clone-wars"
       ],
       "metrics": {
         "freshnessMinutes": 44
@@ -1314,16 +1314,16 @@
       }
     },
     {
-      "id": "node.s03.object_0045",
-      "schemaId": "schema.s03",
-      "name": "object_0045",
-      "qualifiedName": "domain_03.object_0045",
+      "id": "node.alderaan.razor_crest_missions",
+      "schemaId": "schema.alderaan",
+      "name": "razor_crest_missions",
+      "qualifiedName": "alderaan.razor_crest_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Razor Crest Missions table in the Alderaan galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "events",
-        "gold"
+        "clone-wars",
+        "rebel"
       ],
       "metrics": {
         "freshnessMinutes": 45
@@ -1342,16 +1342,16 @@
       }
     },
     {
-      "id": "node.s04.object_0046",
-      "schemaId": "schema.s04",
-      "name": "object_0046",
-      "qualifiedName": "domain_04.object_0046",
+      "id": "node.hoth.ghost_missions",
+      "schemaId": "schema.hoth",
+      "name": "ghost_missions",
+      "qualifiedName": "hoth.ghost_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "Ghost Missions table in the Hoth galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "finance",
-        "realtime"
+        "force",
+        "sith"
       ],
       "metrics": {
         "freshnessMinutes": 46
@@ -1370,16 +1370,16 @@
       }
     },
     {
-      "id": "node.s05.object_0047",
-      "schemaId": "schema.s05",
-      "name": "object_0047",
-      "qualifiedName": "domain_05.object_0047",
+      "id": "node.endor.x_wing_missions",
+      "schemaId": "schema.endor",
+      "name": "x_wing_missions",
+      "qualifiedName": "endor.x_wing_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "X Wing Missions table in the Endor galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "ops",
-        "finance"
+        "hyperspace",
+        "force"
       ],
       "metrics": {
         "freshnessMinutes": 47
@@ -1398,16 +1398,16 @@
       }
     },
     {
-      "id": "node.s00.object_0048",
-      "schemaId": "schema.s00",
-      "name": "object_0048",
-      "qualifiedName": "domain_00.object_0048",
+      "id": "node.tatooine.tie_fighter_missions",
+      "schemaId": "schema.tatooine",
+      "name": "tie_fighter_missions",
+      "qualifiedName": "tatooine.tie_fighter_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Growth",
+      "description": "Tie Fighter Missions table in the Tatooine galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "gold",
-        "silver"
+        "rebel",
+        "imperial"
       ],
       "metrics": {
         "freshnessMinutes": 48
@@ -1426,16 +1426,16 @@
       }
     },
     {
-      "id": "node.s01.object_0049",
-      "schemaId": "schema.s01",
-      "name": "object_0049",
-      "qualifiedName": "domain_01.object_0049",
+      "id": "node.naboo.star_destroyer_missions",
+      "schemaId": "schema.naboo",
+      "name": "star_destroyer_missions",
+      "qualifiedName": "naboo.star_destroyer_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Operations",
+      "description": "Star Destroyer Missions table in the Naboo galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "silver",
-        "pii"
+        "imperial",
+        "outer-rim"
       ],
       "metrics": {
         "freshnessMinutes": 49
@@ -1454,16 +1454,16 @@
       }
     },
     {
-      "id": "node.s02.object_0050",
-      "schemaId": "schema.s02",
-      "name": "object_0050",
-      "qualifiedName": "domain_02.object_0050",
+      "id": "node.coruscant.death_star_missions",
+      "schemaId": "schema.coruscant",
+      "name": "death_star_missions",
+      "qualifiedName": "coruscant.death_star_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Death Star Missions table in the Coruscant galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "hourly",
-        "ops"
+        "jedi",
+        "hyperspace"
       ],
       "metrics": {
         "freshnessMinutes": 50
@@ -1482,16 +1482,16 @@
       }
     },
     {
-      "id": "node.s03.object_0051",
-      "schemaId": "schema.s03",
-      "name": "object_0051",
-      "qualifiedName": "domain_03.object_0051",
+      "id": "node.alderaan.home_one_missions",
+      "schemaId": "schema.alderaan",
+      "name": "home_one_missions",
+      "qualifiedName": "alderaan.home_one_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "Home One Missions table in the Alderaan galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "realtime",
-        "hourly"
+        "sith",
+        "jedi"
       ],
       "metrics": {
         "freshnessMinutes": 51
@@ -1510,16 +1510,16 @@
       }
     },
     {
-      "id": "node.s04.object_0052",
-      "schemaId": "schema.s04",
-      "name": "object_0052",
-      "qualifiedName": "domain_04.object_0052",
+      "id": "node.hoth.slave_one_missions",
+      "schemaId": "schema.hoth",
+      "name": "slave_one_missions",
+      "qualifiedName": "hoth.slave_one_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "Slave One Missions table in the Hoth galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "pii",
-        "events"
+        "outer-rim",
+        "clone-wars"
       ],
       "metrics": {
         "freshnessMinutes": 52
@@ -1538,16 +1538,16 @@
       }
     },
     {
-      "id": "node.s05.object_0053",
-      "schemaId": "schema.s05",
-      "name": "object_0053",
-      "qualifiedName": "domain_05.object_0053",
+      "id": "node.endor.tantive_iv_missions",
+      "schemaId": "schema.endor",
+      "name": "tantive_iv_missions",
+      "qualifiedName": "endor.tantive_iv_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Growth",
+      "description": "Tantive Iv Missions table in the Endor galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "events",
-        "gold"
+        "clone-wars",
+        "rebel"
       ],
       "metrics": {
         "freshnessMinutes": 53
@@ -1566,16 +1566,16 @@
       }
     },
     {
-      "id": "node.s00.object_0054",
-      "schemaId": "schema.s00",
-      "name": "object_0054",
-      "qualifiedName": "domain_00.object_0054",
+      "id": "node.tatooine.executor_missions",
+      "schemaId": "schema.tatooine",
+      "name": "executor_missions",
+      "qualifiedName": "tatooine.executor_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Operations",
+      "description": "Executor Missions table in the Tatooine galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "finance",
-        "realtime"
+        "force",
+        "sith"
       ],
       "metrics": {
         "freshnessMinutes": 54
@@ -1594,16 +1594,16 @@
       }
     },
     {
-      "id": "node.s01.object_0055",
-      "schemaId": "schema.s01",
-      "name": "object_0055",
-      "qualifiedName": "domain_01.object_0055",
+      "id": "node.naboo.fondor_haulcraft_missions",
+      "schemaId": "schema.naboo",
+      "name": "fondor_haulcraft_missions",
+      "qualifiedName": "naboo.fondor_haulcraft_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Fondor Haulcraft Missions table in the Naboo galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "ops",
-        "finance"
+        "hyperspace",
+        "force"
       ],
       "metrics": {
         "freshnessMinutes": 55
@@ -1622,16 +1622,16 @@
       }
     },
     {
-      "id": "node.s02.object_0056",
-      "schemaId": "schema.s02",
-      "name": "object_0056",
-      "qualifiedName": "domain_02.object_0056",
+      "id": "node.coruscant.jedi_temple_missions",
+      "schemaId": "schema.coruscant",
+      "name": "jedi_temple_missions",
+      "qualifiedName": "coruscant.jedi_temple_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "Jedi Temple Missions table in the Coruscant galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "gold",
-        "silver"
+        "rebel",
+        "imperial"
       ],
       "metrics": {
         "freshnessMinutes": 56
@@ -1650,16 +1650,16 @@
       }
     },
     {
-      "id": "node.s03.object_0057",
-      "schemaId": "schema.s03",
-      "name": "object_0057",
-      "qualifiedName": "domain_03.object_0057",
+      "id": "node.alderaan.mos_eisley_missions",
+      "schemaId": "schema.alderaan",
+      "name": "mos_eisley_missions",
+      "qualifiedName": "alderaan.mos_eisley_missions",
       "kind": "view",
-      "description": "Deterministic view for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "Mos Eisley Missions view in the Alderaan galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "silver",
-        "pii"
+        "imperial",
+        "outer-rim"
       ],
       "metrics": {
         "freshnessMinutes": 57
@@ -1669,16 +1669,16 @@
       }
     },
     {
-      "id": "node.s04.object_0058",
-      "schemaId": "schema.s04",
-      "name": "object_0058",
-      "qualifiedName": "domain_04.object_0058",
+      "id": "node.hoth.cloud_city_missions",
+      "schemaId": "schema.hoth",
+      "name": "cloud_city_missions",
+      "qualifiedName": "hoth.cloud_city_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Growth",
+      "description": "Cloud City Missions table in the Hoth galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "hourly",
-        "ops"
+        "jedi",
+        "hyperspace"
       ],
       "metrics": {
         "freshnessMinutes": 58
@@ -1697,16 +1697,16 @@
       }
     },
     {
-      "id": "node.s05.object_0059",
-      "schemaId": "schema.s05",
-      "name": "object_0059",
-      "qualifiedName": "domain_05.object_0059",
+      "id": "node.endor.echo_base_missions",
+      "schemaId": "schema.endor",
+      "name": "echo_base_missions",
+      "qualifiedName": "endor.echo_base_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Operations",
+      "description": "Echo Base Missions table in the Endor galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "realtime",
-        "hourly"
+        "sith",
+        "jedi"
       ],
       "metrics": {
         "freshnessMinutes": 59
@@ -1725,16 +1725,16 @@
       }
     },
     {
-      "id": "node.s00.object_0060",
-      "schemaId": "schema.s00",
-      "name": "object_0060",
-      "qualifiedName": "domain_00.object_0060",
+      "id": "node.tatooine.massassi_temple_missions",
+      "schemaId": "schema.tatooine",
+      "name": "massassi_temple_missions",
+      "qualifiedName": "tatooine.massassi_temple_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Massassi Temple Missions table in the Tatooine galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "pii",
-        "events"
+        "outer-rim",
+        "clone-wars"
       ],
       "metrics": {
         "freshnessMinutes": 60
@@ -1753,16 +1753,16 @@
       }
     },
     {
-      "id": "node.s01.object_0061",
-      "schemaId": "schema.s01",
-      "name": "object_0061",
-      "qualifiedName": "domain_01.object_0061",
+      "id": "node.naboo.theed_palace_missions",
+      "schemaId": "schema.naboo",
+      "name": "theed_palace_missions",
+      "qualifiedName": "naboo.theed_palace_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "Theed Palace Missions table in the Naboo galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "events",
-        "gold"
+        "clone-wars",
+        "rebel"
       ],
       "metrics": {
         "freshnessMinutes": 61
@@ -1781,16 +1781,16 @@
       }
     },
     {
-      "id": "node.s02.object_0062",
-      "schemaId": "schema.s02",
-      "name": "object_0062",
-      "qualifiedName": "domain_02.object_0062",
+      "id": "node.coruscant.imperial_palace_missions",
+      "schemaId": "schema.coruscant",
+      "name": "imperial_palace_missions",
+      "qualifiedName": "coruscant.imperial_palace_missions",
       "kind": "materialized_view",
-      "description": "Deterministic materialized view for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "Imperial Palace Missions materialized view in the Coruscant galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "finance",
-        "realtime"
+        "force",
+        "sith"
       ],
       "metrics": {
         "freshnessMinutes": 62
@@ -1809,20 +1809,20 @@
       },
       "materializedView": {
         "mode": "refreshable",
-        "targetNodeId": "node.s02.object_0068"
+        "targetNodeId": "node.coruscant.return_of_the_jedi_missions"
       }
     },
     {
-      "id": "node.s03.object_0063",
-      "schemaId": "schema.s03",
-      "name": "object_0063",
-      "qualifiedName": "domain_03.object_0063",
+      "id": "node.alderaan.clone_facility_missions",
+      "schemaId": "schema.alderaan",
+      "name": "clone_facility_missions",
+      "qualifiedName": "alderaan.clone_facility_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Growth",
+      "description": "Clone Facility Missions table in the Alderaan galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "ops",
-        "finance"
+        "hyperspace",
+        "force"
       ],
       "metrics": {
         "freshnessMinutes": 63
@@ -1841,16 +1841,16 @@
       }
     },
     {
-      "id": "node.s04.object_0064",
-      "schemaId": "schema.s04",
-      "name": "object_0064",
-      "qualifiedName": "domain_04.object_0064",
+      "id": "node.hoth.niima_outpost_missions",
+      "schemaId": "schema.hoth",
+      "name": "niima_outpost_missions",
+      "qualifiedName": "hoth.niima_outpost_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Operations",
+      "description": "Niima Outpost Missions table in the Hoth galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "gold",
-        "silver"
+        "rebel",
+        "imperial"
       ],
       "metrics": {
         "freshnessMinutes": 64
@@ -1869,16 +1869,16 @@
       }
     },
     {
-      "id": "node.s05.object_0065",
-      "schemaId": "schema.s05",
-      "name": "object_0065",
-      "qualifiedName": "domain_05.object_0065",
+      "id": "node.endor.black_spire_missions",
+      "schemaId": "schema.endor",
+      "name": "black_spire_missions",
+      "qualifiedName": "endor.black_spire_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Black Spire Missions table in the Endor galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "silver",
-        "pii"
+        "imperial",
+        "outer-rim"
       ],
       "metrics": {
         "freshnessMinutes": 65
@@ -1897,16 +1897,16 @@
       }
     },
     {
-      "id": "node.s00.object_0066",
-      "schemaId": "schema.s00",
-      "name": "object_0066",
-      "qualifiedName": "domain_00.object_0066",
+      "id": "node.tatooine.a_new_hope_missions",
+      "schemaId": "schema.tatooine",
+      "name": "a_new_hope_missions",
+      "qualifiedName": "tatooine.a_new_hope_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "A New Hope Missions table in the Tatooine galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "hourly",
-        "ops"
+        "jedi",
+        "hyperspace"
       ],
       "metrics": {
         "freshnessMinutes": 66
@@ -1925,16 +1925,16 @@
       }
     },
     {
-      "id": "node.s01.object_0067",
-      "schemaId": "schema.s01",
-      "name": "object_0067",
-      "qualifiedName": "domain_01.object_0067",
+      "id": "node.naboo.the_empire_strikes_back_missions",
+      "schemaId": "schema.naboo",
+      "name": "the_empire_strikes_back_missions",
+      "qualifiedName": "naboo.the_empire_strikes_back_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Finance Platform",
+      "description": "The Empire Strikes Back Missions table in the Naboo galaxy",
+      "owner": "Imperial Logistics",
       "tags": [
-        "realtime",
-        "hourly"
+        "sith",
+        "jedi"
       ],
       "metrics": {
         "freshnessMinutes": 67
@@ -1953,16 +1953,16 @@
       }
     },
     {
-      "id": "node.s02.object_0068",
-      "schemaId": "schema.s02",
-      "name": "object_0068",
-      "qualifiedName": "domain_02.object_0068",
+      "id": "node.coruscant.return_of_the_jedi_missions",
+      "schemaId": "schema.coruscant",
+      "name": "return_of_the_jedi_missions",
+      "qualifiedName": "coruscant.return_of_the_jedi_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Growth",
+      "description": "Return Of The Jedi Missions table in the Coruscant galaxy",
+      "owner": "Senate Analytics",
       "tags": [
-        "pii",
-        "events"
+        "outer-rim",
+        "clone-wars"
       ],
       "metrics": {
         "freshnessMinutes": 68
@@ -1981,16 +1981,16 @@
       }
     },
     {
-      "id": "node.s03.object_0069",
-      "schemaId": "schema.s03",
-      "name": "object_0069",
-      "qualifiedName": "domain_03.object_0069",
+      "id": "node.alderaan.the_phantom_menace_missions",
+      "schemaId": "schema.alderaan",
+      "name": "the_phantom_menace_missions",
+      "qualifiedName": "alderaan.the_phantom_menace_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Operations",
+      "description": "The Phantom Menace Missions table in the Alderaan galaxy",
+      "owner": "Droid Operations",
       "tags": [
-        "events",
-        "gold"
+        "clone-wars",
+        "rebel"
       ],
       "metrics": {
         "freshnessMinutes": 69
@@ -2009,16 +2009,16 @@
       }
     },
     {
-      "id": "node.s04.object_0070",
-      "schemaId": "schema.s04",
-      "name": "object_0070",
-      "qualifiedName": "domain_04.object_0070",
+      "id": "node.hoth.attack_of_the_clones_missions",
+      "schemaId": "schema.hoth",
+      "name": "attack_of_the_clones_missions",
+      "qualifiedName": "hoth.attack_of_the_clones_missions",
       "kind": "table",
-      "description": "Deterministic table for lineage exploration",
-      "owner": "Core Data",
+      "description": "Attack Of The Clones Missions table in the Hoth galaxy",
+      "owner": "Jedi Archives",
       "tags": [
-        "finance",
-        "realtime"
+        "force",
+        "sith"
       ],
       "metrics": {
         "freshnessMinutes": 70
@@ -2037,16 +2037,16 @@
       }
     },
     {
-      "id": "node.s05.object_0071",
-      "schemaId": "schema.s05",
-      "name": "object_0071",
-      "qualifiedName": "domain_05.object_0071",
+      "id": "node.endor.revenge_of_the_sith_missions",
+      "schemaId": "schema.endor",
+      "name": "revenge_of_the_sith_missions",
+      "qualifiedName": "endor.revenge_of_the_sith_missions",
       "kind": "external_table",
-      "description": "Deterministic external table for lineage exploration",
-      "owner": "Analytics Engineering",
+      "description": "Revenge Of The Sith Missions external table in the Endor galaxy",
+      "owner": "Rebel Intelligence",
       "tags": [
-        "ops",
-        "finance"
+        "hyperspace",
+        "force"
       ],
       "metrics": {
         "freshnessMinutes": 71
@@ -2068,158 +2068,158 @@
   "edges": [
     {
       "id": "edge.00000",
-      "sourceNodeId": "node.s00.object_0000",
-      "targetNodeId": "node.s01.object_0001",
+      "sourceNodeId": "node.tatooine.luke_skywalker_missions",
+      "targetNodeId": "node.naboo.leia_organa_missions",
       "type": "etl_transfer",
-      "label": "known-path-0",
+      "label": "hyperspace-route-1",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00001",
-      "sourceNodeId": "node.s01.object_0001",
-      "targetNodeId": "node.s02.object_0002",
+      "sourceNodeId": "node.naboo.leia_organa_missions",
+      "targetNodeId": "node.coruscant.han_solo_missions",
       "type": "etl_transfer",
-      "label": "known-path-0",
+      "label": "hyperspace-route-1",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00002",
-      "sourceNodeId": "node.s02.object_0002",
-      "targetNodeId": "node.s03.object_0003",
+      "sourceNodeId": "node.coruscant.han_solo_missions",
+      "targetNodeId": "node.alderaan.chewbacca_missions",
       "type": "etl_transfer",
-      "label": "known-path-0",
+      "label": "hyperspace-route-1",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00003",
-      "sourceNodeId": "node.s03.object_0003",
-      "targetNodeId": "node.s04.object_0004",
+      "sourceNodeId": "node.alderaan.chewbacca_missions",
+      "targetNodeId": "node.hoth.obi_wan_kenobi_missions",
       "type": "etl_transfer",
-      "label": "known-path-0",
+      "label": "hyperspace-route-1",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00004",
-      "sourceNodeId": "node.s04.object_0004",
-      "targetNodeId": "node.s05.object_0005",
+      "sourceNodeId": "node.hoth.obi_wan_kenobi_missions",
+      "targetNodeId": "node.endor.anakin_skywalker_missions",
       "type": "etl_transfer",
-      "label": "known-path-0",
+      "label": "hyperspace-route-1",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00005",
-      "sourceNodeId": "node.s00.object_0006",
-      "targetNodeId": "node.s01.object_0007",
+      "sourceNodeId": "node.tatooine.ahsoka_tano_missions",
+      "targetNodeId": "node.naboo.padme_amidala_missions",
       "type": "etl_transfer",
-      "label": "known-path-1",
+      "label": "hyperspace-route-2",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00006",
-      "sourceNodeId": "node.s01.object_0007",
-      "targetNodeId": "node.s02.object_0008",
+      "sourceNodeId": "node.naboo.padme_amidala_missions",
+      "targetNodeId": "node.coruscant.yoda_missions",
       "type": "etl_transfer",
-      "label": "known-path-1",
+      "label": "hyperspace-route-2",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00007",
-      "sourceNodeId": "node.s02.object_0008",
-      "targetNodeId": "node.s03.object_0009",
+      "sourceNodeId": "node.coruscant.yoda_missions",
+      "targetNodeId": "node.alderaan.mace_windu_missions",
       "type": "etl_transfer",
-      "label": "known-path-1",
+      "label": "hyperspace-route-2",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00008",
-      "sourceNodeId": "node.s03.object_0009",
-      "targetNodeId": "node.s04.object_0010",
+      "sourceNodeId": "node.alderaan.mace_windu_missions",
+      "targetNodeId": "node.hoth.qui_gon_jinn_missions",
       "type": "etl_transfer",
-      "label": "known-path-1",
+      "label": "hyperspace-route-2",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00009",
-      "sourceNodeId": "node.s04.object_0010",
-      "targetNodeId": "node.s05.object_0011",
+      "sourceNodeId": "node.hoth.qui_gon_jinn_missions",
+      "targetNodeId": "node.endor.rey_skywalker_missions",
       "type": "etl_transfer",
-      "label": "known-path-1",
+      "label": "hyperspace-route-2",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00010",
-      "sourceNodeId": "node.s00.object_0012",
-      "targetNodeId": "node.s01.object_0013",
+      "sourceNodeId": "node.tatooine.finn_missions",
+      "targetNodeId": "node.naboo.poe_dameron_missions",
       "type": "etl_transfer",
-      "label": "known-path-2",
+      "label": "hyperspace-route-3",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00011",
-      "sourceNodeId": "node.s01.object_0013",
-      "targetNodeId": "node.s02.object_0014",
+      "sourceNodeId": "node.naboo.poe_dameron_missions",
+      "targetNodeId": "node.coruscant.lando_calrissian_missions",
       "type": "etl_transfer",
-      "label": "known-path-2",
+      "label": "hyperspace-route-3",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00012",
-      "sourceNodeId": "node.s02.object_0014",
-      "targetNodeId": "node.s03.object_0015",
+      "sourceNodeId": "node.coruscant.lando_calrissian_missions",
+      "targetNodeId": "node.alderaan.cassian_andor_missions",
       "type": "etl_transfer",
-      "label": "known-path-2",
+      "label": "hyperspace-route-3",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00013",
-      "sourceNodeId": "node.s03.object_0015",
-      "targetNodeId": "node.s04.object_0016",
+      "sourceNodeId": "node.alderaan.cassian_andor_missions",
+      "targetNodeId": "node.hoth.jyn_erso_missions",
       "type": "etl_transfer",
-      "label": "known-path-2",
+      "label": "hyperspace-route-3",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00014",
-      "sourceNodeId": "node.s04.object_0016",
-      "targetNodeId": "node.s05.object_0017",
+      "sourceNodeId": "node.hoth.jyn_erso_missions",
+      "targetNodeId": "node.endor.din_djarin_missions",
       "type": "etl_transfer",
-      "label": "known-path-2",
+      "label": "hyperspace-route-3",
       "tags": [
         "hourly"
       ]
     },
     {
       "id": "edge.00015",
-      "sourceNodeId": "node.s05.object_0065",
-      "targetNodeId": "node.s01.object_0037",
+      "sourceNodeId": "node.endor.black_spire_missions",
+      "targetNodeId": "node.naboo.moff_gideon_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2227,8 +2227,8 @@
     },
     {
       "id": "edge.00016",
-      "sourceNodeId": "node.s04.object_0064",
-      "targetNodeId": "node.s04.object_0046",
+      "sourceNodeId": "node.hoth.niima_outpost_missions",
+      "targetNodeId": "node.hoth.ghost_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2236,8 +2236,8 @@
     },
     {
       "id": "edge.00017",
-      "sourceNodeId": "node.s01.object_0031",
-      "targetNodeId": "node.s04.object_0034",
+      "sourceNodeId": "node.naboo.count_dooku_missions",
+      "targetNodeId": "node.hoth.grand_moff_tarkin_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2245,8 +2245,8 @@
     },
     {
       "id": "edge.00018",
-      "sourceNodeId": "node.s05.object_0029",
-      "targetNodeId": "node.s04.object_0034",
+      "sourceNodeId": "node.endor.darth_maul_missions",
+      "targetNodeId": "node.hoth.grand_moff_tarkin_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2254,8 +2254,8 @@
     },
     {
       "id": "edge.00019",
-      "sourceNodeId": "node.s05.object_0059",
-      "targetNodeId": "node.s02.object_0056",
+      "sourceNodeId": "node.endor.echo_base_missions",
+      "targetNodeId": "node.coruscant.jedi_temple_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2263,8 +2263,8 @@
     },
     {
       "id": "edge.00020",
-      "sourceNodeId": "node.s01.object_0055",
-      "targetNodeId": "node.s04.object_0022",
+      "sourceNodeId": "node.naboo.fondor_haulcraft_missions",
+      "targetNodeId": "node.hoth.sabine_wren_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2272,8 +2272,8 @@
     },
     {
       "id": "edge.00021",
-      "sourceNodeId": "node.s03.object_0057",
-      "targetNodeId": "node.s02.object_0020",
+      "sourceNodeId": "node.alderaan.mos_eisley_missions",
+      "targetNodeId": "node.coruscant.hera_syndulla_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2281,8 +2281,8 @@
     },
     {
       "id": "edge.00022",
-      "sourceNodeId": "node.s02.object_0056",
-      "targetNodeId": "node.s05.object_0023",
+      "sourceNodeId": "node.coruscant.jedi_temple_missions",
+      "targetNodeId": "node.endor.kanan_jarrus_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2290,8 +2290,8 @@
     },
     {
       "id": "edge.00023",
-      "sourceNodeId": "node.s01.object_0031",
-      "targetNodeId": "node.s02.object_0044",
+      "sourceNodeId": "node.naboo.count_dooku_missions",
+      "targetNodeId": "node.coruscant.millennium_falcon_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2299,8 +2299,8 @@
     },
     {
       "id": "edge.00024",
-      "sourceNodeId": "node.s00.object_0018",
-      "targetNodeId": "node.s03.object_0021",
+      "sourceNodeId": "node.tatooine.grogu_missions",
+      "targetNodeId": "node.alderaan.ezra_bridger_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2308,8 +2308,8 @@
     },
     {
       "id": "edge.00025",
-      "sourceNodeId": "node.s02.object_0026",
-      "targetNodeId": "node.s01.object_0049",
+      "sourceNodeId": "node.coruscant.boba_fett_missions",
+      "targetNodeId": "node.naboo.star_destroyer_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2317,8 +2317,8 @@
     },
     {
       "id": "edge.00026",
-      "sourceNodeId": "node.s05.object_0035",
-      "targetNodeId": "node.s00.object_0024",
+      "sourceNodeId": "node.endor.grand_admiral_thrawn_missions",
+      "targetNodeId": "node.tatooine.captain_rex_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2326,8 +2326,8 @@
     },
     {
       "id": "edge.00027",
-      "sourceNodeId": "node.s03.object_0027",
-      "targetNodeId": "node.s03.object_0021",
+      "sourceNodeId": "node.alderaan.jango_fett_missions",
+      "targetNodeId": "node.alderaan.ezra_bridger_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2335,8 +2335,8 @@
     },
     {
       "id": "edge.00028",
-      "sourceNodeId": "node.s00.object_0024",
-      "targetNodeId": "node.s05.object_0059",
+      "sourceNodeId": "node.tatooine.captain_rex_missions",
+      "targetNodeId": "node.endor.echo_base_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2344,8 +2344,8 @@
     },
     {
       "id": "edge.00029",
-      "sourceNodeId": "node.s00.object_0018",
-      "targetNodeId": "node.s05.object_0053",
+      "sourceNodeId": "node.tatooine.grogu_missions",
+      "targetNodeId": "node.endor.tantive_iv_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2353,8 +2353,8 @@
     },
     {
       "id": "edge.00030",
-      "sourceNodeId": "node.s02.object_0062",
-      "targetNodeId": "node.s01.object_0067",
+      "sourceNodeId": "node.coruscant.imperial_palace_missions",
+      "targetNodeId": "node.naboo.the_empire_strikes_back_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2362,8 +2362,8 @@
     },
     {
       "id": "edge.00031",
-      "sourceNodeId": "node.s00.object_0054",
-      "targetNodeId": "node.s03.object_0039",
+      "sourceNodeId": "node.tatooine.executor_missions",
+      "targetNodeId": "node.alderaan.c_3po_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2371,8 +2371,8 @@
     },
     {
       "id": "edge.00032",
-      "sourceNodeId": "node.s02.object_0020",
-      "targetNodeId": "node.s04.object_0058",
+      "sourceNodeId": "node.coruscant.hera_syndulla_missions",
+      "targetNodeId": "node.hoth.cloud_city_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2380,8 +2380,8 @@
     },
     {
       "id": "edge.00033",
-      "sourceNodeId": "node.s03.object_0045",
-      "targetNodeId": "node.s02.object_0044",
+      "sourceNodeId": "node.alderaan.razor_crest_missions",
+      "targetNodeId": "node.coruscant.millennium_falcon_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2389,8 +2389,8 @@
     },
     {
       "id": "edge.00034",
-      "sourceNodeId": "node.s04.object_0034",
-      "targetNodeId": "node.s02.object_0032",
+      "sourceNodeId": "node.hoth.grand_moff_tarkin_missions",
+      "targetNodeId": "node.coruscant.general_grievous_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2398,8 +2398,8 @@
     },
     {
       "id": "edge.00035",
-      "sourceNodeId": "node.s04.object_0028",
-      "targetNodeId": "node.s05.object_0053",
+      "sourceNodeId": "node.hoth.darth_vader_missions",
+      "targetNodeId": "node.endor.tantive_iv_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2407,8 +2407,8 @@
     },
     {
       "id": "edge.00036",
-      "sourceNodeId": "node.s03.object_0063",
-      "targetNodeId": "node.s05.object_0029",
+      "sourceNodeId": "node.alderaan.clone_facility_missions",
+      "targetNodeId": "node.endor.darth_maul_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2416,8 +2416,8 @@
     },
     {
       "id": "edge.00037",
-      "sourceNodeId": "node.s02.object_0044",
-      "targetNodeId": "node.s04.object_0022",
+      "sourceNodeId": "node.coruscant.millennium_falcon_missions",
+      "targetNodeId": "node.hoth.sabine_wren_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2425,8 +2425,8 @@
     },
     {
       "id": "edge.00038",
-      "sourceNodeId": "node.s01.object_0031",
-      "targetNodeId": "node.s05.object_0041",
+      "sourceNodeId": "node.naboo.count_dooku_missions",
+      "targetNodeId": "node.endor.k_2so_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2434,8 +2434,8 @@
     },
     {
       "id": "edge.00039",
-      "sourceNodeId": "node.s00.object_0024",
-      "targetNodeId": "node.s00.object_0066",
+      "sourceNodeId": "node.tatooine.captain_rex_missions",
+      "targetNodeId": "node.tatooine.a_new_hope_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2443,8 +2443,8 @@
     },
     {
       "id": "edge.00040",
-      "sourceNodeId": "node.s01.object_0049",
-      "targetNodeId": "node.s00.object_0066",
+      "sourceNodeId": "node.naboo.star_destroyer_missions",
+      "targetNodeId": "node.tatooine.a_new_hope_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2452,8 +2452,8 @@
     },
     {
       "id": "edge.00041",
-      "sourceNodeId": "node.s04.object_0034",
-      "targetNodeId": "node.s03.object_0051",
+      "sourceNodeId": "node.hoth.grand_moff_tarkin_missions",
+      "targetNodeId": "node.alderaan.home_one_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2461,8 +2461,8 @@
     },
     {
       "id": "edge.00042",
-      "sourceNodeId": "node.s00.object_0060",
-      "targetNodeId": "node.s03.object_0057",
+      "sourceNodeId": "node.tatooine.massassi_temple_missions",
+      "targetNodeId": "node.alderaan.mos_eisley_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2470,8 +2470,8 @@
     },
     {
       "id": "edge.00043",
-      "sourceNodeId": "node.s02.object_0026",
-      "targetNodeId": "node.s04.object_0064",
+      "sourceNodeId": "node.coruscant.boba_fett_missions",
+      "targetNodeId": "node.hoth.niima_outpost_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2479,8 +2479,8 @@
     },
     {
       "id": "edge.00044",
-      "sourceNodeId": "node.s03.object_0021",
-      "targetNodeId": "node.s05.object_0035",
+      "sourceNodeId": "node.alderaan.ezra_bridger_missions",
+      "targetNodeId": "node.endor.grand_admiral_thrawn_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2488,8 +2488,8 @@
     },
     {
       "id": "edge.00045",
-      "sourceNodeId": "node.s04.object_0034",
-      "targetNodeId": "node.s00.object_0030",
+      "sourceNodeId": "node.hoth.grand_moff_tarkin_missions",
+      "targetNodeId": "node.tatooine.emperor_palpatine_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2497,8 +2497,8 @@
     },
     {
       "id": "edge.00046",
-      "sourceNodeId": "node.s00.object_0054",
-      "targetNodeId": "node.s02.object_0044",
+      "sourceNodeId": "node.tatooine.executor_missions",
+      "targetNodeId": "node.coruscant.millennium_falcon_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2506,8 +2506,8 @@
     },
     {
       "id": "edge.00047",
-      "sourceNodeId": "node.s01.object_0067",
-      "targetNodeId": "node.s02.object_0050",
+      "sourceNodeId": "node.naboo.the_empire_strikes_back_missions",
+      "targetNodeId": "node.coruscant.death_star_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2515,8 +2515,8 @@
     },
     {
       "id": "edge.00048",
-      "sourceNodeId": "node.s05.object_0065",
-      "targetNodeId": "node.s01.object_0043",
+      "sourceNodeId": "node.endor.black_spire_missions",
+      "targetNodeId": "node.naboo.ig_11_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2524,8 +2524,8 @@
     },
     {
       "id": "edge.00049",
-      "sourceNodeId": "node.s04.object_0052",
-      "targetNodeId": "node.s02.object_0062",
+      "sourceNodeId": "node.hoth.slave_one_missions",
+      "targetNodeId": "node.coruscant.imperial_palace_missions",
       "type": "materialized_view_input",
       "tags": [
         "lineage"
@@ -2533,8 +2533,8 @@
     },
     {
       "id": "edge.00050",
-      "sourceNodeId": "node.s01.object_0055",
-      "targetNodeId": "node.s05.object_0065",
+      "sourceNodeId": "node.naboo.fondor_haulcraft_missions",
+      "targetNodeId": "node.endor.black_spire_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2542,8 +2542,8 @@
     },
     {
       "id": "edge.00051",
-      "sourceNodeId": "node.s00.object_0054",
-      "targetNodeId": "node.s02.object_0032",
+      "sourceNodeId": "node.tatooine.executor_missions",
+      "targetNodeId": "node.coruscant.general_grievous_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2551,8 +2551,8 @@
     },
     {
       "id": "edge.00052",
-      "sourceNodeId": "node.s03.object_0051",
-      "targetNodeId": "node.s00.object_0042",
+      "sourceNodeId": "node.alderaan.home_one_missions",
+      "targetNodeId": "node.tatooine.chopper_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2560,8 +2560,8 @@
     },
     {
       "id": "edge.00053",
-      "sourceNodeId": "node.s01.object_0043",
-      "targetNodeId": "node.s05.object_0023",
+      "sourceNodeId": "node.naboo.ig_11_missions",
+      "targetNodeId": "node.endor.kanan_jarrus_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2569,8 +2569,8 @@
     },
     {
       "id": "edge.00054",
-      "sourceNodeId": "node.s00.object_0024",
-      "targetNodeId": "node.s01.object_0043",
+      "sourceNodeId": "node.tatooine.captain_rex_missions",
+      "targetNodeId": "node.naboo.ig_11_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2578,8 +2578,8 @@
     },
     {
       "id": "edge.00055",
-      "sourceNodeId": "node.s04.object_0052",
-      "targetNodeId": "node.s01.object_0067",
+      "sourceNodeId": "node.hoth.slave_one_missions",
+      "targetNodeId": "node.naboo.the_empire_strikes_back_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2587,8 +2587,8 @@
     },
     {
       "id": "edge.00056",
-      "sourceNodeId": "node.s01.object_0061",
-      "targetNodeId": "node.s02.object_0068",
+      "sourceNodeId": "node.naboo.theed_palace_missions",
+      "targetNodeId": "node.coruscant.return_of_the_jedi_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2596,8 +2596,8 @@
     },
     {
       "id": "edge.00057",
-      "sourceNodeId": "node.s00.object_0042",
-      "targetNodeId": "node.s05.object_0053",
+      "sourceNodeId": "node.tatooine.chopper_missions",
+      "targetNodeId": "node.endor.tantive_iv_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2605,8 +2605,8 @@
     },
     {
       "id": "edge.00058",
-      "sourceNodeId": "node.s03.object_0045",
-      "targetNodeId": "node.s03.object_0033",
+      "sourceNodeId": "node.alderaan.razor_crest_missions",
+      "targetNodeId": "node.alderaan.kylo_ren_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2614,8 +2614,8 @@
     },
     {
       "id": "edge.00059",
-      "sourceNodeId": "node.s03.object_0027",
-      "targetNodeId": "node.s02.object_0068",
+      "sourceNodeId": "node.alderaan.jango_fett_missions",
+      "targetNodeId": "node.coruscant.return_of_the_jedi_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2623,8 +2623,8 @@
     },
     {
       "id": "edge.00060",
-      "sourceNodeId": "node.s02.object_0038",
-      "targetNodeId": "node.s05.object_0059",
+      "sourceNodeId": "node.coruscant.r2_d2_missions",
+      "targetNodeId": "node.endor.echo_base_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2632,8 +2632,8 @@
     },
     {
       "id": "edge.00061",
-      "sourceNodeId": "node.s00.object_0066",
-      "targetNodeId": "node.s01.object_0025",
+      "sourceNodeId": "node.tatooine.a_new_hope_missions",
+      "targetNodeId": "node.naboo.commander_cody_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2641,8 +2641,8 @@
     },
     {
       "id": "edge.00062",
-      "sourceNodeId": "node.s05.object_0065",
-      "targetNodeId": "node.s01.object_0031",
+      "sourceNodeId": "node.endor.black_spire_missions",
+      "targetNodeId": "node.naboo.count_dooku_missions",
       "type": "materialized_view_input",
       "tags": [
         "lineage"
@@ -2650,8 +2650,8 @@
     },
     {
       "id": "edge.00063",
-      "sourceNodeId": "node.s03.object_0051",
-      "targetNodeId": "node.s00.object_0018",
+      "sourceNodeId": "node.alderaan.home_one_missions",
+      "targetNodeId": "node.tatooine.grogu_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2659,8 +2659,8 @@
     },
     {
       "id": "edge.00064",
-      "sourceNodeId": "node.s05.object_0059",
-      "targetNodeId": "node.s01.object_0067",
+      "sourceNodeId": "node.endor.echo_base_missions",
+      "targetNodeId": "node.naboo.the_empire_strikes_back_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2668,8 +2668,8 @@
     },
     {
       "id": "edge.00065",
-      "sourceNodeId": "node.s00.object_0036",
-      "targetNodeId": "node.s04.object_0064",
+      "sourceNodeId": "node.tatooine.asajj_ventress_missions",
+      "targetNodeId": "node.hoth.niima_outpost_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2677,8 +2677,8 @@
     },
     {
       "id": "edge.00066",
-      "sourceNodeId": "node.s03.object_0045",
-      "targetNodeId": "node.s01.object_0049",
+      "sourceNodeId": "node.alderaan.razor_crest_missions",
+      "targetNodeId": "node.naboo.star_destroyer_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2686,8 +2686,8 @@
     },
     {
       "id": "edge.00067",
-      "sourceNodeId": "node.s02.object_0026",
-      "targetNodeId": "node.s04.object_0028",
+      "sourceNodeId": "node.coruscant.boba_fett_missions",
+      "targetNodeId": "node.hoth.darth_vader_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2695,8 +2695,8 @@
     },
     {
       "id": "edge.00068",
-      "sourceNodeId": "node.s00.object_0066",
-      "targetNodeId": "node.s01.object_0055",
+      "sourceNodeId": "node.tatooine.a_new_hope_missions",
+      "targetNodeId": "node.naboo.fondor_haulcraft_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2704,8 +2704,8 @@
     },
     {
       "id": "edge.00069",
-      "sourceNodeId": "node.s01.object_0049",
-      "targetNodeId": "node.s00.object_0060",
+      "sourceNodeId": "node.naboo.star_destroyer_missions",
+      "targetNodeId": "node.tatooine.massassi_temple_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2713,8 +2713,8 @@
     },
     {
       "id": "edge.00070",
-      "sourceNodeId": "node.s03.object_0027",
-      "targetNodeId": "node.s00.object_0042",
+      "sourceNodeId": "node.alderaan.jango_fett_missions",
+      "targetNodeId": "node.tatooine.chopper_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2722,8 +2722,8 @@
     },
     {
       "id": "edge.00071",
-      "sourceNodeId": "node.s00.object_0042",
-      "targetNodeId": "node.s01.object_0037",
+      "sourceNodeId": "node.tatooine.chopper_missions",
+      "targetNodeId": "node.naboo.moff_gideon_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2731,8 +2731,8 @@
     },
     {
       "id": "edge.00072",
-      "sourceNodeId": "node.s02.object_0038",
-      "targetNodeId": "node.s01.object_0025",
+      "sourceNodeId": "node.coruscant.r2_d2_missions",
+      "targetNodeId": "node.naboo.commander_cody_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2740,8 +2740,8 @@
     },
     {
       "id": "edge.00073",
-      "sourceNodeId": "node.s03.object_0051",
-      "targetNodeId": "node.s05.object_0059",
+      "sourceNodeId": "node.alderaan.home_one_missions",
+      "targetNodeId": "node.endor.echo_base_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2749,8 +2749,8 @@
     },
     {
       "id": "edge.00074",
-      "sourceNodeId": "node.s03.object_0057",
-      "targetNodeId": "node.s01.object_0067",
+      "sourceNodeId": "node.alderaan.mos_eisley_missions",
+      "targetNodeId": "node.naboo.the_empire_strikes_back_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2758,8 +2758,8 @@
     },
     {
       "id": "edge.00075",
-      "sourceNodeId": "node.s00.object_0060",
-      "targetNodeId": "node.s00.object_0036",
+      "sourceNodeId": "node.tatooine.massassi_temple_missions",
+      "targetNodeId": "node.tatooine.asajj_ventress_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2767,8 +2767,8 @@
     },
     {
       "id": "edge.00076",
-      "sourceNodeId": "node.s04.object_0052",
-      "targetNodeId": "node.s04.object_0028",
+      "sourceNodeId": "node.hoth.slave_one_missions",
+      "targetNodeId": "node.hoth.darth_vader_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2776,8 +2776,8 @@
     },
     {
       "id": "edge.00077",
-      "sourceNodeId": "node.s03.object_0063",
-      "targetNodeId": "node.s04.object_0040",
+      "sourceNodeId": "node.alderaan.clone_facility_missions",
+      "targetNodeId": "node.hoth.bb_8_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2785,8 +2785,8 @@
     },
     {
       "id": "edge.00078",
-      "sourceNodeId": "node.s04.object_0052",
-      "targetNodeId": "node.s03.object_0051",
+      "sourceNodeId": "node.hoth.slave_one_missions",
+      "targetNodeId": "node.alderaan.home_one_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2794,8 +2794,8 @@
     },
     {
       "id": "edge.00079",
-      "sourceNodeId": "node.s04.object_0040",
-      "targetNodeId": "node.s03.object_0051",
+      "sourceNodeId": "node.hoth.bb_8_missions",
+      "targetNodeId": "node.alderaan.home_one_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2803,8 +2803,8 @@
     },
     {
       "id": "edge.00080",
-      "sourceNodeId": "node.s01.object_0037",
-      "targetNodeId": "node.s01.object_0031",
+      "sourceNodeId": "node.naboo.moff_gideon_missions",
+      "targetNodeId": "node.naboo.count_dooku_missions",
       "type": "materialized_view_input",
       "tags": [
         "lineage"
@@ -2812,8 +2812,8 @@
     },
     {
       "id": "edge.00081",
-      "sourceNodeId": "node.s02.object_0020",
-      "targetNodeId": "node.s05.object_0053",
+      "sourceNodeId": "node.coruscant.hera_syndulla_missions",
+      "targetNodeId": "node.endor.tantive_iv_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2821,8 +2821,8 @@
     },
     {
       "id": "edge.00082",
-      "sourceNodeId": "node.s00.object_0060",
-      "targetNodeId": "node.s02.object_0044",
+      "sourceNodeId": "node.tatooine.massassi_temple_missions",
+      "targetNodeId": "node.coruscant.millennium_falcon_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2830,8 +2830,8 @@
     },
     {
       "id": "edge.00083",
-      "sourceNodeId": "node.s04.object_0028",
-      "targetNodeId": "node.s04.object_0034",
+      "sourceNodeId": "node.hoth.darth_vader_missions",
+      "targetNodeId": "node.hoth.grand_moff_tarkin_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2839,8 +2839,8 @@
     },
     {
       "id": "edge.00084",
-      "sourceNodeId": "node.s01.object_0037",
-      "targetNodeId": "node.s02.object_0038",
+      "sourceNodeId": "node.naboo.moff_gideon_missions",
+      "targetNodeId": "node.coruscant.r2_d2_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2848,8 +2848,8 @@
     },
     {
       "id": "edge.00085",
-      "sourceNodeId": "node.s02.object_0056",
-      "targetNodeId": "node.s03.object_0057",
+      "sourceNodeId": "node.coruscant.jedi_temple_missions",
+      "targetNodeId": "node.alderaan.mos_eisley_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2857,8 +2857,8 @@
     },
     {
       "id": "edge.00086",
-      "sourceNodeId": "node.s00.object_0024",
-      "targetNodeId": "node.s02.object_0038",
+      "sourceNodeId": "node.tatooine.captain_rex_missions",
+      "targetNodeId": "node.coruscant.r2_d2_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2866,8 +2866,8 @@
     },
     {
       "id": "edge.00087",
-      "sourceNodeId": "node.s04.object_0034",
-      "targetNodeId": "node.s00.object_0042",
+      "sourceNodeId": "node.hoth.grand_moff_tarkin_missions",
+      "targetNodeId": "node.tatooine.chopper_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -2875,8 +2875,8 @@
     },
     {
       "id": "edge.00088",
-      "sourceNodeId": "node.s00.object_0060",
-      "targetNodeId": "node.s05.object_0029",
+      "sourceNodeId": "node.tatooine.massassi_temple_missions",
+      "targetNodeId": "node.endor.darth_maul_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2884,8 +2884,8 @@
     },
     {
       "id": "edge.00089",
-      "sourceNodeId": "node.s05.object_0053",
-      "targetNodeId": "node.s00.object_0018",
+      "sourceNodeId": "node.endor.tantive_iv_missions",
+      "targetNodeId": "node.tatooine.grogu_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2893,8 +2893,8 @@
     },
     {
       "id": "edge.00090",
-      "sourceNodeId": "node.s02.object_0062",
-      "targetNodeId": "node.s05.object_0047",
+      "sourceNodeId": "node.coruscant.imperial_palace_missions",
+      "targetNodeId": "node.endor.x_wing_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2902,8 +2902,8 @@
     },
     {
       "id": "edge.00091",
-      "sourceNodeId": "node.s01.object_0025",
-      "targetNodeId": "node.s02.object_0020",
+      "sourceNodeId": "node.naboo.commander_cody_missions",
+      "targetNodeId": "node.coruscant.hera_syndulla_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2911,8 +2911,8 @@
     },
     {
       "id": "edge.00092",
-      "sourceNodeId": "node.s03.object_0021",
-      "targetNodeId": "node.s03.object_0033",
+      "sourceNodeId": "node.alderaan.ezra_bridger_missions",
+      "targetNodeId": "node.alderaan.kylo_ren_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2920,8 +2920,8 @@
     },
     {
       "id": "edge.00093",
-      "sourceNodeId": "node.s00.object_0060",
-      "targetNodeId": "node.s05.object_0053",
+      "sourceNodeId": "node.tatooine.massassi_temple_missions",
+      "targetNodeId": "node.endor.tantive_iv_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2929,8 +2929,8 @@
     },
     {
       "id": "edge.00094",
-      "sourceNodeId": "node.s01.object_0067",
-      "targetNodeId": "node.s00.object_0042",
+      "sourceNodeId": "node.naboo.the_empire_strikes_back_missions",
+      "targetNodeId": "node.tatooine.chopper_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -2938,8 +2938,8 @@
     },
     {
       "id": "edge.00095",
-      "sourceNodeId": "node.s04.object_0058",
-      "targetNodeId": "node.s00.object_0066",
+      "sourceNodeId": "node.hoth.cloud_city_missions",
+      "targetNodeId": "node.tatooine.a_new_hope_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2947,8 +2947,8 @@
     },
     {
       "id": "edge.00096",
-      "sourceNodeId": "node.s03.object_0057",
-      "targetNodeId": "node.s05.object_0023",
+      "sourceNodeId": "node.alderaan.mos_eisley_missions",
+      "targetNodeId": "node.endor.kanan_jarrus_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2956,8 +2956,8 @@
     },
     {
       "id": "edge.00097",
-      "sourceNodeId": "node.s04.object_0046",
-      "targetNodeId": "node.s01.object_0043",
+      "sourceNodeId": "node.hoth.ghost_missions",
+      "targetNodeId": "node.naboo.ig_11_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2965,8 +2965,8 @@
     },
     {
       "id": "edge.00098",
-      "sourceNodeId": "node.s00.object_0054",
-      "targetNodeId": "node.s04.object_0058",
+      "sourceNodeId": "node.tatooine.executor_missions",
+      "targetNodeId": "node.hoth.cloud_city_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -2974,8 +2974,8 @@
     },
     {
       "id": "edge.00099",
-      "sourceNodeId": "node.s03.object_0057",
-      "targetNodeId": "node.s02.object_0032",
+      "sourceNodeId": "node.alderaan.mos_eisley_missions",
+      "targetNodeId": "node.coruscant.general_grievous_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -2983,8 +2983,8 @@
     },
     {
       "id": "edge.00100",
-      "sourceNodeId": "node.s01.object_0061",
-      "targetNodeId": "node.s00.object_0036",
+      "sourceNodeId": "node.naboo.theed_palace_missions",
+      "targetNodeId": "node.tatooine.asajj_ventress_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -2992,8 +2992,8 @@
     },
     {
       "id": "edge.00101",
-      "sourceNodeId": "node.s01.object_0043",
-      "targetNodeId": "node.s00.object_0042",
+      "sourceNodeId": "node.naboo.ig_11_missions",
+      "targetNodeId": "node.tatooine.chopper_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3001,8 +3001,8 @@
     },
     {
       "id": "edge.00102",
-      "sourceNodeId": "node.s02.object_0050",
-      "targetNodeId": "node.s05.object_0047",
+      "sourceNodeId": "node.coruscant.death_star_missions",
+      "targetNodeId": "node.endor.x_wing_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3010,8 +3010,8 @@
     },
     {
       "id": "edge.00103",
-      "sourceNodeId": "node.s04.object_0052",
-      "targetNodeId": "node.s03.object_0027",
+      "sourceNodeId": "node.hoth.slave_one_missions",
+      "targetNodeId": "node.alderaan.jango_fett_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3019,8 +3019,8 @@
     },
     {
       "id": "edge.00104",
-      "sourceNodeId": "node.s05.object_0029",
-      "targetNodeId": "node.s04.object_0052",
+      "sourceNodeId": "node.endor.darth_maul_missions",
+      "targetNodeId": "node.hoth.slave_one_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3028,8 +3028,8 @@
     },
     {
       "id": "edge.00105",
-      "sourceNodeId": "node.s01.object_0037",
-      "targetNodeId": "node.s00.object_0054",
+      "sourceNodeId": "node.naboo.moff_gideon_missions",
+      "targetNodeId": "node.tatooine.executor_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3037,8 +3037,8 @@
     },
     {
       "id": "edge.00106",
-      "sourceNodeId": "node.s04.object_0022",
-      "targetNodeId": "node.s02.object_0050",
+      "sourceNodeId": "node.hoth.sabine_wren_missions",
+      "targetNodeId": "node.coruscant.death_star_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3046,8 +3046,8 @@
     },
     {
       "id": "edge.00107",
-      "sourceNodeId": "node.s05.object_0059",
-      "targetNodeId": "node.s00.object_0060",
+      "sourceNodeId": "node.endor.echo_base_missions",
+      "targetNodeId": "node.tatooine.massassi_temple_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3055,8 +3055,8 @@
     },
     {
       "id": "edge.00108",
-      "sourceNodeId": "node.s02.object_0062",
-      "targetNodeId": "node.s00.object_0054",
+      "sourceNodeId": "node.coruscant.imperial_palace_missions",
+      "targetNodeId": "node.tatooine.executor_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3064,8 +3064,8 @@
     },
     {
       "id": "edge.00109",
-      "sourceNodeId": "node.s00.object_0030",
-      "targetNodeId": "node.s01.object_0019",
+      "sourceNodeId": "node.tatooine.emperor_palpatine_missions",
+      "targetNodeId": "node.naboo.bo_katan_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3073,8 +3073,8 @@
     },
     {
       "id": "edge.00110",
-      "sourceNodeId": "node.s02.object_0050",
-      "targetNodeId": "node.s03.object_0063",
+      "sourceNodeId": "node.coruscant.death_star_missions",
+      "targetNodeId": "node.alderaan.clone_facility_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3082,8 +3082,8 @@
     },
     {
       "id": "edge.00111",
-      "sourceNodeId": "node.s05.object_0053",
-      "targetNodeId": "node.s05.object_0047",
+      "sourceNodeId": "node.endor.tantive_iv_missions",
+      "targetNodeId": "node.endor.x_wing_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3091,8 +3091,8 @@
     },
     {
       "id": "edge.00112",
-      "sourceNodeId": "node.s00.object_0048",
-      "targetNodeId": "node.s00.object_0036",
+      "sourceNodeId": "node.tatooine.tie_fighter_missions",
+      "targetNodeId": "node.tatooine.asajj_ventress_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3100,8 +3100,8 @@
     },
     {
       "id": "edge.00113",
-      "sourceNodeId": "node.s04.object_0058",
-      "targetNodeId": "node.s04.object_0034",
+      "sourceNodeId": "node.hoth.cloud_city_missions",
+      "targetNodeId": "node.hoth.grand_moff_tarkin_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3109,8 +3109,8 @@
     },
     {
       "id": "edge.00114",
-      "sourceNodeId": "node.s02.object_0020",
-      "targetNodeId": "node.s00.object_0042",
+      "sourceNodeId": "node.coruscant.hera_syndulla_missions",
+      "targetNodeId": "node.tatooine.chopper_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3118,8 +3118,8 @@
     },
     {
       "id": "edge.00115",
-      "sourceNodeId": "node.s00.object_0030",
-      "targetNodeId": "node.s02.object_0038",
+      "sourceNodeId": "node.tatooine.emperor_palpatine_missions",
+      "targetNodeId": "node.coruscant.r2_d2_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3127,8 +3127,8 @@
     },
     {
       "id": "edge.00116",
-      "sourceNodeId": "node.s00.object_0018",
-      "targetNodeId": "node.s03.object_0039",
+      "sourceNodeId": "node.tatooine.grogu_missions",
+      "targetNodeId": "node.alderaan.c_3po_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3136,8 +3136,8 @@
     },
     {
       "id": "edge.00117",
-      "sourceNodeId": "node.s01.object_0031",
-      "targetNodeId": "node.s01.object_0049",
+      "sourceNodeId": "node.naboo.count_dooku_missions",
+      "targetNodeId": "node.naboo.star_destroyer_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3145,8 +3145,8 @@
     },
     {
       "id": "edge.00118",
-      "sourceNodeId": "node.s04.object_0034",
-      "targetNodeId": "node.s04.object_0046",
+      "sourceNodeId": "node.hoth.grand_moff_tarkin_missions",
+      "targetNodeId": "node.hoth.ghost_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3154,8 +3154,8 @@
     },
     {
       "id": "edge.00119",
-      "sourceNodeId": "node.s01.object_0061",
-      "targetNodeId": "node.s05.object_0041",
+      "sourceNodeId": "node.naboo.theed_palace_missions",
+      "targetNodeId": "node.endor.k_2so_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3163,8 +3163,8 @@
     },
     {
       "id": "edge.00120",
-      "sourceNodeId": "node.s03.object_0063",
-      "targetNodeId": "node.s01.object_0067",
+      "sourceNodeId": "node.alderaan.clone_facility_missions",
+      "targetNodeId": "node.naboo.the_empire_strikes_back_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3172,8 +3172,8 @@
     },
     {
       "id": "edge.00121",
-      "sourceNodeId": "node.s01.object_0061",
-      "targetNodeId": "node.s00.object_0054",
+      "sourceNodeId": "node.naboo.theed_palace_missions",
+      "targetNodeId": "node.tatooine.executor_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3181,8 +3181,8 @@
     },
     {
       "id": "edge.00122",
-      "sourceNodeId": "node.s00.object_0048",
-      "targetNodeId": "node.s02.object_0032",
+      "sourceNodeId": "node.tatooine.tie_fighter_missions",
+      "targetNodeId": "node.coruscant.general_grievous_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3190,8 +3190,8 @@
     },
     {
       "id": "edge.00123",
-      "sourceNodeId": "node.s04.object_0040",
-      "targetNodeId": "node.s04.object_0046",
+      "sourceNodeId": "node.hoth.bb_8_missions",
+      "targetNodeId": "node.hoth.ghost_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3199,8 +3199,8 @@
     },
     {
       "id": "edge.00124",
-      "sourceNodeId": "node.s01.object_0037",
-      "targetNodeId": "node.s00.object_0030",
+      "sourceNodeId": "node.naboo.moff_gideon_missions",
+      "targetNodeId": "node.tatooine.emperor_palpatine_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3208,8 +3208,8 @@
     },
     {
       "id": "edge.00125",
-      "sourceNodeId": "node.s02.object_0068",
-      "targetNodeId": "node.s02.object_0062",
+      "sourceNodeId": "node.coruscant.return_of_the_jedi_missions",
+      "targetNodeId": "node.coruscant.imperial_palace_missions",
       "type": "materialized_view_input",
       "tags": [
         "lineage"
@@ -3217,8 +3217,8 @@
     },
     {
       "id": "edge.00126",
-      "sourceNodeId": "node.s00.object_0054",
-      "targetNodeId": "node.s01.object_0061",
+      "sourceNodeId": "node.tatooine.executor_missions",
+      "targetNodeId": "node.naboo.theed_palace_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3226,8 +3226,8 @@
     },
     {
       "id": "edge.00127",
-      "sourceNodeId": "node.s05.object_0041",
-      "targetNodeId": "node.s00.object_0036",
+      "sourceNodeId": "node.endor.k_2so_missions",
+      "targetNodeId": "node.tatooine.asajj_ventress_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3235,8 +3235,8 @@
     },
     {
       "id": "edge.00128",
-      "sourceNodeId": "node.s04.object_0052",
-      "targetNodeId": "node.s05.object_0023",
+      "sourceNodeId": "node.hoth.slave_one_missions",
+      "targetNodeId": "node.endor.kanan_jarrus_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3244,8 +3244,8 @@
     },
     {
       "id": "edge.00129",
-      "sourceNodeId": "node.s00.object_0030",
-      "targetNodeId": "node.s05.object_0035",
+      "sourceNodeId": "node.tatooine.emperor_palpatine_missions",
+      "targetNodeId": "node.endor.grand_admiral_thrawn_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3253,8 +3253,8 @@
     },
     {
       "id": "edge.00130",
-      "sourceNodeId": "node.s02.object_0068",
-      "targetNodeId": "node.s04.object_0034",
+      "sourceNodeId": "node.coruscant.return_of_the_jedi_missions",
+      "targetNodeId": "node.hoth.grand_moff_tarkin_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3262,8 +3262,8 @@
     },
     {
       "id": "edge.00131",
-      "sourceNodeId": "node.s01.object_0049",
-      "targetNodeId": "node.s04.object_0058",
+      "sourceNodeId": "node.naboo.star_destroyer_missions",
+      "targetNodeId": "node.hoth.cloud_city_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3271,8 +3271,8 @@
     },
     {
       "id": "edge.00132",
-      "sourceNodeId": "node.s04.object_0028",
-      "targetNodeId": "node.s04.object_0046",
+      "sourceNodeId": "node.hoth.darth_vader_missions",
+      "targetNodeId": "node.hoth.ghost_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3280,8 +3280,8 @@
     },
     {
       "id": "edge.00133",
-      "sourceNodeId": "node.s05.object_0047",
-      "targetNodeId": "node.s03.object_0033",
+      "sourceNodeId": "node.endor.x_wing_missions",
+      "targetNodeId": "node.alderaan.kylo_ren_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3289,8 +3289,8 @@
     },
     {
       "id": "edge.00134",
-      "sourceNodeId": "node.s01.object_0055",
-      "targetNodeId": "node.s00.object_0030",
+      "sourceNodeId": "node.naboo.fondor_haulcraft_missions",
+      "targetNodeId": "node.tatooine.emperor_palpatine_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3298,8 +3298,8 @@
     },
     {
       "id": "edge.00135",
-      "sourceNodeId": "node.s01.object_0037",
-      "targetNodeId": "node.s04.object_0040",
+      "sourceNodeId": "node.naboo.moff_gideon_missions",
+      "targetNodeId": "node.hoth.bb_8_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3307,8 +3307,8 @@
     },
     {
       "id": "edge.00136",
-      "sourceNodeId": "node.s04.object_0028",
-      "targetNodeId": "node.s01.object_0037",
+      "sourceNodeId": "node.hoth.darth_vader_missions",
+      "targetNodeId": "node.naboo.moff_gideon_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3316,8 +3316,8 @@
     },
     {
       "id": "edge.00137",
-      "sourceNodeId": "node.s02.object_0056",
-      "targetNodeId": "node.s01.object_0037",
+      "sourceNodeId": "node.coruscant.jedi_temple_missions",
+      "targetNodeId": "node.naboo.moff_gideon_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3325,8 +3325,8 @@
     },
     {
       "id": "edge.00138",
-      "sourceNodeId": "node.s02.object_0050",
-      "targetNodeId": "node.s01.object_0019",
+      "sourceNodeId": "node.coruscant.death_star_missions",
+      "targetNodeId": "node.naboo.bo_katan_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3334,8 +3334,8 @@
     },
     {
       "id": "edge.00139",
-      "sourceNodeId": "node.s02.object_0056",
-      "targetNodeId": "node.s04.object_0028",
+      "sourceNodeId": "node.coruscant.jedi_temple_missions",
+      "targetNodeId": "node.hoth.darth_vader_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3343,8 +3343,8 @@
     },
     {
       "id": "edge.00140",
-      "sourceNodeId": "node.s01.object_0067",
-      "targetNodeId": "node.s01.object_0043",
+      "sourceNodeId": "node.naboo.the_empire_strikes_back_missions",
+      "targetNodeId": "node.naboo.ig_11_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3352,8 +3352,8 @@
     },
     {
       "id": "edge.00141",
-      "sourceNodeId": "node.s00.object_0048",
-      "targetNodeId": "node.s02.object_0062",
+      "sourceNodeId": "node.tatooine.tie_fighter_missions",
+      "targetNodeId": "node.coruscant.imperial_palace_missions",
       "type": "materialized_view_input",
       "tags": [
         "lineage"
@@ -3361,8 +3361,8 @@
     },
     {
       "id": "edge.00142",
-      "sourceNodeId": "node.s03.object_0051",
-      "targetNodeId": "node.s04.object_0040",
+      "sourceNodeId": "node.alderaan.home_one_missions",
+      "targetNodeId": "node.hoth.bb_8_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3370,8 +3370,8 @@
     },
     {
       "id": "edge.00143",
-      "sourceNodeId": "node.s03.object_0045",
-      "targetNodeId": "node.s03.object_0027",
+      "sourceNodeId": "node.alderaan.razor_crest_missions",
+      "targetNodeId": "node.alderaan.jango_fett_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3379,8 +3379,8 @@
     },
     {
       "id": "edge.00144",
-      "sourceNodeId": "node.s01.object_0043",
-      "targetNodeId": "node.s00.object_0024",
+      "sourceNodeId": "node.naboo.ig_11_missions",
+      "targetNodeId": "node.tatooine.captain_rex_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3388,8 +3388,8 @@
     },
     {
       "id": "edge.00145",
-      "sourceNodeId": "node.s02.object_0026",
-      "targetNodeId": "node.s05.object_0059",
+      "sourceNodeId": "node.coruscant.boba_fett_missions",
+      "targetNodeId": "node.endor.echo_base_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3397,8 +3397,8 @@
     },
     {
       "id": "edge.00146",
-      "sourceNodeId": "node.s01.object_0037",
-      "targetNodeId": "node.s02.object_0020",
+      "sourceNodeId": "node.naboo.moff_gideon_missions",
+      "targetNodeId": "node.coruscant.hera_syndulla_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3406,8 +3406,8 @@
     },
     {
       "id": "edge.00147",
-      "sourceNodeId": "node.s01.object_0067",
-      "targetNodeId": "node.s01.object_0031",
+      "sourceNodeId": "node.naboo.the_empire_strikes_back_missions",
+      "targetNodeId": "node.naboo.count_dooku_missions",
       "type": "materialized_view_input",
       "tags": [
         "lineage"
@@ -3415,8 +3415,8 @@
     },
     {
       "id": "edge.00148",
-      "sourceNodeId": "node.s05.object_0047",
-      "targetNodeId": "node.s05.object_0041",
+      "sourceNodeId": "node.endor.x_wing_missions",
+      "targetNodeId": "node.endor.k_2so_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3424,8 +3424,8 @@
     },
     {
       "id": "edge.00149",
-      "sourceNodeId": "node.s02.object_0044",
-      "targetNodeId": "node.s04.object_0064",
+      "sourceNodeId": "node.coruscant.millennium_falcon_missions",
+      "targetNodeId": "node.hoth.niima_outpost_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3433,8 +3433,8 @@
     },
     {
       "id": "edge.00150",
-      "sourceNodeId": "node.s00.object_0036",
-      "targetNodeId": "node.s02.object_0044",
+      "sourceNodeId": "node.tatooine.asajj_ventress_missions",
+      "targetNodeId": "node.coruscant.millennium_falcon_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3442,8 +3442,8 @@
     },
     {
       "id": "edge.00151",
-      "sourceNodeId": "node.s02.object_0056",
-      "targetNodeId": "node.s01.object_0037",
+      "sourceNodeId": "node.coruscant.jedi_temple_missions",
+      "targetNodeId": "node.naboo.moff_gideon_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3451,8 +3451,8 @@
     },
     {
       "id": "edge.00152",
-      "sourceNodeId": "node.s01.object_0049",
-      "targetNodeId": "node.s03.object_0033",
+      "sourceNodeId": "node.naboo.star_destroyer_missions",
+      "targetNodeId": "node.alderaan.kylo_ren_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3460,8 +3460,8 @@
     },
     {
       "id": "edge.00153",
-      "sourceNodeId": "node.s04.object_0046",
-      "targetNodeId": "node.s02.object_0056",
+      "sourceNodeId": "node.hoth.ghost_missions",
+      "targetNodeId": "node.coruscant.jedi_temple_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3469,8 +3469,8 @@
     },
     {
       "id": "edge.00154",
-      "sourceNodeId": "node.s00.object_0054",
-      "targetNodeId": "node.s05.object_0059",
+      "sourceNodeId": "node.tatooine.executor_missions",
+      "targetNodeId": "node.endor.echo_base_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3478,8 +3478,8 @@
     },
     {
       "id": "edge.00155",
-      "sourceNodeId": "node.s04.object_0058",
-      "targetNodeId": "node.s03.object_0057",
+      "sourceNodeId": "node.hoth.cloud_city_missions",
+      "targetNodeId": "node.alderaan.mos_eisley_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3487,8 +3487,8 @@
     },
     {
       "id": "edge.00156",
-      "sourceNodeId": "node.s05.object_0023",
-      "targetNodeId": "node.s03.object_0039",
+      "sourceNodeId": "node.endor.kanan_jarrus_missions",
+      "targetNodeId": "node.alderaan.c_3po_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3496,8 +3496,8 @@
     },
     {
       "id": "edge.00157",
-      "sourceNodeId": "node.s00.object_0042",
-      "targetNodeId": "node.s05.object_0041",
+      "sourceNodeId": "node.tatooine.chopper_missions",
+      "targetNodeId": "node.endor.k_2so_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3505,8 +3505,8 @@
     },
     {
       "id": "edge.00158",
-      "sourceNodeId": "node.s01.object_0031",
-      "targetNodeId": "node.s02.object_0026",
+      "sourceNodeId": "node.naboo.count_dooku_missions",
+      "targetNodeId": "node.coruscant.boba_fett_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3514,8 +3514,8 @@
     },
     {
       "id": "edge.00159",
-      "sourceNodeId": "node.s02.object_0050",
-      "targetNodeId": "node.s02.object_0062",
+      "sourceNodeId": "node.coruscant.death_star_missions",
+      "targetNodeId": "node.coruscant.imperial_palace_missions",
       "type": "materialized_view_input",
       "tags": [
         "lineage"
@@ -3523,8 +3523,8 @@
     },
     {
       "id": "edge.00160",
-      "sourceNodeId": "node.s05.object_0053",
-      "targetNodeId": "node.s04.object_0040",
+      "sourceNodeId": "node.endor.tantive_iv_missions",
+      "targetNodeId": "node.hoth.bb_8_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3532,8 +3532,8 @@
     },
     {
       "id": "edge.00161",
-      "sourceNodeId": "node.s00.object_0054",
-      "targetNodeId": "node.s03.object_0063",
+      "sourceNodeId": "node.tatooine.executor_missions",
+      "targetNodeId": "node.alderaan.clone_facility_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3541,8 +3541,8 @@
     },
     {
       "id": "edge.00162",
-      "sourceNodeId": "node.s04.object_0052",
-      "targetNodeId": "node.s04.object_0064",
+      "sourceNodeId": "node.hoth.slave_one_missions",
+      "targetNodeId": "node.hoth.niima_outpost_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3550,8 +3550,8 @@
     },
     {
       "id": "edge.00163",
-      "sourceNodeId": "node.s03.object_0045",
-      "targetNodeId": "node.s03.object_0021",
+      "sourceNodeId": "node.alderaan.razor_crest_missions",
+      "targetNodeId": "node.alderaan.ezra_bridger_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3559,8 +3559,8 @@
     },
     {
       "id": "edge.00164",
-      "sourceNodeId": "node.s05.object_0035",
-      "targetNodeId": "node.s02.object_0068",
+      "sourceNodeId": "node.endor.grand_admiral_thrawn_missions",
+      "targetNodeId": "node.coruscant.return_of_the_jedi_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3568,8 +3568,8 @@
     },
     {
       "id": "edge.00165",
-      "sourceNodeId": "node.s00.object_0054",
-      "targetNodeId": "node.s00.object_0066",
+      "sourceNodeId": "node.tatooine.executor_missions",
+      "targetNodeId": "node.tatooine.a_new_hope_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3577,8 +3577,8 @@
     },
     {
       "id": "edge.00166",
-      "sourceNodeId": "node.s05.object_0029",
-      "targetNodeId": "node.s00.object_0024",
+      "sourceNodeId": "node.endor.darth_maul_missions",
+      "targetNodeId": "node.tatooine.captain_rex_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3586,8 +3586,8 @@
     },
     {
       "id": "edge.00167",
-      "sourceNodeId": "node.s03.object_0045",
-      "targetNodeId": "node.s01.object_0037",
+      "sourceNodeId": "node.alderaan.razor_crest_missions",
+      "targetNodeId": "node.naboo.moff_gideon_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3595,8 +3595,8 @@
     },
     {
       "id": "edge.00168",
-      "sourceNodeId": "node.s05.object_0029",
-      "targetNodeId": "node.s00.object_0060",
+      "sourceNodeId": "node.endor.darth_maul_missions",
+      "targetNodeId": "node.tatooine.massassi_temple_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3604,8 +3604,8 @@
     },
     {
       "id": "edge.00169",
-      "sourceNodeId": "node.s00.object_0030",
-      "targetNodeId": "node.s03.object_0051",
+      "sourceNodeId": "node.tatooine.emperor_palpatine_missions",
+      "targetNodeId": "node.alderaan.home_one_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3613,8 +3613,8 @@
     },
     {
       "id": "edge.00170",
-      "sourceNodeId": "node.s04.object_0064",
-      "targetNodeId": "node.s02.object_0068",
+      "sourceNodeId": "node.hoth.niima_outpost_missions",
+      "targetNodeId": "node.coruscant.return_of_the_jedi_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3622,8 +3622,8 @@
     },
     {
       "id": "edge.00171",
-      "sourceNodeId": "node.s03.object_0033",
-      "targetNodeId": "node.s01.object_0049",
+      "sourceNodeId": "node.alderaan.kylo_ren_missions",
+      "targetNodeId": "node.naboo.star_destroyer_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3631,8 +3631,8 @@
     },
     {
       "id": "edge.00172",
-      "sourceNodeId": "node.s01.object_0037",
-      "targetNodeId": "node.s02.object_0056",
+      "sourceNodeId": "node.naboo.moff_gideon_missions",
+      "targetNodeId": "node.coruscant.jedi_temple_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3640,8 +3640,8 @@
     },
     {
       "id": "edge.00173",
-      "sourceNodeId": "node.s02.object_0050",
-      "targetNodeId": "node.s00.object_0066",
+      "sourceNodeId": "node.coruscant.death_star_missions",
+      "targetNodeId": "node.tatooine.a_new_hope_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3649,8 +3649,8 @@
     },
     {
       "id": "edge.00174",
-      "sourceNodeId": "node.s04.object_0022",
-      "targetNodeId": "node.s00.object_0060",
+      "sourceNodeId": "node.hoth.sabine_wren_missions",
+      "targetNodeId": "node.tatooine.massassi_temple_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3658,8 +3658,8 @@
     },
     {
       "id": "edge.00175",
-      "sourceNodeId": "node.s00.object_0060",
-      "targetNodeId": "node.s04.object_0022",
+      "sourceNodeId": "node.tatooine.massassi_temple_missions",
+      "targetNodeId": "node.hoth.sabine_wren_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3667,8 +3667,8 @@
     },
     {
       "id": "edge.00176",
-      "sourceNodeId": "node.s05.object_0059",
-      "targetNodeId": "node.s03.object_0027",
+      "sourceNodeId": "node.endor.echo_base_missions",
+      "targetNodeId": "node.alderaan.jango_fett_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3676,8 +3676,8 @@
     },
     {
       "id": "edge.00177",
-      "sourceNodeId": "node.s01.object_0055",
-      "targetNodeId": "node.s01.object_0037",
+      "sourceNodeId": "node.naboo.fondor_haulcraft_missions",
+      "targetNodeId": "node.naboo.moff_gideon_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3685,8 +3685,8 @@
     },
     {
       "id": "edge.00178",
-      "sourceNodeId": "node.s02.object_0062",
-      "targetNodeId": "node.s01.object_0037",
+      "sourceNodeId": "node.coruscant.imperial_palace_missions",
+      "targetNodeId": "node.naboo.moff_gideon_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3694,8 +3694,8 @@
     },
     {
       "id": "edge.00179",
-      "sourceNodeId": "node.s05.object_0023",
-      "targetNodeId": "node.s00.object_0036",
+      "sourceNodeId": "node.endor.kanan_jarrus_missions",
+      "targetNodeId": "node.tatooine.asajj_ventress_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3703,8 +3703,8 @@
     },
     {
       "id": "edge.00180",
-      "sourceNodeId": "node.s02.object_0020",
-      "targetNodeId": "node.s04.object_0046",
+      "sourceNodeId": "node.coruscant.hera_syndulla_missions",
+      "targetNodeId": "node.hoth.ghost_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3712,8 +3712,8 @@
     },
     {
       "id": "edge.00181",
-      "sourceNodeId": "node.s00.object_0066",
-      "targetNodeId": "node.s04.object_0034",
+      "sourceNodeId": "node.tatooine.a_new_hope_missions",
+      "targetNodeId": "node.hoth.grand_moff_tarkin_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3721,8 +3721,8 @@
     },
     {
       "id": "edge.00182",
-      "sourceNodeId": "node.s05.object_0035",
-      "targetNodeId": "node.s03.object_0033",
+      "sourceNodeId": "node.endor.grand_admiral_thrawn_missions",
+      "targetNodeId": "node.alderaan.kylo_ren_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3730,8 +3730,8 @@
     },
     {
       "id": "edge.00183",
-      "sourceNodeId": "node.s00.object_0030",
-      "targetNodeId": "node.s01.object_0061",
+      "sourceNodeId": "node.tatooine.emperor_palpatine_missions",
+      "targetNodeId": "node.naboo.theed_palace_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3739,8 +3739,8 @@
     },
     {
       "id": "edge.00184",
-      "sourceNodeId": "node.s00.object_0066",
-      "targetNodeId": "node.s00.object_0048",
+      "sourceNodeId": "node.tatooine.a_new_hope_missions",
+      "targetNodeId": "node.tatooine.tie_fighter_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3748,8 +3748,8 @@
     },
     {
       "id": "edge.00185",
-      "sourceNodeId": "node.s01.object_0031",
-      "targetNodeId": "node.s00.object_0024",
+      "sourceNodeId": "node.naboo.count_dooku_missions",
+      "targetNodeId": "node.tatooine.captain_rex_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3757,8 +3757,8 @@
     },
     {
       "id": "edge.00186",
-      "sourceNodeId": "node.s05.object_0053",
-      "targetNodeId": "node.s00.object_0048",
+      "sourceNodeId": "node.endor.tantive_iv_missions",
+      "targetNodeId": "node.tatooine.tie_fighter_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3766,8 +3766,8 @@
     },
     {
       "id": "edge.00187",
-      "sourceNodeId": "node.s01.object_0031",
-      "targetNodeId": "node.s00.object_0024",
+      "sourceNodeId": "node.naboo.count_dooku_missions",
+      "targetNodeId": "node.tatooine.captain_rex_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3775,8 +3775,8 @@
     },
     {
       "id": "edge.00188",
-      "sourceNodeId": "node.s00.object_0054",
-      "targetNodeId": "node.s03.object_0063",
+      "sourceNodeId": "node.tatooine.executor_missions",
+      "targetNodeId": "node.alderaan.clone_facility_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3784,8 +3784,8 @@
     },
     {
       "id": "edge.00189",
-      "sourceNodeId": "node.s05.object_0053",
-      "targetNodeId": "node.s04.object_0046",
+      "sourceNodeId": "node.endor.tantive_iv_missions",
+      "targetNodeId": "node.hoth.ghost_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3793,8 +3793,8 @@
     },
     {
       "id": "edge.00190",
-      "sourceNodeId": "node.s00.object_0018",
-      "targetNodeId": "node.s03.object_0045",
+      "sourceNodeId": "node.tatooine.grogu_missions",
+      "targetNodeId": "node.alderaan.razor_crest_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3802,8 +3802,8 @@
     },
     {
       "id": "edge.00191",
-      "sourceNodeId": "node.s05.object_0023",
-      "targetNodeId": "node.s02.object_0056",
+      "sourceNodeId": "node.endor.kanan_jarrus_missions",
+      "targetNodeId": "node.coruscant.jedi_temple_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3811,8 +3811,8 @@
     },
     {
       "id": "edge.00192",
-      "sourceNodeId": "node.s00.object_0054",
-      "targetNodeId": "node.s04.object_0064",
+      "sourceNodeId": "node.tatooine.executor_missions",
+      "targetNodeId": "node.hoth.niima_outpost_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3820,8 +3820,8 @@
     },
     {
       "id": "edge.00193",
-      "sourceNodeId": "node.s05.object_0047",
-      "targetNodeId": "node.s03.object_0057",
+      "sourceNodeId": "node.endor.x_wing_missions",
+      "targetNodeId": "node.alderaan.mos_eisley_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3829,8 +3829,8 @@
     },
     {
       "id": "edge.00194",
-      "sourceNodeId": "node.s01.object_0025",
-      "targetNodeId": "node.s01.object_0037",
+      "sourceNodeId": "node.naboo.commander_cody_missions",
+      "targetNodeId": "node.naboo.moff_gideon_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3838,8 +3838,8 @@
     },
     {
       "id": "edge.00195",
-      "sourceNodeId": "node.s05.object_0047",
-      "targetNodeId": "node.s00.object_0024",
+      "sourceNodeId": "node.endor.x_wing_missions",
+      "targetNodeId": "node.tatooine.captain_rex_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3847,8 +3847,8 @@
     },
     {
       "id": "edge.00196",
-      "sourceNodeId": "node.s04.object_0058",
-      "targetNodeId": "node.s00.object_0054",
+      "sourceNodeId": "node.hoth.cloud_city_missions",
+      "targetNodeId": "node.tatooine.executor_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3856,8 +3856,8 @@
     },
     {
       "id": "edge.00197",
-      "sourceNodeId": "node.s05.object_0047",
-      "targetNodeId": "node.s02.object_0068",
+      "sourceNodeId": "node.endor.x_wing_missions",
+      "targetNodeId": "node.coruscant.return_of_the_jedi_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3865,8 +3865,8 @@
     },
     {
       "id": "edge.00198",
-      "sourceNodeId": "node.s02.object_0020",
-      "targetNodeId": "node.s00.object_0048",
+      "sourceNodeId": "node.coruscant.hera_syndulla_missions",
+      "targetNodeId": "node.tatooine.tie_fighter_missions",
       "type": "unknown",
       "tags": [
         "lineage"
@@ -3874,8 +3874,8 @@
     },
     {
       "id": "edge.00199",
-      "sourceNodeId": "node.s05.object_0053",
-      "targetNodeId": "node.s02.object_0056",
+      "sourceNodeId": "node.endor.tantive_iv_missions",
+      "targetNodeId": "node.coruscant.jedi_temple_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3883,8 +3883,8 @@
     },
     {
       "id": "edge.00200",
-      "sourceNodeId": "node.s02.object_0032",
-      "targetNodeId": "node.s00.object_0042",
+      "sourceNodeId": "node.coruscant.general_grievous_missions",
+      "targetNodeId": "node.tatooine.chopper_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3892,8 +3892,8 @@
     },
     {
       "id": "edge.00201",
-      "sourceNodeId": "node.s02.object_0032",
-      "targetNodeId": "node.s04.object_0058",
+      "sourceNodeId": "node.coruscant.general_grievous_missions",
+      "targetNodeId": "node.hoth.cloud_city_missions",
       "type": "etl_transfer",
       "tags": [
         "hourly"
@@ -3901,8 +3901,8 @@
     },
     {
       "id": "edge.00202",
-      "sourceNodeId": "node.s00.object_0060",
-      "targetNodeId": "node.s02.object_0026",
+      "sourceNodeId": "node.tatooine.massassi_temple_missions",
+      "targetNodeId": "node.coruscant.boba_fett_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3910,8 +3910,8 @@
     },
     {
       "id": "edge.00203",
-      "sourceNodeId": "node.s03.object_0051",
-      "targetNodeId": "node.s05.object_0029",
+      "sourceNodeId": "node.alderaan.home_one_missions",
+      "targetNodeId": "node.endor.darth_maul_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3919,8 +3919,8 @@
     },
     {
       "id": "edge.00204",
-      "sourceNodeId": "node.s01.object_0019",
-      "targetNodeId": "node.s03.object_0051",
+      "sourceNodeId": "node.naboo.bo_katan_missions",
+      "targetNodeId": "node.alderaan.home_one_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3928,8 +3928,8 @@
     },
     {
       "id": "edge.00205",
-      "sourceNodeId": "node.s01.object_0019",
-      "targetNodeId": "node.s00.object_0036",
+      "sourceNodeId": "node.naboo.bo_katan_missions",
+      "targetNodeId": "node.tatooine.asajj_ventress_missions",
       "type": "distributed_reference",
       "tags": [
         "lineage"
@@ -3937,8 +3937,8 @@
     },
     {
       "id": "edge.00206",
-      "sourceNodeId": "node.s04.object_0052",
-      "targetNodeId": "node.s04.object_0028",
+      "sourceNodeId": "node.hoth.slave_one_missions",
+      "targetNodeId": "node.hoth.darth_vader_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3946,8 +3946,8 @@
     },
     {
       "id": "edge.00207",
-      "sourceNodeId": "node.s00.object_0030",
-      "targetNodeId": "node.s01.object_0031",
+      "sourceNodeId": "node.tatooine.emperor_palpatine_missions",
+      "targetNodeId": "node.naboo.count_dooku_missions",
       "type": "materialized_view_input",
       "tags": [
         "lineage"
@@ -3955,8 +3955,8 @@
     },
     {
       "id": "edge.00208",
-      "sourceNodeId": "node.s01.object_0055",
-      "targetNodeId": "node.s05.object_0065",
+      "sourceNodeId": "node.naboo.fondor_haulcraft_missions",
+      "targetNodeId": "node.endor.black_spire_missions",
       "type": "manual_dependency",
       "tags": [
         "lineage"
@@ -3964,8 +3964,8 @@
     },
     {
       "id": "edge.00209",
-      "sourceNodeId": "node.s00.object_0042",
-      "targetNodeId": "node.s03.object_0063",
+      "sourceNodeId": "node.tatooine.chopper_missions",
+      "targetNodeId": "node.alderaan.clone_facility_missions",
       "type": "view_dependency",
       "tags": [
         "lineage"
@@ -3973,8 +3973,8 @@
     },
     {
       "id": "edge.00210",
-      "sourceNodeId": "node.s01.object_0031",
-      "targetNodeId": "node.s01.object_0037",
+      "sourceNodeId": "node.naboo.count_dooku_missions",
+      "targetNodeId": "node.naboo.moff_gideon_missions",
       "type": "materialized_view_target",
       "tags": [
         "lineage"
@@ -3982,8 +3982,8 @@
     },
     {
       "id": "edge.00211",
-      "sourceNodeId": "node.s02.object_0062",
-      "targetNodeId": "node.s02.object_0068",
+      "sourceNodeId": "node.coruscant.imperial_palace_missions",
+      "targetNodeId": "node.coruscant.return_of_the_jedi_missions",
       "type": "materialized_view_target",
       "tags": [
         "lineage"

@@ -19,7 +19,7 @@ describe("large deterministic workload", () => {
     const filterStarted = performance.now();
     const visible = visibleNodeIds(result.graph, {
       ...DEFAULT_FILTERS,
-      schemaIds: ["schema.s00", "schema.s01"],
+      schemaIds: ["schema.tatooine", "schema.naboo"],
       engineFamilies: ["MergeTree"],
       minBytes: 1024 ** 3
     });

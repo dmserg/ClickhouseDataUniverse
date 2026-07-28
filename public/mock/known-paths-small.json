@@ -1,26 +1,26 @@
 [
   [
-    "node.s00.object_0000",
-    "node.s01.object_0001",
-    "node.s02.object_0002",
-    "node.s03.object_0003",
-    "node.s04.object_0004",
-    "node.s05.object_0005"
+    "node.tatooine.luke_skywalker_missions",
+    "node.naboo.leia_organa_missions",
+    "node.coruscant.han_solo_missions",
+    "node.alderaan.chewbacca_missions",
+    "node.hoth.obi_wan_kenobi_missions",
+    "node.endor.anakin_skywalker_missions"
   ],
   [
-    "node.s00.object_0006",
-    "node.s01.object_0007",
-    "node.s02.object_0008",
-    "node.s03.object_0009",
-    "node.s04.object_0010",
-    "node.s05.object_0011"
+    "node.tatooine.ahsoka_tano_missions",
+    "node.naboo.padme_amidala_missions",
+    "node.coruscant.yoda_missions",
+    "node.alderaan.mace_windu_missions",
+    "node.hoth.qui_gon_jinn_missions",
+    "node.endor.rey_skywalker_missions"
   ],
   [
-    "node.s00.object_0012",
-    "node.s01.object_0013",
-    "node.s02.object_0014",
-    "node.s03.object_0015",
-    "node.s04.object_0016",
-    "node.s05.object_0017"
+    "node.tatooine.finn_missions",
+    "node.naboo.poe_dameron_missions",
+    "node.coruscant.lando_calrissian_missions",
+    "node.alderaan.cassian_andor_missions",
+    "node.hoth.jyn_erso_missions",
+    "node.endor.din_djarin_missions"
   ]
 ]

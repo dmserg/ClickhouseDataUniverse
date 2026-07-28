@@ -73,7 +73,7 @@ Status: Complete.
 - Deterministic breadth-first search supports any edge, ETL-only, and view-dependency-only routes.
 - Source-equals-destination, cycles, disconnected components, and no-path states are covered.
 - The UI exposes source/destination selection, route summaries, and path highlighting.
-- The deterministic large route from `domain_00.object_0000` to `domain_11.object_0011` resolves to 11 hops.
+- The deterministic large route from `tatooine.luke_skywalker_missions` to `bespin.rey_skywalker_missions` resolves to 11 hops.
 
 ### Milestone 7 — Journey mode
 
