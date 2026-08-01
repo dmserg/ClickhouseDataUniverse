@@ -19,7 +19,8 @@ const EMPTY_STATS: SceneStats = {
   visibleNodes: 0,
   visibleLabels: 0,
   visibleDetailedEdges: 0,
-  visibleAggregateEdges: 0
+  visibleAggregateEdges: 0,
+  animatedCargoShips: 0
 };
 
 export default function App() {
@@ -206,6 +207,14 @@ export default function App() {
             <option>Low</option><option>Medium</option><option>High</option>
           </select>
         </label>
+        <button
+          className={state.cargoShipsEnabled ? "active cargo-toggle" : "cargo-toggle"}
+          aria-label="Toggle cargo ships"
+          aria-pressed={state.cargoShipsEnabled}
+          onClick={state.toggleCargoShips}
+        >
+          CARGO {state.cargoShipsEnabled ? "ON" : "OFF"}
+        </button>
         <button className={state.showPerformance ? "active" : ""} onClick={state.togglePerformance}>PERF</button>
       </div>
 
@@ -220,6 +229,7 @@ export default function App() {
             <dt>Visible nodes</dt><dd>{stats.visibleNodes}</dd>
             <dt>Labels</dt><dd>{stats.visibleLabels}</dd>
             <dt>Detail routes</dt><dd>{stats.visibleDetailedEdges}</dd>
+            <dt>Cargo ships</dt><dd>{stats.animatedCargoShips}</dd>
             <dt>Aggregate routes</dt><dd>{stats.visibleAggregateEdges}</dd>
             <dt>Normalize</dt><dd>{state.normalizationMs.toFixed(1)} ms</dd>
             <dt>Worker layout</dt><dd>{state.layout?.durationMs.toFixed(1)} ms</dd>

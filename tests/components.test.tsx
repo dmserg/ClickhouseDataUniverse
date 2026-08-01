@@ -14,8 +14,15 @@ describe("component UI", () => {
     useAppStore.setState({
       graph: normalizeGraph(fixtureDocument()),
       filters: DEFAULT_FILTERS,
-      selectedNodeId: null
+      selectedNodeId: null,
+      cargoShipsEnabled: false
     });
+  });
+
+  it("keeps cargo ships off by default until explicitly enabled", () => {
+    expect(useAppStore.getState().cargoShipsEnabled).toBe(false);
+    useAppStore.getState().toggleCargoShips();
+    expect(useAppStore.getState().cargoShipsEnabled).toBe(true);
   });
 
   it("shows results and selects an object", () => {

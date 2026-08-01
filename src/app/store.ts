@@ -41,6 +41,7 @@ interface AppState {
   activePath: GraphPath | null;
   pathMessage: string | null;
   quality: QualityPreset;
+  cargoShipsEnabled: boolean;
   showPerformance: boolean;
   journey: JourneyState;
   setData: (graph: DomainGraph, layout: LayoutResult, normalizationMs: number) => void;
@@ -60,6 +61,7 @@ interface AppState {
   setPathMode: (mode: PathMode) => void;
   setPath: (path: GraphPath | null, message: string | null) => void;
   setQuality: (quality: QualityPreset) => void;
+  toggleCargoShips: () => void;
   togglePerformance: () => void;
   startJourney: () => void;
   exitJourney: () => void;
@@ -87,6 +89,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   activePath: null,
   pathMessage: null,
   quality: "Medium",
+  cargoShipsEnabled: false,
   showPerformance: false,
   journey: { playing: false, speed: 1, segment: 0, progress: 0 },
   setData: (graph, layout, normalizationMs) =>
@@ -123,6 +126,8 @@ export const useAppStore = create<AppState>((set, get) => ({
   setPathMode: (pathMode) => set({ pathMode, activePath: null, pathMessage: null }),
   setPath: (activePath, pathMessage) => set({ activePath, pathMessage }),
   setQuality: (quality) => set({ quality }),
+  toggleCargoShips: () =>
+    set((state) => ({ cargoShipsEnabled: !state.cargoShipsEnabled })),
   togglePerformance: () => set((state) => ({ showPerformance: !state.showPerformance })),
   startJourney: () =>
     set({

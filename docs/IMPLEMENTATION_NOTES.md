@@ -65,6 +65,11 @@ Status: Complete.
 - Focus and Journey modes cap selected detail at 420 edges.
 - Visible detailed routes use subtle target-end cone markers, hardware-instanced by edge type, so
   direction remains readable without adding a unique draw batch per edge.
+- Small emissive cargo ships travel source-to-target on pre-sampled route curves. A single render
+  loop update animates deterministic, hardware-instanced ships with Low/Medium/High caps of
+  6/12/20, prioritizing the selected path or lineage before major local background flows.
+- Cargo traffic is disabled by default and can be toggled from the always-visible visual controls;
+  disabling it disposes all active ship instances while keeping route arrowheads visible.
 - Edge types have separate colors; selected paths receive full brightness.
 - Cycle-safe upstream/downstream traversal supports depth 1–3.
 - Babylon now owns a fixed pool of billboard labels for schemas and objects; React still does not

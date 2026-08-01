@@ -21,7 +21,8 @@ export function SceneCanvas({ onStats }: { onStats: (stats: SceneStats) => void 
       filters: state.filters,
       lineageEdgeIds: state.lineageEdgeIds,
       pathEdgeIds: state.activePath?.edgeIds,
-      quality: state.quality
+      quality: state.quality,
+      cargoShipsEnabled: state.cargoShipsEnabled
     }))
   );
   const projection = useMemo(
@@ -36,7 +37,8 @@ export function SceneCanvas({ onStats }: { onStats: (stats: SceneStats) => void 
       lineageEdgeIds: projectionState.lineageEdgeIds,
       pathEdgeIds: new Set(projectionState.pathEdgeIds ?? []),
       edgeTypes: projectionState.filters.edgeTypes,
-      quality: projectionState.quality
+      quality: projectionState.quality,
+      cargoShipsEnabled: projectionState.cargoShipsEnabled
     }),
     [projectionState]
   );

@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { calculateRouteArrowPlacement } from "../src/rendering/routeGeometry";
+import {
+  buildPolylineMetrics,
+  calculateRouteArrowPlacement,
+  cargoShipBudget,
+  samplePolyline
+} from "../src/rendering/routeGeometry";
 
 describe("route arrow placement", () => {
   it("points toward the target and clears its radius", () => {
@@ -23,5 +28,54 @@ describe("route arrow placement", () => {
 
   it("returns no marker for a degenerate final segment", () => {
     expect(calculateRouteArrowPlacement([1, 1, 1], [1, 1, 1], 0.5, 4)).toBeNull();
+  });
+});
+
+describe("cargo route sampling", () => {
+  it("samples position and forward direction by traveled distance", () => {
+    const metrics = buildPolylineMetrics([
+      [0, 0, 0],
+      [3, 0, 0],
+      [3, 4, 0]
+    ]);
+
+    expect(metrics?.totalLength).toBe(7);
+    expect(metrics && samplePolyline(metrics, 0.5)).toEqual({
+      position: [3, 0.5, 0],
+      direction: [0, 1, 0]
+    });
+  });
+
+  it("rejects degenerate paths and clamps progress", () => {
+    expect(buildPolylineMetrics([[0, 0, 0]])).toBeNull();
+    expect(
+      buildPolylineMetrics([
+        [1, 1, 1],
+        [1, 1, 1]
+      ])
+    ).toBeNull();
+    const metrics = buildPolylineMetrics([
+      [0, 0, 0],
+      [2, 0, 0]
+    ]);
+    expect(metrics && samplePolyline(metrics, -1)?.position).toEqual([0, 0, 0]);
+    expect(metrics && samplePolyline(metrics, 2)?.position).toEqual([2, 0, 0]);
+  });
+
+  it("skips repeated points without interrupting travel", () => {
+    const metrics = buildPolylineMetrics([
+      [0, 0, 0],
+      [0, 0, 0],
+      [2, 0, 0]
+    ]);
+
+    expect(metrics?.points).toHaveLength(2);
+    expect(metrics && samplePolyline(metrics, 0.5)?.position).toEqual([1, 0, 0]);
+  });
+
+  it("uses quality-specific animation budgets", () => {
+    expect(cargoShipBudget("Low")).toBe(6);
+    expect(cargoShipBudget("Medium")).toBe(12);
+    expect(cargoShipBudget("High")).toBe(20);
   });
 });

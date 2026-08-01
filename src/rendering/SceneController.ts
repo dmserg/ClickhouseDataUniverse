@@ -23,7 +23,13 @@ import type { AppMode, QualityPreset } from "../app/store";
 import type { DomainGraph, EdgeType } from "../domain/types";
 import type { LayoutResult, Vector3Tuple } from "../layout/types";
 import { engineColor } from "./renderModel";
-import { calculateRouteArrowPlacement } from "./routeGeometry";
+import {
+  buildPolylineMetrics,
+  calculateRouteArrowPlacement,
+  cargoShipBudget,
+  samplePolyline,
+  type PolylineMetrics
+} from "./routeGeometry";
 import type { SceneBridge } from "./sceneBridge";
 import {
   estimateLabelWidth,
@@ -45,6 +51,7 @@ export interface SceneProjection {
   pathEdgeIds: ReadonlySet<string>;
   edgeTypes: readonly EdgeType[];
   quality: QualityPreset;
+  cargoShipsEnabled: boolean;
 }
 
 interface SceneCallbacks {
@@ -63,6 +70,7 @@ export interface SceneStats {
   visibleLabels: number;
   visibleDetailedEdges: number;
   visibleAggregateEdges: number;
+  animatedCargoShips: number;
 }
 
 interface RuntimeLabelCandidate extends ScreenLabelCandidate {
@@ -76,6 +84,15 @@ interface LabelSlot {
   texture: DynamicTexture;
   contentKey: string;
   labelId: string | null;
+}
+
+interface CargoShipAnimation {
+  mesh: AbstractMesh;
+  metrics: PolylineMetrics;
+  progress: number;
+  speed: number;
+  startProgress: number;
+  progressSpan: number;
 }
 
 const KIND_COLORS: Record<string, Color3> = {
@@ -100,6 +117,15 @@ function vector(value: Vector3Tuple) {
   return new Vector3(value[0], value[1], value[2]);
 }
 
+function deterministicPhase(value: string): number {
+  let hash = 2166136261;
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0) / 4294967296;
+}
+
 export class SceneController implements SceneBridge {
   readonly engine: Engine;
   readonly scene: Scene;
@@ -113,6 +139,8 @@ export class SceneController implements SceneBridge {
   private readonly detailedRoutes: Mesh[] = [];
   private readonly detailedRouteArrows: AbstractMesh[] = [];
   private readonly routeArrowSources = new Map<string, Mesh>();
+  private readonly cargoShips: CargoShipAnimation[] = [];
+  private readonly cargoShipSources = new Map<string, Mesh>();
   private readonly labelSlots: LabelSlot[] = [];
   private readonly nodeIdsByImportance: string[];
   private readonly glowLayer: GlowLayer;
@@ -168,8 +196,10 @@ export class SceneController implements SceneBridge {
     this.buildAggregateRoutes();
     this.installPicking();
     this.applyProjection(projection);
+    this.rebuildDetailedRoutes();
     this.engine.runRenderLoop(() => {
       if (this.statsTick % 6 === 0) this.updateLabels();
+      this.updateCargoShips(this.engine.getDeltaTime());
       this.scene.render();
       this.statsTick += 1;
       if (this.statsTick % 24 === 0) this.reportStats();
@@ -427,7 +457,6 @@ export class SceneController implements SceneBridge {
       const mesh = source.createInstance(`galaxy:${galaxy.schemaId}`);
       mesh.position = vector(galaxy.position);
       mesh.scaling.setAll(galaxy.radius);
-      mesh.visibility = 0.36;
       mesh.isPickable = true;
       mesh.metadata = { type: "galaxy", id: galaxy.schemaId };
       this.galaxyMeshes.set(galaxy.schemaId, mesh);
@@ -495,8 +524,7 @@ export class SceneController implements SceneBridge {
     alpha: number,
     metadata: Record<string, unknown>
   ) {
-    const curve = Curve3.CreateCatmullRomSpline(points, 12, false);
-    const mesh = MeshBuilder.CreateLines(name, { points: curve.getPoints() }, this.scene);
+    const mesh = MeshBuilder.CreateLines(name, { points }, this.scene);
     mesh.color = color;
     mesh.alpha = alpha;
     mesh.isPickable = false;
@@ -566,11 +594,136 @@ export class SceneController implements SceneBridge {
     this.detailedRouteArrows.push(arrow);
   }
 
+  private cargoShipSource(edgeType: string, color: Color3) {
+    const existing = this.cargoShipSources.get(edgeType);
+    if (existing) return existing;
+
+    const body = MeshBuilder.CreateBox(
+      `cargo-body:${edgeType}`,
+      { width: 0.2, height: 0.14, depth: 0.62 },
+      this.scene
+    );
+    const hold = MeshBuilder.CreateBox(
+      `cargo-hold:${edgeType}`,
+      { width: 0.36, height: 0.2, depth: 0.3 },
+      this.scene
+    );
+    hold.position.z = -0.2;
+    const wings = MeshBuilder.CreateBox(
+      `cargo-wings:${edgeType}`,
+      { width: 0.72, height: 0.045, depth: 0.22 },
+      this.scene
+    );
+    wings.position.z = -0.05;
+    const nose = MeshBuilder.CreateCylinder(
+      `cargo-nose:${edgeType}`,
+      { height: 0.28, diameterTop: 0, diameterBottom: 0.2, tessellation: 4 },
+      this.scene
+    );
+    nose.rotation.x = Math.PI / 2;
+    nose.position.z = 0.45;
+    const source = Mesh.MergeMeshes([body, hold, wings, nose], true, true);
+    if (!source) throw new Error(`Could not build cargo ship mesh for ${edgeType}`);
+    source.name = `cargo-ship-source:${edgeType}`;
+    source.material = this.material(
+      `cargo-ship-mat:${edgeType}`,
+      Color3.Lerp(color, Color3.White(), 0.45),
+      0.96
+    );
+    source.isVisible = false;
+    source.isPickable = false;
+    this.cargoShipSources.set(edgeType, source);
+    return source;
+  }
+
+  private addCargoShip(
+    edgeId: string,
+    edgeType: string,
+    color: Color3,
+    curvePoints: readonly Vector3[],
+    sourceRadius: number,
+    targetRadius: number
+  ) {
+    const metrics = buildPolylineMetrics(
+      curvePoints.map((point): Vector3Tuple => [point.x, point.y, point.z])
+    );
+    if (!metrics) return;
+    const startProgress = Math.min(0.22, (sourceRadius + 0.45) / metrics.totalLength);
+    const endProgress = Math.max(
+      startProgress + 0.08,
+      1 - Math.min(0.28, (targetRadius + 0.85) / metrics.totalLength)
+    );
+    const progressSpan = Math.min(1, endProgress) - startProgress;
+    if (progressSpan < 0.05) return;
+    const phase = deterministicPhase(edgeId);
+    const ship: CargoShipAnimation = {
+      mesh: this.cargoShipSource(edgeType, color).createInstance(`cargo-ship:${edgeId}`),
+      metrics,
+      progress: phase,
+      speed: (2.4 + phase * 0.9) / (metrics.totalLength * progressSpan),
+      startProgress,
+      progressSpan
+    };
+    ship.mesh.scaling.setAll(1.05);
+    ship.mesh.rotationQuaternion = Quaternion.Identity();
+    ship.mesh.isPickable = false;
+    ship.mesh.metadata = { type: "cargo-ship", id: edgeId };
+    this.cargoShips.push(ship);
+    this.positionCargoShip(ship);
+  }
+
+  private positionCargoShip(ship: CargoShipAnimation) {
+    const sample = samplePolyline(
+      ship.metrics,
+      ship.startProgress + ship.progress * ship.progressSpan
+    );
+    if (!sample) return;
+    const direction = vector(sample.direction);
+    const up =
+      Math.abs(Vector3.Dot(direction, Vector3.Up())) > 0.96 ? Vector3.Right() : Vector3.Up();
+    ship.mesh.position.copyFrom(vector(sample.position));
+    ship.mesh.rotationQuaternion?.copyFrom(Quaternion.FromLookDirectionLH(direction, up));
+  }
+
+  private updateCargoShips(deltaMs: number) {
+    const deltaSeconds = Math.min(50, Math.max(0, deltaMs)) / 1000;
+    for (const ship of this.cargoShips) {
+      ship.progress = (ship.progress + deltaSeconds * ship.speed) % 1;
+      this.positionCargoShip(ship);
+    }
+  }
+
+  private animatedEdgeIds(candidates: ReadonlySet<string>) {
+    if (!this.projection.cargoShipsEnabled) return new Set<string>();
+
+    const prioritized =
+      this.projection.mode === "Journey" && this.projection.pathEdgeIds.size > 0
+        ? [...this.projection.pathEdgeIds]
+        : this.projection.mode === "Focus" && this.projection.lineageEdgeIds.size > 0
+          ? [...this.projection.lineageEdgeIds]
+          : [...candidates].sort((leftId, rightId) => {
+              const left = this.graph.edgesById.get(leftId);
+              const right = this.graph.edgesById.get(rightId);
+              const leftImportance = left
+                ? (this.layout.nodes[left.sourceNodeId]?.importance ?? 0) +
+                  (this.layout.nodes[left.targetNodeId]?.importance ?? 0)
+                : 0;
+              const rightImportance = right
+                ? (this.layout.nodes[right.sourceNodeId]?.importance ?? 0) +
+                  (this.layout.nodes[right.targetNodeId]?.importance ?? 0)
+                : 0;
+              return rightImportance - leftImportance || leftId.localeCompare(rightId);
+            });
+    return new Set(prioritized.slice(0, cargoShipBudget(this.projection.quality)));
+  }
+
   private rebuildDetailedRoutes() {
     this.detailedRoutes.forEach((mesh) => mesh.dispose());
     this.detailedRoutes.length = 0;
     this.detailedRouteArrows.forEach((mesh) => mesh.dispose());
     this.detailedRouteArrows.length = 0;
+    this.cargoShips.forEach((ship) => ship.mesh.dispose());
+    this.cargoShips.length = 0;
     const candidates =
       this.projection.mode === "Journey"
         ? this.projection.pathEdgeIds
@@ -585,6 +738,7 @@ export class SceneController implements SceneBridge {
                 .slice(0, 260)
                 .map((edge) => edge.id)
             );
+    const animatedEdgeIds = this.animatedEdgeIds(candidates);
     for (const id of [...candidates].slice(0, 420)) {
       const edge = this.graph.edgesById.get(id);
       if (
@@ -604,10 +758,14 @@ export class SceneController implements SceneBridge {
       );
       const color = Color3.FromHexString(EDGE_COLORS[edge.type] ?? "#727d99");
       const emphasized = this.projection.pathEdgeIds.has(id);
+      const curvePoints = Curve3.CreateCatmullRomSpline([a, middle, b], 12, false).getPoints();
       this.detailedRoutes.push(
-        this.route(`edge:${id}`, [a, middle, b], color, emphasized ? 1 : 0.72, { type: "edge", id })
+        this.route(`edge:${id}`, curvePoints, color, emphasized ? 1 : 0.72, { type: "edge", id })
       );
       this.addRouteArrow(id, edge.type, color, middle, b, target.radius, Vector3.Distance(a, b));
+      if (animatedEdgeIds.has(id)) {
+        this.addCargoShip(id, edge.type, color, curvePoints, source.radius, target.radius);
+      }
     }
   }
 
@@ -641,6 +799,9 @@ export class SceneController implements SceneBridge {
       projection.lineageEdgeIds !== this.projection.lineageEdgeIds ||
       projection.pathEdgeIds !== this.projection.pathEdgeIds ||
       projection.edgeTypes.join("|") !== this.projection.edgeTypes.join("|");
+    const qualityChanged = projection.quality !== this.projection.quality;
+    const cargoShipsChanged =
+      projection.cargoShipsEnabled !== this.projection.cargoShipsEnabled;
     this.projection = projection;
     for (const [id, mesh] of this.nodeMeshes) {
       const node = this.graph.nodesById.get(id);
@@ -662,7 +823,9 @@ export class SceneController implements SceneBridge {
             this.graph.nodesById.get(projection.selectedNodeId ?? "")?.schemaId === id)
       );
     }
-    if (modeChanged || edgesChanged) this.rebuildDetailedRoutes();
+    if (modeChanged || edgesChanged || qualityChanged || cargoShipsChanged) {
+      this.rebuildDetailedRoutes();
+    }
     this.updateSelection();
     this.updateLabels();
   }
@@ -749,6 +912,7 @@ export class SceneController implements SceneBridge {
       visibleNodes: [...this.nodeMeshes.values()].filter((mesh) => mesh.isEnabled()).length,
       visibleLabels: this.labelSlots.filter((slot) => slot.mesh.isEnabled()).length,
       visibleDetailedEdges: this.detailedRoutes.length,
+      animatedCargoShips: this.cargoShips.length,
       visibleAggregateEdges:
         this.projection.mode === "Universe" ? Math.min(120, this.layout.aggregateRoutes.length) : 0
     });
