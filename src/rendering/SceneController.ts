@@ -13,6 +13,7 @@ import {
   Mesh,
   MeshBuilder,
   PointerEventTypes,
+  Quaternion,
   Scene,
   SceneInstrumentation,
   StandardMaterial,
@@ -22,6 +23,7 @@ import type { AppMode, QualityPreset } from "../app/store";
 import type { DomainGraph, EdgeType } from "../domain/types";
 import type { LayoutResult, Vector3Tuple } from "../layout/types";
 import { engineColor } from "./renderModel";
+import { calculateRouteArrowPlacement } from "./routeGeometry";
 import type { SceneBridge } from "./sceneBridge";
 import {
   estimateLabelWidth,
@@ -84,6 +86,16 @@ const KIND_COLORS: Record<string, Color3> = {
   special_table: Color3.FromHexString("#ff6f85")
 };
 
+const EDGE_COLORS: Record<string, string> = {
+  etl_transfer: "#ffb84a",
+  view_dependency: "#5bd7ff",
+  materialized_view_input: "#f17cff",
+  materialized_view_target: "#ff6e97",
+  distributed_reference: "#42f1c1",
+  manual_dependency: "#a7b2cf",
+  unknown: "#727d99"
+};
+
 function vector(value: Vector3Tuple) {
   return new Vector3(value[0], value[1], value[2]);
 }
@@ -99,6 +111,8 @@ export class SceneController implements SceneBridge {
   private readonly galaxyMeshes = new Map<string, AbstractMesh>();
   private readonly aggregateRoutes: Mesh[] = [];
   private readonly detailedRoutes: Mesh[] = [];
+  private readonly detailedRouteArrows: AbstractMesh[] = [];
+  private readonly routeArrowSources = new Map<string, Mesh>();
   private readonly labelSlots: LabelSlot[] = [];
   private readonly nodeIdsByImportance: string[];
   private readonly glowLayer: GlowLayer;
@@ -129,7 +143,14 @@ export class SceneController implements SceneBridge {
     this.scene.fogMode = Scene.FOGMODE_EXP2;
     this.scene.fogDensity = 0.0016;
     this.scene.fogColor = new Color3(0.008, 0.012, 0.035);
-    this.camera = new ArcRotateCamera("universe-camera", -Math.PI / 2, 1.06, 145, Vector3.Zero(), this.scene);
+    this.camera = new ArcRotateCamera(
+      "universe-camera",
+      -Math.PI / 2,
+      1.06,
+      145,
+      Vector3.Zero(),
+      this.scene
+    );
     this.camera.lowerRadiusLimit = 3;
     this.camera.upperRadiusLimit = 420;
     this.camera.wheelPrecision = 7;
@@ -331,12 +352,7 @@ export class SceneController implements SceneBridge {
       const isSelected = nodeId === this.projection.selectedNodeId;
       const isHovered = nodeId === this.projection.hoveredNodeId;
       const isRelevant = relevantNodes.has(nodeId);
-      if (
-        this.projection.mode === "Universe" &&
-        !isSelected &&
-        !isHovered &&
-        screenRadius < 4.2
-      ) {
+      if (this.projection.mode === "Universe" && !isSelected && !isHovered && screenRadius < 4.2) {
         continue;
       }
       const priority = isSelected
@@ -404,11 +420,7 @@ export class SceneController implements SceneBridge {
       { diameter: 2, segments: 12 },
       this.scene
     );
-    source.material = this.material(
-      "batch-mat:galaxies",
-      Color3.FromHexString("#324b9c"),
-      0.13
-    );
+    source.material = this.material("batch-mat:galaxies", Color3.FromHexString("#324b9c"), 0.13);
     source.isVisible = false;
     source.isPickable = false;
     for (const galaxy of Object.values(this.layout.galaxies)) {
@@ -506,9 +518,59 @@ export class SceneController implements SceneBridge {
     this.aggregateRoutes.push(mesh);
   }
 
+  private routeArrowSource(edgeType: string, color: Color3) {
+    const existing = this.routeArrowSources.get(edgeType);
+    if (existing) return existing;
+
+    const source = MeshBuilder.CreateCylinder(
+      `route-arrow-source:${edgeType}`,
+      { height: 1, diameterTop: 0, diameterBottom: 1, tessellation: 8 },
+      this.scene
+    );
+    source.rotation.x = Math.PI / 2;
+    source.bakeCurrentTransformIntoVertices();
+    source.material = this.material(`route-arrow-mat:${edgeType}`, color, 0.82);
+    source.isVisible = false;
+    source.isPickable = false;
+    this.routeArrowSources.set(edgeType, source);
+    return source;
+  }
+
+  private addRouteArrow(
+    edgeId: string,
+    edgeType: string,
+    color: Color3,
+    approach: Vector3,
+    target: Vector3,
+    targetRadius: number,
+    routeDistance: number
+  ) {
+    const placement = calculateRouteArrowPlacement(
+      [approach.x, approach.y, approach.z],
+      [target.x, target.y, target.z],
+      targetRadius,
+      routeDistance
+    );
+    if (!placement) return;
+
+    const direction = vector(placement.direction);
+    const up =
+      Math.abs(Vector3.Dot(direction, Vector3.Up())) > 0.96 ? Vector3.Right() : Vector3.Up();
+    const arrow = this.routeArrowSource(edgeType, color).createInstance(`edge-arrow:${edgeId}`);
+    arrow.position = vector(placement.position);
+    arrow.scaling.set(placement.width, placement.width, placement.length);
+    arrow.rotationQuaternion = Quaternion.FromLookDirectionLH(direction, up);
+    arrow.isPickable = false;
+    arrow.metadata = { type: "edge-arrow", id: edgeId };
+    arrow.freezeWorldMatrix();
+    this.detailedRouteArrows.push(arrow);
+  }
+
   private rebuildDetailedRoutes() {
     this.detailedRoutes.forEach((mesh) => mesh.dispose());
     this.detailedRoutes.length = 0;
+    this.detailedRouteArrows.forEach((mesh) => mesh.dispose());
+    this.detailedRouteArrows.length = 0;
     const candidates =
       this.projection.mode === "Journey"
         ? this.projection.pathEdgeIds
@@ -523,15 +585,6 @@ export class SceneController implements SceneBridge {
                 .slice(0, 260)
                 .map((edge) => edge.id)
             );
-    const colors: Record<string, string> = {
-      etl_transfer: "#ffb84a",
-      view_dependency: "#5bd7ff",
-      materialized_view_input: "#f17cff",
-      materialized_view_target: "#ff6e97",
-      distributed_reference: "#42f1c1",
-      manual_dependency: "#a7b2cf",
-      unknown: "#727d99"
-    };
     for (const id of [...candidates].slice(0, 420)) {
       const edge = this.graph.edgesById.get(id);
       if (
@@ -546,16 +599,15 @@ export class SceneController implements SceneBridge {
       if (!edge || !source || !target) continue;
       const a = vector(source.position);
       const b = vector(target.position);
-      const middle = Vector3.Center(a, b).add(new Vector3(0, Math.min(5, Vector3.Distance(a, b) * 0.12), 0));
-      this.detailedRoutes.push(
-        this.route(
-          `edge:${id}`,
-          [a, middle, b],
-          Color3.FromHexString(colors[edge.type] ?? "#727d99"),
-          this.projection.pathEdgeIds.has(id) ? 1 : 0.72,
-          { type: "edge", id }
-        )
+      const middle = Vector3.Center(a, b).add(
+        new Vector3(0, Math.min(5, Vector3.Distance(a, b) * 0.12), 0)
       );
+      const color = Color3.FromHexString(EDGE_COLORS[edge.type] ?? "#727d99");
+      const emphasized = this.projection.pathEdgeIds.has(id);
+      this.detailedRoutes.push(
+        this.route(`edge:${id}`, [a, middle, b], color, emphasized ? 1 : 0.72, { type: "edge", id })
+      );
+      this.addRouteArrow(id, edge.type, color, middle, b, target.radius, Vector3.Distance(a, b));
     }
   }
 
@@ -698,9 +750,7 @@ export class SceneController implements SceneBridge {
       visibleLabels: this.labelSlots.filter((slot) => slot.mesh.isEnabled()).length,
       visibleDetailedEdges: this.detailedRoutes.length,
       visibleAggregateEdges:
-        this.projection.mode === "Universe"
-          ? Math.min(120, this.layout.aggregateRoutes.length)
-          : 0
+        this.projection.mode === "Universe" ? Math.min(120, this.layout.aggregateRoutes.length) : 0
     });
   }
 

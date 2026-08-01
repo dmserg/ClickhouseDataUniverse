@@ -63,6 +63,8 @@ Status: Complete.
 - Universe mode renders one batched aggregate-route line system, capped at 120 logical routes.
 - Galaxy mode caps local detail at 260 edges.
 - Focus and Journey modes cap selected detail at 420 edges.
+- Visible detailed routes use subtle target-end cone markers, hardware-instanced by edge type, so
+  direction remains readable without adding a unique draw batch per edge.
 - Edge types have separate colors; selected paths receive full brightness.
 - Cycle-safe upstream/downstream traversal supports depth 1–3.
 - Babylon now owns a fixed pool of billboard labels for schemas and objects; React still does not
