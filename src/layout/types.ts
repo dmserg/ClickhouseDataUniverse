@@ -24,7 +24,7 @@ export interface AggregateRoute {
 }
 
 export interface LayoutResult {
-  algorithmVersion: "prototype-1";
+  algorithmVersion: "prototype-2";
   seed: number;
   galaxies: Record<string, GalaxyLayout>;
   nodes: Record<string, NodeLayout>;

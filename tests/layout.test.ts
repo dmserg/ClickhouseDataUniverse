@@ -29,6 +29,29 @@ describe("deterministic layout", () => {
     }
     expect(result.galaxies["schema.a"]?.position).not.toEqual(result.galaxies["schema.b"]?.position);
   });
+
+  it("fills a spherical volume with 1.5x intra-galaxy spacing", () => {
+    const document = fixtureDocument();
+    document.schemas = [document.schemas[0]!];
+    document.nodes = Array.from({ length: 96 }, (_, index) => ({
+      ...document.nodes[0]!,
+      id: `table-${index}`,
+      name: `table_${index}`,
+      qualifiedName: `a.table_${index}`
+    }));
+    document.edges = [];
+    const sphericalGraph = normalizeGraph(document);
+    const result = calculateLayout(sphericalGraph, 42);
+    const galaxy = result.galaxies["schema.a"]!;
+    const positions = Object.values(result.nodes).map((node) => node.position);
+    const span = (axis: 0 | 1 | 2) => {
+      const values = positions.map((position) => position[axis]);
+      return Math.max(...values) - Math.min(...values);
+    };
+
+    expect(galaxy.radius).toBeCloseTo((4.7 + Math.sqrt(96) * 1.3) * 1.5);
+    expect(span(1)).toBeGreaterThan(Math.max(span(0), span(2)) * 0.7);
+  });
 });
 
 describe("table size scaling", () => {

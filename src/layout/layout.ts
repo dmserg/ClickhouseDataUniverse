@@ -7,6 +7,9 @@ import type {
   Vector3Tuple
 } from "./types";
 
+const INTRA_GALAXY_SPACING = 1.5;
+const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
+
 function mulberry32(seed: number) {
   let state = seed >>> 0;
   return () => {
@@ -69,7 +72,7 @@ export function calculateLayout(graph: DomainGraph, seed: number): LayoutResult 
     galaxies[schema.id] = {
       schemaId: schema.id,
       position: hint ?? [Math.cos(angle) * ring, (jitter - 0.5) * 12, Math.sin(angle) * ring],
-      radius: Math.max(7, 4.7 + Math.sqrt(count) * 1.3),
+      radius: Math.max(7, 4.7 + Math.sqrt(count) * 1.3) * INTRA_GALAXY_SPACING,
       nodeCount: count
     };
   });
@@ -88,18 +91,19 @@ export function calculateLayout(graph: DomainGraph, seed: number): LayoutResult 
       .sort((a, b) => importance(graph, b) - importance(graph, a) || a.id.localeCompare(b.id));
     localNodes.forEach((node, index) => {
       const random = mulberry32(hashString(node.id, seed));
-      const theta = index * 2.399963 + random() * 0.45;
-      const fraction = Math.sqrt((index + 1) / Math.max(1, localNodes.length));
-      const arm = Math.sin(theta * 2.2) * galaxy.radius * 0.13;
-      const distance = galaxy.radius * (0.12 + fraction * 0.72) + arm;
-      const y = (random() - 0.5) * galaxy.radius * 0.35;
+      const theta = index * GOLDEN_ANGLE + random() * 0.45;
+      const vertical = random() * 2 - 1;
+      const horizontal = Math.sqrt(Math.max(0, 1 - vertical * vertical));
+      const fraction =
+        localNodes.length <= 1 ? 0 : Math.cbrt(index / (localNodes.length - 1));
+      const distance = galaxy.radius * (0.08 + fraction * 0.78) * (0.92 + random() * 0.16);
       const hint = graph.document.layout?.nodes?.[node.id]?.position;
       const position: Vector3Tuple =
         hint ??
         [
-          galaxy.position[0] + Math.cos(theta) * distance,
-          galaxy.position[1] + y,
-          galaxy.position[2] + Math.sin(theta) * distance
+          galaxy.position[0] + Math.cos(theta) * horizontal * distance,
+          galaxy.position[1] + vertical * distance,
+          galaxy.position[2] + Math.sin(theta) * horizontal * distance
         ];
       nodes[node.id] = {
         nodeId: node.id,
@@ -130,10 +134,15 @@ export function calculateLayout(graph: DomainGraph, seed: number): LayoutResult 
         (sum, value) => [sum[0] + value[0], sum[1] + value[1], sum[2] + value[2]],
         [0, 0, 0]
       );
+      const random = mulberry32(hashString(node.id, seed ^ 0x9e3779b9));
+      const theta = random() * Math.PI * 2;
+      const vertical = random() * 2 - 1;
+      const horizontal = Math.sqrt(Math.max(0, 1 - vertical * vertical));
+      const offset = 2.2 * INTRA_GALAXY_SPACING;
       layout.position = [
-        centroid[0] / dependencies.length + 1.4,
-        centroid[1] / dependencies.length + 1,
-        centroid[2] / dependencies.length + 1.4
+        centroid[0] / dependencies.length + Math.cos(theta) * horizontal * offset,
+        centroid[1] / dependencies.length + vertical * offset,
+        centroid[2] / dependencies.length + Math.sin(theta) * horizontal * offset
       ];
     }
   }
@@ -166,7 +175,7 @@ export function calculateLayout(graph: DomainGraph, seed: number): LayoutResult 
     .sort((a, b) => b.edgeCount - a.edgeCount || a.id.localeCompare(b.id));
 
   return {
-    algorithmVersion: "prototype-1",
+    algorithmVersion: "prototype-2",
     seed,
     galaxies,
     nodes,

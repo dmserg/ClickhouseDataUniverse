@@ -414,7 +414,7 @@ export class SceneController implements SceneBridge {
     for (const galaxy of Object.values(this.layout.galaxies)) {
       const mesh = source.createInstance(`galaxy:${galaxy.schemaId}`);
       mesh.position = vector(galaxy.position);
-      mesh.scaling = new Vector3(galaxy.radius, galaxy.radius * 0.26, galaxy.radius);
+      mesh.scaling.setAll(galaxy.radius);
       mesh.visibility = 0.36;
       mesh.isPickable = true;
       mesh.metadata = { type: "galaxy", id: galaxy.schemaId };
