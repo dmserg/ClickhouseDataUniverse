@@ -1,9 +1,10 @@
-import Ajv, { type ErrorObject } from "ajv";
+import type { ErrorObject } from "ajv";
+import Ajv2020 from "ajv/dist/2020.js";
 import { normalizeGraph, validateReferences } from "../domain/graph";
 import type { LoadResult, UniverseDocument, ValidationIssue } from "../domain/types";
 import { universeSchema } from "./universeSchema";
 
-const ajv = new Ajv({ allErrors: true, strict: true, allowUnionTypes: true });
+const ajv = new Ajv2020({ allErrors: true, strict: true, allowUnionTypes: true });
 const validate = ajv.compile<UniverseDocument>(universeSchema);
 
 function schemaIssue(error: ErrorObject): ValidationIssue {

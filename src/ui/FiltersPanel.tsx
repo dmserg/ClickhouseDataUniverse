@@ -9,12 +9,14 @@ function CheckGroup<T extends string>({
   label,
   options,
   values,
-  onChange
+  onChange,
+  getOptionLabel = (option) => option.replaceAll("_", " ")
 }: {
   label: string;
   options: readonly T[];
   values: T[];
   onChange: (values: T[]) => void;
+  getOptionLabel?: (option: T) => string;
 }) {
   return (
     <fieldset>
@@ -27,7 +29,7 @@ function CheckGroup<T extends string>({
               checked={values.includes(option)}
               onChange={() => onChange(toggle(values, option))}
             />
-            <span>{option.replaceAll("_", " ")}</span>
+            <span>{getOptionLabel(option)}</span>
           </label>
         ))}
       </div>
@@ -75,6 +77,10 @@ export function FiltersPanel({ collapsed, onToggle }: { collapsed: boolean; onTo
             options={schemas.map((schema) => schema.id)}
             values={filters.schemaIds}
             onChange={(schemaIds) => patch({ schemaIds })}
+            getOptionLabel={(schemaId) => {
+              const schema = graph.schemasById.get(schemaId);
+              return schema?.displayName ?? schema?.name ?? schemaId;
+            }}
           />
           <CheckGroup<NodeKind>
             label="Object kind"

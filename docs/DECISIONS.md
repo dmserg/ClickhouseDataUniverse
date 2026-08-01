@@ -189,6 +189,48 @@ Do not delete accepted decisions without recording a replacement.
 
 ---
 
+## ADR-013 — Keep ClickHouse extraction outside the browser
+
+**Status:** Accepted
+
+**Decision:** Implement ClickHouse metadata collection as an isolated, one-shot Python CLI that
+writes the same static Universe 1.0 document consumed by the browser.
+
+**Reasoning:**
+
+- preserves the static import boundary and browser-only prototype;
+- keeps credentials and ClickHouse drivers out of Vite assets;
+- makes metadata collection explicit, bounded, testable, and automation-friendly.
+
+**Consequences:** The exporter requires a separate Python environment and protected home-directory
+properties file. It is not a backend and does not update the visualization continuously.
+
+---
+
+## ADR-014 — Permit an empty protected password value for public endpoints
+
+**Status:** Accepted
+
+**Decision:** Require the `clickhouse.password` key but allow its value to be empty.
+
+**Reasoning:** The official `play.clickhouse.com` `explorer` account authenticates with an empty
+password. All connection settings still come exclusively from the protected home properties file.
+
+---
+
+## ADR-015 — Fail explicitly for cluster-wide extraction
+
+**Status:** Accepted
+
+**Decision:** The initial exporter handles the connected server's local snapshot and rejects a
+configured `clickhouse.cluster`.
+
+**Reasoning:** Silently presenting a local snapshot as complete cluster coverage would violate size
+and query-log semantics. Representative-replica selection and partial-shard reporting require a
+separate implementation milestone.
+
+---
+
 ## New decision template
 
 ### ADR-XXX — Title

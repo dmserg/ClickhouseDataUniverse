@@ -5,3 +5,12 @@ coverage/
 *.tsbuildinfo
 .vite/
 .vite-*.log
+
+# ClickHouse Universe exporter: credentials must only live in the user's home.
+.clickhouse-universe-exporter.properties
+**/.clickhouse-universe-exporter.properties
+tools/clickhouse-exporter/.venv/
+tools/clickhouse-exporter/.pytest_cache/
+tools/clickhouse-exporter/**/__pycache__/
+tools/clickhouse-exporter/*.egg-info/
+artifacts/

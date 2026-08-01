@@ -105,3 +105,27 @@ The browser version meets the requested prototype scope. Electron adds packaging
 - The README documents controls, architecture, datasets, and local development.
 - There is no ClickHouse connection, SQL execution, backend, Docker, cloud service, authentication, CI/CD, or live metadata update.
 - The only package with an install-time binary helper is Vite's required `esbuild`; this is recorded in `docs/DECISIONS.md`.
+
+## ClickHouse metadata exporter
+
+Status: Implemented for local-server snapshots.
+
+- Added an isolated Python 3.10+ package under `tools/clickhouse-exporter`; the browser application
+  has no Python or ClickHouse runtime dependency.
+- Promoted the Universe 1.0 schema to `schema/universe-1.0.schema.json`; both Ajv and Python
+  `jsonschema` consume it.
+- Connection settings load only from the protected
+  `~/.clickhouse-universe-exporter.properties` file. The CLI exposes no credential, host, TLS, or
+  timeout flags.
+- The exporter probes metadata capabilities, discovers databases and objects, maps object and size
+  semantics, parses declared view/Materialized View and Distributed references, and collects
+  bounded observed `INSERT ... SELECT` lineage when `system.query_log` is accessible.
+- The pinned ClickHouse ANTLR parser modules from `clickhouse_objects_analysis` commit
+  `0e7eab950135bedfa27946c32ab89630389a9392` are vendored with author authorization.
+- Validation covers the shared JSON Schema, domain references, deterministic IDs, finite numeric
+  values, supplements, and atomic writes.
+- The public Playground smoke test produced 4 schemas, 94 nodes, and 8 declared-lineage edges from
+  94 objects. Its `system.query_log` is unavailable to `explorer`, which is recorded as one
+  unresolved item in the sidecar report instead of being presented as complete lineage.
+- Cluster-wide representative-replica sizing and cluster query-log collection are not implemented;
+  a configured cluster is rejected explicitly.

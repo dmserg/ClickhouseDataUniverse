@@ -2,7 +2,9 @@
 
 ## Status
 
-Planning document only. This does not add ClickHouse connectivity to the browser application.
+Implemented for local-server snapshots in `tools/clickhouse-exporter`. This does not add ClickHouse
+connectivity to the browser application. Cluster-wide representative-replica collection remains
+deferred; the CLI fails explicitly when `clickhouse.cluster` is configured.
 
 ## Goal
 

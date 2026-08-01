@@ -1,0 +1,2 @@
+[console_scripts]
+clickhouse-universe-exporter = clickhouse_universe_exporter.cli:main

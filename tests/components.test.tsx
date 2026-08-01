@@ -6,9 +6,10 @@ import { useAppStore } from "../src/app/store";
 import { fixtureDocument } from "../src/testing/fixture";
 import { SearchBox } from "../src/ui/SearchBox";
 import { DetailsPanel } from "../src/ui/DetailsPanel";
+import { FiltersPanel } from "../src/ui/FiltersPanel";
 import { JourneyHud } from "../src/ui/JourneyHud";
 
-describe("search UI", () => {
+describe("component UI", () => {
   beforeEach(() => {
     useAppStore.setState({
       graph: normalizeGraph(fixtureDocument()),
@@ -22,6 +23,18 @@ describe("search UI", () => {
     fireEvent.change(screen.getByLabelText("Search objects"), { target: { value: "b.target" } });
     fireEvent.click(screen.getByText("b.target"));
     expect(useAppStore.getState().selectedNodeId).toBe("c");
+  });
+
+  it("shows schema display names while retaining schema IDs as filter values", () => {
+    const document = fixtureDocument();
+    document.schemas[0]!.displayName = "Alpha Galaxy";
+    useAppStore.setState({ graph: normalizeGraph(document), filters: DEFAULT_FILTERS });
+
+    render(<FiltersPanel collapsed={false} onToggle={() => undefined} />);
+
+    fireEvent.click(screen.getByRole("checkbox", { name: "Alpha Galaxy" }));
+    expect(screen.queryByText("schema.a")).not.toBeInTheDocument();
+    expect(useAppStore.getState().filters.schemaIds).toEqual(["schema.a"]);
   });
 
   it("calculates a route from selected endpoints", () => {

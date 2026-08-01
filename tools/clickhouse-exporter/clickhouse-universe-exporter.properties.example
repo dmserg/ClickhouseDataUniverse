@@ -1,0 +1,12 @@
+# Copy this file to ~/.clickhouse-universe-exporter.properties.
+# Replace every placeholder. Never place the real file in this repository.
+clickhouse.host=clickhouse.example.internal
+clickhouse.port=8443
+clickhouse.username=universe_exporter
+clickhouse.password=replace-with-secret
+clickhouse.secure=true
+clickhouse.verify=true
+# clickhouse.ca_cert=C:\Users\username\.clickhouse\ca.pem
+# clickhouse.cluster=production
+clickhouse.connect_timeout_seconds=10
+clickhouse.query_timeout_seconds=60
