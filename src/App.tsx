@@ -17,6 +17,7 @@ const EMPTY_STATS: SceneStats = {
   drawCalls: 0,
   activeMeshes: 0,
   visibleNodes: 0,
+  visibleLabels: 0,
   visibleDetailedEdges: 0,
   visibleAggregateEdges: 0
 };
@@ -217,6 +218,7 @@ export default function App() {
             <dt>Draw calls</dt><dd>{stats.drawCalls}</dd>
             <dt>Active meshes</dt><dd>{stats.activeMeshes}</dd>
             <dt>Visible nodes</dt><dd>{stats.visibleNodes}</dd>
+            <dt>Labels</dt><dd>{stats.visibleLabels}</dd>
             <dt>Detail routes</dt><dd>{stats.visibleDetailedEdges}</dd>
             <dt>Aggregate routes</dt><dd>{stats.visibleAggregateEdges}</dd>
             <dt>Normalize</dt><dd>{state.normalizationMs.toFixed(1)} ms</dd>

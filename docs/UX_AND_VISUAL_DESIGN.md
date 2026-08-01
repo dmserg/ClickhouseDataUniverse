@@ -235,6 +235,23 @@ On focus:
 - frame object and local lineage;
 - display labels only for relevant neighbours.
 
+## Label hierarchy and progressive disclosure
+
+Labels are part of the navigational model, not decoration:
+
+- Universe mode prioritizes stable schema display names over individual objects;
+- object names appear as their objects become legible on screen, then expand further in Galaxy mode;
+- Focus mode prioritizes the selected object, hovered object, and visible lineage neighbours;
+- Journey mode limits labels to the selected route;
+- selected and hovered labels remain visible even when they collide;
+- lower-priority labels yield when their screen rectangles overlap;
+- label budgets vary by quality preset and mode, with an absolute ceiling of 50 scene labels;
+- long visible names are shortened with an ellipsis; hover and the details panel retain the full qualified name.
+
+Labels use a constant apparent screen size and do not intercept picking. This preserves readability
+while orbiting or zooming and avoids creating a DOM element or React component for every node.
+They use flat, muted text on the dark scene with no border, backing plate, bloom, glow, or shadow.
+
 ## Search
 
 Search by:

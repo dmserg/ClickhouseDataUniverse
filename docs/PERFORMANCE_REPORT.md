@@ -13,6 +13,11 @@ Benchmark date: 2026-07-26
 
 These are local prototype measurements, not portable production guarantees.
 
+> The measurements below predate the bounded scene-label pool added on 2026-08-01. The prior
+> 45-draw-call Universe result remains the no-label baseline. Label budgets now cap the additional
+> active meshes at 26, 38, or 50 for Low, Medium, and High quality respectively; a post-change FPS
+> and draw-call sample is still required on the benchmark machine.
+
 ## Results
 
 | Scenario | Result |

@@ -5,9 +5,11 @@ import {
   Color3,
   Color4,
   Curve3,
+  DynamicTexture,
   Engine,
   GlowLayer,
   HemisphericLight,
+  Matrix,
   Mesh,
   MeshBuilder,
   PointerEventTypes,
@@ -21,6 +23,15 @@ import type { DomainGraph, EdgeType } from "../domain/types";
 import type { LayoutResult, Vector3Tuple } from "../layout/types";
 import { engineColor } from "./renderModel";
 import type { SceneBridge } from "./sceneBridge";
+import {
+  estimateLabelWidth,
+  labelBudget,
+  MAX_SCENE_LABELS,
+  selectNonOverlappingLabels,
+  truncateLabel,
+  type SceneLabelKind,
+  type ScreenLabelCandidate
+} from "./labelLayout";
 
 export interface SceneProjection {
   mode: AppMode;
@@ -47,8 +58,22 @@ export interface SceneStats {
   drawCalls: number;
   activeMeshes: number;
   visibleNodes: number;
+  visibleLabels: number;
   visibleDetailedEdges: number;
   visibleAggregateEdges: number;
+}
+
+interface RuntimeLabelCandidate extends ScreenLabelCandidate {
+  position: Vector3;
+  worldWidth: number;
+  worldHeight: number;
+}
+
+interface LabelSlot {
+  mesh: Mesh;
+  texture: DynamicTexture;
+  contentKey: string;
+  labelId: string | null;
 }
 
 const KIND_COLORS: Record<string, Color3> = {
@@ -74,6 +99,9 @@ export class SceneController implements SceneBridge {
   private readonly galaxyMeshes = new Map<string, AbstractMesh>();
   private readonly aggregateRoutes: Mesh[] = [];
   private readonly detailedRoutes: Mesh[] = [];
+  private readonly labelSlots: LabelSlot[] = [];
+  private readonly nodeIdsByImportance: string[];
+  private readonly glowLayer: GlowLayer;
   private selectionMarker: Mesh | null = null;
   private readonly instrumentation: SceneInstrumentation;
   private projection: SceneProjection;
@@ -90,6 +118,9 @@ export class SceneController implements SceneBridge {
     this.layout = layout;
     this.projection = projection;
     this.callbacks = callbacks;
+    this.nodeIdsByImportance = Object.values(layout.nodes)
+      .sort((a, b) => b.importance - a.importance || a.nodeId.localeCompare(b.nodeId))
+      .map((item) => item.nodeId);
     this.engine = new Engine(canvas, true, { preserveDrawingBuffer: false, stencil: true });
     this.scene = new Scene(this.engine);
     this.instrumentation = new SceneInstrumentation(this.scene);
@@ -105,21 +136,254 @@ export class SceneController implements SceneBridge {
     this.camera.panningSensibility = 90;
     this.camera.attachControl(canvas, true);
     new HemisphericLight("shared-fill", new Vector3(0, 1, 0), this.scene).intensity = 0.32;
-    new GlowLayer("shared-glow", this.scene, {
+    this.glowLayer = new GlowLayer("shared-glow", this.scene, {
       mainTextureFixedSize: projection.quality === "Low" ? 256 : 512,
       blurKernelSize: projection.quality === "High" ? 64 : 32
-    }).intensity = 0.7;
+    });
+    this.glowLayer.intensity = 0.7;
     this.buildGalaxies();
     this.buildNodes();
+    this.buildLabelPool();
     this.buildAggregateRoutes();
     this.installPicking();
     this.applyProjection(projection);
     this.engine.runRenderLoop(() => {
+      if (this.statsTick % 6 === 0) this.updateLabels();
       this.scene.render();
       this.statsTick += 1;
       if (this.statsTick % 24 === 0) this.reportStats();
     });
     window.addEventListener("resize", this.resize);
+  }
+
+  private buildLabelPool() {
+    for (let index = 0; index < MAX_SCENE_LABELS; index += 1) {
+      const texture = new DynamicTexture(
+        `scene-label-texture:${index}`,
+        { width: 1024, height: 128 },
+        this.scene,
+        false
+      );
+      texture.hasAlpha = true;
+      const material = new StandardMaterial(`scene-label-material:${index}`, this.scene);
+      material.diffuseTexture = texture;
+      material.opacityTexture = texture;
+      material.emissiveColor = Color3.White();
+      material.diffuseColor = Color3.White();
+      material.specularColor = Color3.Black();
+      material.useAlphaFromDiffuseTexture = true;
+      material.disableLighting = true;
+      material.disableDepthWrite = true;
+      material.backFaceCulling = false;
+      material.fogEnabled = false;
+      const mesh = MeshBuilder.CreatePlane(`scene-label:${index}`, { size: 1 }, this.scene);
+      mesh.material = material;
+      mesh.billboardMode = Mesh.BILLBOARDMODE_ALL;
+      mesh.isPickable = false;
+      mesh.renderingGroupId = 2;
+      this.glowLayer.addExcludedMesh(mesh);
+      mesh.setEnabled(false);
+      this.labelSlots.push({ mesh, texture, contentKey: "", labelId: null });
+    }
+  }
+
+  private drawLabel(slot: LabelSlot, text: string, kind: SceneLabelKind) {
+    const contentKey = `${kind}:${text}`;
+    if (slot.contentKey === contentKey) return;
+    const context = slot.texture.getContext();
+    const screenHeight = kind === "galaxy" ? 34 : 28;
+    const contentWidth = Math.min(
+      1024,
+      Math.ceil((estimateLabelWidth(text, kind) / screenHeight) * 128)
+    );
+    slot.texture.uScale = contentWidth / 1024;
+    slot.texture.uOffset = 0;
+    context.clearRect(0, 0, 1024, 128);
+    context.font =
+      kind === "galaxy"
+        ? '600 55px "Segoe UI", Arial, sans-serif'
+        : '600 59px "Segoe UI", Arial, sans-serif';
+    context.lineJoin = "round";
+    context.lineWidth = 7;
+    context.strokeStyle = "rgba(2, 7, 18, 0.94)";
+    context.fillStyle = kind === "galaxy" ? "#b8d8ea" : "#e0edf7";
+    const availableWidth = contentWidth - 54;
+    const measuredWidth = Math.min(availableWidth, context.measureText(text).width);
+    const textX = contentWidth / 2 - measuredWidth / 2;
+    context.strokeText(text, textX, 86, availableWidth);
+    context.fillText(text, textX, 86, availableWidth);
+    // DynamicTexture defaults to canvas-style Y orientation. Disabling it uploads text upside down.
+    slot.texture.update();
+    slot.contentKey = contentKey;
+  }
+
+  private relevantNodeIds(edgeIds: ReadonlySet<string>): Set<string> {
+    const ids = new Set<string>();
+    for (const edgeId of edgeIds) {
+      const edge = this.graph.edgesById.get(edgeId);
+      if (!edge) continue;
+      ids.add(edge.sourceNodeId);
+      ids.add(edge.targetNodeId);
+    }
+    return ids;
+  }
+
+  private nodeLabelIds(): string[] {
+    const required = new Set<string>();
+    if (this.projection.selectedNodeId) required.add(this.projection.selectedNodeId);
+    if (this.projection.hoveredNodeId) required.add(this.projection.hoveredNodeId);
+    const relevant =
+      this.projection.mode === "Journey"
+        ? this.relevantNodeIds(this.projection.pathEdgeIds)
+        : this.relevantNodeIds(this.projection.lineageEdgeIds);
+    for (const id of relevant) required.add(id);
+
+    if (this.projection.mode === "Journey") return [...required];
+    const contextual =
+      this.projection.mode === "Universe"
+        ? this.nodeIdsByImportance.slice(0, 220)
+        : this.nodeIdsByImportance.filter(
+            (id) => this.graph.nodesById.get(id)?.schemaId === this.projection.activeSchemaId
+          );
+    return [...required, ...contextual.filter((id) => !required.has(id))];
+  }
+
+  private createProjectedLabel(
+    id: string,
+    kind: SceneLabelKind,
+    text: string,
+    anchor: Vector3,
+    objectRadius: number,
+    priority: number,
+    pinned: boolean,
+    viewportWidth: number,
+    viewportHeight: number
+  ): RuntimeLabelCandidate | null {
+    const distance = Vector3.Distance(this.camera.globalPosition, anchor);
+    if (!Number.isFinite(distance) || distance <= 0) return null;
+    const worldPerPixel = (2 * distance * Math.tan(this.camera.fov / 2)) / viewportHeight;
+    const height = kind === "galaxy" ? 34 : 28;
+    const displayText = truncateLabel(text, kind === "galaxy" ? 34 : 30);
+    const width = estimateLabelWidth(displayText, kind);
+    const position = anchor.add(
+      this.camera.upVector.normalize().scale(objectRadius + worldPerPixel * (height / 2 + 7))
+    );
+    const projected = Vector3.Project(
+      position,
+      Matrix.Identity(),
+      this.scene.getTransformMatrix(),
+      this.camera.viewport.toGlobal(viewportWidth, viewportHeight)
+    );
+    return {
+      id,
+      kind,
+      text: displayText,
+      x: projected.x,
+      y: projected.y,
+      width,
+      height,
+      depth: projected.z,
+      priority,
+      pinned,
+      position,
+      worldWidth: width * worldPerPixel,
+      worldHeight: height * worldPerPixel
+    };
+  }
+
+  private updateLabels() {
+    const viewportWidth = this.engine.getRenderWidth();
+    const viewportHeight = this.engine.getRenderHeight();
+    if (viewportWidth <= 0 || viewportHeight <= 0) return;
+    const candidates: RuntimeLabelCandidate[] = [];
+
+    if (this.projection.mode === "Universe") {
+      for (const [schemaId, galaxy] of Object.entries(this.layout.galaxies)) {
+        if (!this.galaxyMeshes.get(schemaId)?.isEnabled()) continue;
+        const schema = this.graph.schemasById.get(schemaId);
+        const candidate = this.createProjectedLabel(
+          `galaxy:${schemaId}`,
+          "galaxy",
+          schema?.displayName ?? schema?.name ?? schemaId,
+          vector(galaxy.position),
+          galaxy.radius * 0.28,
+          5_000 + galaxy.nodeCount,
+          false,
+          viewportWidth,
+          viewportHeight
+        );
+        if (candidate) candidates.push(candidate);
+      }
+    }
+
+    const relevantNodes =
+      this.projection.mode === "Journey"
+        ? this.relevantNodeIds(this.projection.pathEdgeIds)
+        : this.relevantNodeIds(this.projection.lineageEdgeIds);
+    for (const nodeId of this.nodeLabelIds()) {
+      const mesh = this.nodeMeshes.get(nodeId);
+      const item = this.layout.nodes[nodeId];
+      const node = this.graph.nodesById.get(nodeId);
+      if (!mesh?.isEnabled() || !item || !node) continue;
+      const distance = Vector3.Distance(this.camera.globalPosition, vector(item.position));
+      const worldPerPixel = (2 * distance * Math.tan(this.camera.fov / 2)) / viewportHeight;
+      const screenRadius = item.radius / Math.max(worldPerPixel, Number.EPSILON);
+      const isSelected = nodeId === this.projection.selectedNodeId;
+      const isHovered = nodeId === this.projection.hoveredNodeId;
+      const isRelevant = relevantNodes.has(nodeId);
+      if (
+        this.projection.mode === "Universe" &&
+        !isSelected &&
+        !isHovered &&
+        screenRadius < 4.2
+      ) {
+        continue;
+      }
+      const priority = isSelected
+        ? 10_000
+        : isHovered
+          ? 9_500
+          : isRelevant
+            ? 7_000 + item.importance
+            : 1_000 + item.importance;
+      const candidate = this.createProjectedLabel(
+        `node:${nodeId}`,
+        "node",
+        node.name,
+        vector(item.position),
+        item.radius,
+        priority,
+        isSelected || isHovered,
+        viewportWidth,
+        viewportHeight
+      );
+      if (candidate) candidates.push(candidate);
+    }
+
+    const selected = selectNonOverlappingLabels(
+      candidates,
+      { width: viewportWidth, height: viewportHeight },
+      labelBudget(this.projection.mode, this.projection.quality)
+    );
+    const selectedIds = new Set(selected.map((candidate) => candidate.id));
+    for (const slot of this.labelSlots) {
+      if (slot.labelId && !selectedIds.has(slot.labelId)) {
+        slot.mesh.setEnabled(false);
+        slot.labelId = null;
+      }
+    }
+    const availableSlots = this.labelSlots.filter((slot) => slot.labelId === null);
+    for (const candidate of selected) {
+      const slot =
+        this.labelSlots.find((candidateSlot) => candidateSlot.labelId === candidate.id) ??
+        availableSlots.shift();
+      if (!slot) break;
+      slot.labelId = candidate.id;
+      this.drawLabel(slot, candidate.text, candidate.kind);
+      slot.mesh.position.copyFrom(candidate.position);
+      slot.mesh.scaling.set(candidate.worldWidth, candidate.worldHeight, 1);
+      slot.mesh.setEnabled(true);
+    }
   }
 
   private readonly resize = () => this.engine.resize();
@@ -348,6 +612,7 @@ export class SceneController implements SceneBridge {
     }
     if (modeChanged || edgesChanged) this.rebuildDetailedRoutes();
     this.updateSelection();
+    this.updateLabels();
   }
 
   private updateSelection() {
@@ -430,6 +695,7 @@ export class SceneController implements SceneBridge {
       drawCalls: this.instrumentation.drawCallsCounter.current,
       activeMeshes: this.scene.getActiveMeshes().length,
       visibleNodes: [...this.nodeMeshes.values()].filter((mesh) => mesh.isEnabled()).length,
+      visibleLabels: this.labelSlots.filter((slot) => slot.mesh.isEnabled()).length,
       visibleDetailedEdges: this.detailedRoutes.length,
       visibleAggregateEdges:
         this.projection.mode === "Universe"

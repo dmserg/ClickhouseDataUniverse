@@ -1,6 +1,6 @@
 # Implementation Notes
 
-Last updated: 2026-07-26
+Last updated: 2026-08-01
 
 ## Milestone status
 
@@ -65,6 +65,18 @@ Status: Complete.
 - Focus and Journey modes cap selected detail at 420 edges.
 - Edge types have separate colors; selected paths receive full brightness.
 - Cycle-safe upstream/downstream traversal supports depth 1–3.
+- Babylon now owns a fixed pool of billboard labels for schemas and objects; React still does not
+  render per-node scene elements.
+- Universe mode prioritizes schema display names and reveals major object names only when they are
+  large enough on screen. Galaxy, Focus, and Journey progressively prioritize local, lineage, and
+  route context.
+- Screen-space collision suppression, quality-specific budgets, and an absolute 50-label ceiling
+  keep names readable and bound the draw-call cost. Selected and hovered names are pinned.
+- Five unit tests cover budgets, priority, overlap suppression, pinned labels, clipping, and long
+  name shortening. The flight recorder reports the active label count.
+- Label meshes are explicitly excluded from the scene glow layer. Their dynamic textures use
+  canvas-style Y orientation plus a stronger system font and dark glyph outline, while retaining
+  transparent backgrounds and no label panels or shadows.
 
 ### Milestone 6 — Pathfinding
 

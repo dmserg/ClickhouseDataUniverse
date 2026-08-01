@@ -231,6 +231,33 @@ separate implementation milestone.
 
 ---
 
+## ADR-016 — Use a bounded semantic label pool
+
+**Status:** Accepted
+
+**Context:** Object names are essential for navigation, but rendering thousands of simultaneous
+labels would create unreadable overlap and exceed the Universe draw-call budget.
+
+**Decision:** The Babylon rendering layer owns a reusable pool of at most 50 dynamic-texture
+billboards. Each mode supplies semantic candidates, which are ranked by selection, hover, route or
+lineage relevance, schema importance, and node importance. A deterministic screen-space pass
+suppresses overlapping optional labels. Quality presets set lower active-label budgets.
+
+**Reasoning:**
+
+- schema names preserve the galaxy metaphor at Universe scale;
+- progressive object-name disclosure makes zooming and focusing useful;
+- selected and hovered names remain dependable navigation anchors;
+- a fixed pool bounds memory, meshes, texture updates, and draw calls;
+- keeping the policy in the rendering layer avoids per-node React or DOM elements.
+
+**Consequences:** The High-quality Universe ceiling is 50 active labels. Combined with the prior
+45-draw-call Universe baseline, the design remains within the 100-call objective, but the
+post-label browser benchmark still needs to be recorded on the benchmark machine. Long labels are
+ellipsized in-scene while their full qualified names remain available on hover and in details.
+
+---
+
 ## New decision template
 
 ### ADR-XXX — Title
